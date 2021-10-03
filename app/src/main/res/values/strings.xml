@@ -10,4 +10,10 @@
     <string name="contrasena">Contraseña</string>
     <string name="email">Email</string>
     <string name="registrarme">Registrarme</string>
+    <string name="registracion">Registración</string>
+    <string name="inicio">Inicio</string>
+    <string name="recetas">Recetas</string>
+    <string name="historial">Historial</string>
+    <string name="estudios">Estudios</string>
+    <string name="turnos">Turnos</string>
 </resources>

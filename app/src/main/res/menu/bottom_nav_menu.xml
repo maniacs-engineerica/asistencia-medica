@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/inicio"
+        android:icon="@drawable/ic_inicio"
+        android:title="@string/inicio" />
+
+    <item
+        android:id="@+id/recetas"
+        android:icon="@drawable/ic_recetas"
+        android:title="@string/recetas" />
+
+    <item
+        android:id="@+id/historial"
+        android:icon="@drawable/ic_historial"
+        android:title="@string/historial" />
+
+    <item
+        android:id="@+id/estudios"
+        android:icon="@drawable/ic_estudios"
+        android:title="@string/estudios" />
+
+    <item
+        android:id="@+id/turnos"
+        android:icon="@drawable/ic_turnos"
+        android:title="@string/turnos" />
+
+</menu>
