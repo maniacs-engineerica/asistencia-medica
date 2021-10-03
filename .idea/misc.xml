@@ -7,7 +7,7 @@
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20606884057971014" />
-        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.16153341818072134" />
+        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.25" />
       </map>
     </option>
   </component>

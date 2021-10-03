@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Asistencia Medica</string>
     <string name="ingresar">Ingresar</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="telefono">Teléfono</string>
+    <string name="dni">DNI</string>
+    <string name="apellido">Apellido</string>
+    <string name="nombre">Nombre</string>
+    <string name="repita_contrasena">Repita contraseña</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="email">Email</string>
+    <string name="registrarme">Registrarme</string>
 </resources>

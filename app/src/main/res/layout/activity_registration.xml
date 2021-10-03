@@ -15,7 +15,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,74 +35,59 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/email"
                 style="@style/EditText"
                 android:layout_width="match_parent"
-                android:hint="Usuario" />
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/password"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                android:hint="Contraseña"
+                android:hint="@string/contrasena"
                 android:inputType="textPassword" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/password_repeat"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                android:hint="Contraseña"
+                android:hint="@string/repita_contrasena"
                 android:inputType="textPassword" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/first_name"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                android:hint="Contraseña"
-                android:inputType="textPassword" />
+                android:hint="@string/nombre"
+                android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/last_name"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                android:hint="Contraseña"
-                android:inputType="textPassword" />
+                android:hint="@string/apellido"
+                android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/dni"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                android:hint="Contraseña"
-                android:inputType="textPassword" />
+                android:hint="@string/dni"
+                android:inputType="number" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/phone_number"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                android:hint="Contraseña"
-                android:inputType="textPassword" />
-
-            <EditText
-                android:id="@+id/password"
-                style="@style/EditText"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="Contraseña"
-                android:inputType="textPassword" />
-
-            <EditText
-                android:id="@+id/password"
-                style="@style/EditText"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="Contraseña"
-                android:inputType="textPassword" />
+                android:hint="@string/telefono"
+                android:inputType="phone" />
 
         </LinearLayout>
 
@@ -112,10 +97,8 @@
         android:id="@+id/login"
         style="@style/Button"
         android:layout_width="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/ingresar"
+        android:layout_margin="16dp"
+        android:text="@string/registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
