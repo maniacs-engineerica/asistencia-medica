@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/inicio"
+        android:id="@+id/navigation_inicio"
         android:icon="@drawable/ic_inicio"
         android:title="@string/inicio" />
 
     <item
-        android:id="@+id/recetas"
+        android:id="@+id/navigation_recetas"
         android:icon="@drawable/ic_recetas"
         android:title="@string/recetas" />
 
     <item
-        android:id="@+id/historial"
+        android:id="@+id/navigation_historial"
         android:icon="@drawable/ic_historial"
         android:title="@string/historial" />
 
     <item
-        android:id="@+id/estudios"
+        android:id="@+id/navigation_estudios"
         android:icon="@drawable/ic_estudios"
         android:title="@string/estudios" />
 
     <item
-        android:id="@+id/turnos"
+        android:id="@+id/navigation_turnos"
         android:icon="@drawable/ic_turnos"
         android:title="@string/turnos" />
 

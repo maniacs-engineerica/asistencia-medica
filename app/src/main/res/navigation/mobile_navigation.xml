@@ -9,17 +9,27 @@
         android:id="@+id/navigation_inicio"
         android:name="com.tp3.asistenciamedica.ui.inicio.InicioFragment"
         android:label="@string/inicio"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_inicio" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.tp3.asistenciamedica.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_recetas"
+        android:name="com.tp3.asistenciamedica.ui.recetas.RecetasFragment"
+        android:label="@string/recetas"
+        tools:layout="@layout/fragment_recetas" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.tp3.asistenciamedica.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_historial"
+        android:name="com.tp3.asistenciamedica.ui.historial.HistorialFragment"
+        android:label="@string/historial"
+        tools:layout="@layout/fragment_historial" />
+    <fragment
+        android:id="@+id/navigation_estudios"
+        android:name="com.tp3.asistenciamedica.ui.estudios.EstudiosFragment"
+        android:label="@string/estudios"
+        tools:layout="@layout/fragment_estudios" />
+    <fragment
+        android:id="@+id/navigation_turnos"
+        android:name="com.tp3.asistenciamedica.ui.turnos.TurnosFragment"
+        android:label="@string/turnos"
+        tools:layout="@layout/fragment_recetas" />
 </navigation>

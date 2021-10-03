@@ -1,4 +1,4 @@
-package com.tp3.asistenciamedica.ui.inicio
+package com.tp3.asistenciamedica.ui.turnos
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.tp3.asistenciamedica.databinding.FragmentInicioBinding
+import com.tp3.asistenciamedica.databinding.FragmentTurnosBinding
+import com.tp3.asistenciamedica.ui.recetas.TurnosViewModel
 
-class InicioFragment : Fragment() {
+class TurnosFragment : Fragment() {
 
-    private lateinit var inicioViewModel: InicioViewModel
-    private var _binding: FragmentInicioBinding? = null
+    private lateinit var turnosViewModel: TurnosViewModel
+    private var _binding: FragmentTurnosBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,14 +25,14 @@ class InicioFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        inicioViewModel =
-            ViewModelProvider(this).get(InicioViewModel::class.java)
+        turnosViewModel =
+            ViewModelProvider(this).get(TurnosViewModel::class.java)
 
-        _binding = FragmentInicioBinding.inflate(inflater, container, false)
+        _binding = FragmentTurnosBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textInicio
-        inicioViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = binding.textTurnos
+        turnosViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
