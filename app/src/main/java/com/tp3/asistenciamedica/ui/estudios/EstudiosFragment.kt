@@ -31,10 +31,6 @@ class EstudiosFragment : Fragment() {
         _binding = FragmentEstudiosBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textEstudios
-        estudiosViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

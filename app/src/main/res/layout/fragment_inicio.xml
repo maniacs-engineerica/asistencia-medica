@@ -29,9 +29,10 @@
                 style="@style/TextViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Próximos turnos" />
+                android:text="@string/proximos_turnos" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/turnos"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
@@ -65,9 +66,10 @@
                 style="@style/TextViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Últimos estudios" />
+                android:text="@string/ultimos_estudios" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/estudios"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
@@ -100,9 +102,10 @@
             style="@style/TextViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Últimas historias" />
+            android:text="@string/ultimas_historias" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/historias"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="16dp"

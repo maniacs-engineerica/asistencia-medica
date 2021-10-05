@@ -30,10 +30,6 @@ class HistorialFragment : Fragment() {
         _binding = FragmentHistorialBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHistorial
-        historialViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

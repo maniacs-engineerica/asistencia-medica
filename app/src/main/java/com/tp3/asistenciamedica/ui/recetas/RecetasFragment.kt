@@ -30,10 +30,6 @@ class RecetasFragment : Fragment() {
         _binding = FragmentRecetasBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textRecetas
-        recetasViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 
