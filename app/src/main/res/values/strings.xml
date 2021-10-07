@@ -23,4 +23,6 @@
     <string name="profesional">Profesional</string>
     <string name="especialidad">Especialidad</string>
     <string name="fecha">Fecha</string>
+    <string name="estudio">Estudio</string>
+    <string name="resultado">Resultado</string>
 </resources>

@@ -20,6 +20,11 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="EditTextMultiLine">
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="EditTextLogin" parent="EditText">
         <item name="android:background">@drawable/edit_text_login_background</item>
     </style>
