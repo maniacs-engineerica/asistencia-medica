@@ -16,9 +16,16 @@
 
     <style name="EditText">
         <item name="android:background">@drawable/edit_text_background</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="EditTextLogin" parent="EditText">
+        <item name="android:background">@drawable/edit_text_login_background</item>
+    </style>
+
+    <style name="TextInputLayout">
+        <item name="boxStrokeWidth">0dp</item>
     </style>
 
     <style name="Button">

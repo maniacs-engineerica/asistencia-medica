@@ -1,4 +1,4 @@
-package com.tp3.asistenciamedica.ui.historial
+package com.tp3.asistenciamedica.ui.estudios
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,25 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tp3.asistenciamedica.R
+import com.tp3.asistenciamedica.databinding.FragmentEstudiosBinding
 
-class HistorialFragment : Fragment() {
+class EstudioFragment : Fragment() {
 
     companion object {
-        fun newInstance() = HistorialFragment()
+        fun newInstance() = EstudioFragment()
     }
 
-    private lateinit var viewModel: HistorialViewModel
+    private lateinit var viewModel: EstudioViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.historial_fragment, container, false)
+        return inflater.inflate(R.layout.estudio_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HistorialViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(EstudioViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

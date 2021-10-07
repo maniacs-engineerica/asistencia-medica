@@ -1,7 +1,8 @@
-package com.tp3.asistenciamedica
+package com.tp3.asistenciamedica.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tp3.asistenciamedica.R
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

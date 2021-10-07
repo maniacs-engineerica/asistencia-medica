@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_historial"
-        android:name="com.tp3.asistenciamedica.ui.historial.HistorialFragment"
+        android:name="com.tp3.asistenciamedica.ui.historial.HistorialesFragment"
         android:label="@string/historial"
         tools:layout="@layout/fragment_historial" />
     <fragment

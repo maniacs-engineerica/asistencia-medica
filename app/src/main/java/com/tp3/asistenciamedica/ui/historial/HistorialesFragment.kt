@@ -1,4 +1,4 @@
-package com.tp3.asistenciamedica.ui.estudios
+package com.tp3.asistenciamedica.ui.historial
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tp3.asistenciamedica.databinding.FragmentEstudiosBinding
+import com.tp3.asistenciamedica.databinding.FragmentHistorialBinding
 
-class EstudiosFragment : Fragment() {
+class HistorialesFragment : Fragment() {
 
-    private lateinit var estudiosViewModel: EstudiosViewModel
-    private var _binding: FragmentEstudiosBinding? = null
+    private lateinit var historialesViewModel: HistorialesViewModel
+    private var _binding: FragmentHistorialBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,9 +22,10 @@ class EstudiosFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        estudiosViewModel =
-            ViewModelProvider(this).get(EstudiosViewModel::class.java)
-        _binding = FragmentEstudiosBinding.inflate(inflater, container, false)
+        historialesViewModel =
+            ViewModelProvider(this).get(HistorialesViewModel::class.java)
+
+        _binding = FragmentHistorialBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root

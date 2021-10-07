@@ -1,4 +1,4 @@
-package com.tp3.asistenciamedica.ui.historial
+package com.tp3.asistenciamedica.ui.recetas
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.tp3.asistenciamedica.R
 
-class HistorialFragment : Fragment() {
+class RecetaFragment : Fragment() {
 
     companion object {
-        fun newInstance() = HistorialFragment()
+        fun newInstance() = RecetaFragment()
     }
 
-    private lateinit var viewModel: HistorialViewModel
+    private lateinit var viewModel: RecetaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.historial_fragment, container, false)
+        return inflater.inflate(R.layout.receta_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HistorialViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RecetaViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

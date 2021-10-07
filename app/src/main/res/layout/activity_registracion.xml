@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -34,60 +34,109 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/email"
-                style="@style/EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress" />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/password"
-                style="@style/EditText"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="@string/contrasena"
-                android:inputType="textPassword" />
+                <EditText
+                    android:id="@+id/email"
+                    style="@style/EditTextLogin"
+                    android:layout_width="match_parent"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress" />
 
-            <EditText
-                android:id="@+id/password_repeat"
-                style="@style/EditText"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="@string/repita_contrasena"
-                android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/first_name"
-                style="@style/EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="@string/nombre"
-                android:inputType="textPersonName" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
 
-            <EditText
-                android:id="@+id/last_name"
-                style="@style/EditText"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="@string/apellido"
-                android:inputType="textPersonName" />
+                <EditText
+                    android:id="@+id/password"
+                    style="@style/EditTextLogin"
+                    android:layout_width="match_parent"
+                    android:hint="@string/contrasena"
+                    android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/dni"
-                style="@style/EditText"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="@string/dni"
-                android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/phone_number"
-                style="@style/EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="@string/telefono"
-                android:inputType="phone" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <EditText
+                    android:id="@+id/password_repeat"
+                    style="@style/EditTextLogin"
+                    android:layout_width="match_parent"
+                    android:hint="@string/repita_contrasena"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <EditText
+                    android:id="@+id/first_name"
+                    style="@style/EditTextLogin"
+                    android:layout_width="match_parent"
+                    android:hint="@string/nombre"
+                    android:inputType="textPersonName" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <EditText
+                    android:id="@+id/last_name"
+                    style="@style/EditTextLogin"
+                    android:layout_width="match_parent"
+                    android:hint="@string/apellido"
+                    android:inputType="textPersonName" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <EditText
+                    android:id="@+id/dni"
+                    style="@style/EditTextLogin"
+                    android:layout_width="match_parent"
+                    android:hint="@string/dni"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <EditText
+                    android:id="@+id/phone_number"
+                    style="@style/EditTextLogin"
+                    android:layout_width="match_parent"
+                    android:hint="@string/telefono"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 

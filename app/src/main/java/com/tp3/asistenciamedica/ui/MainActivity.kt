@@ -1,4 +1,4 @@
-package com.tp3.asistenciamedica
+package com.tp3.asistenciamedica.ui
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

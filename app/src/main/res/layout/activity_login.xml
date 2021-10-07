@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -27,20 +27,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/username"
-            style="@style/EditText"
-            android:inputType="textEmailAddress"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:hint="@string/email" />
+            android:layout_height="wrap_content"
+            style="@style/TextInputLayout">
+
+            <EditText
+                android:id="@+id/username"
+                style="@style/EditTextLogin"
+                android:layout_width="match_parent"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/TextInputLayout">
 
         <EditText
             android:id="@+id/password"
-            style="@style/EditText"
+            style="@style/EditTextLogin"
             android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
             android:hint="@string/contrasena"
             android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/login"

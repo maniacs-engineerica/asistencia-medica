@@ -19,4 +19,8 @@
     <string name="proximos_turnos">Próximos turnos</string>
     <string name="ultimos_estudios">Últimos estudios</string>
     <string name="ultimas_historias">Últimas historias</string>
+    <string name="paciente">Paciente</string>
+    <string name="profesional">Profesional</string>
+    <string name="especialidad">Especialidad</string>
+    <string name="fecha">Fecha</string>
 </resources>
