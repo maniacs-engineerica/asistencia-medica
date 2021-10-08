@@ -25,4 +25,6 @@
     <string name="fecha">Fecha</string>
     <string name="estudio">Estudio</string>
     <string name="resultado">Resultado</string>
+    <string name="receta">Receta</string>
+    <string name="historia">Historia</string>
 </resources>

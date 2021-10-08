@@ -1,6 +1,8 @@
 package com.tp3.asistenciamedica.ui.turnos
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tp3.asistenciamedica.databinding.FragmentTurnosBinding
+import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 import com.tp3.asistenciamedica.ui.recetas.TurnosViewModel
 
 class TurnosFragment : Fragment() {
@@ -32,6 +35,12 @@ class TurnosFragment : Fragment() {
         val root: View = binding.root
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            TurnosFragmentDirections.actionTurnosToTurno()
+        }, 2000)
     }
 
     override fun onDestroyView() {

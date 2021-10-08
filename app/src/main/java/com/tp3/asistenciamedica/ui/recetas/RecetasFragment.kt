@@ -1,6 +1,8 @@
 package com.tp3.asistenciamedica.ui.recetas
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
+import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 
 class RecetasFragment : Fragment() {
 
@@ -31,6 +34,12 @@ class RecetasFragment : Fragment() {
         val root: View = binding.root
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            RecetasFragmentDirections.actionRecetasToReceta()
+        }, 2000)
     }
 
     override fun onDestroyView() {
