@@ -3,11 +3,17 @@ package com.tp3.asistenciamedica.ui.estudios
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tp3.asistenciamedica.entities.Estudio
 
 class EstudiosViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    private val _estudios = MutableLiveData<List<Estudio>>().apply {
+        value = listOf(
+            Estudio("Radiografía"),
+            Estudio("Tomografía"),
+            Estudio("Ergometría"),
+            Estudio("Ecografía")
+        )
     }
-    val text: LiveData<String> = _text
+    val estudios: LiveData<List<Estudio>> = _estudios
 }

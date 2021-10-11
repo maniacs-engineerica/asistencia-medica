@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.databinding.FragmentHistorialBinding
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
+import com.tp3.asistenciamedica.ui.recetas.RecetasFragmentDirections
 
 class HistorialFragment : Fragment() {
 
@@ -36,7 +38,7 @@ class HistorialFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Handler(Looper.getMainLooper()).postDelayed({
-            HistorialFragmentDirections.actionHistorialToHistoria()
+            findNavController().navigate(HistorialFragmentDirections.actionHistorialToHistoria())
         }, 2000)
     }
 
