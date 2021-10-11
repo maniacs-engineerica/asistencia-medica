@@ -27,4 +27,13 @@
     <string name="resultado">Resultado</string>
     <string name="receta">Receta</string>
     <string name="historia">Historia</string>
+
+    <string name="hora_ini">Hora inicial a generar</string>
+    <string name="hora_fin">Hora final a generar</string>
+    <string name="duracion_turno">Duración de cada turno en minutos</string>
+    <string name="separacion_turnos">Separación entre turnos en minutos</string>
+    <string name="submit_turnos">Confirmar Generación</string>
+
+
+
 </resources>
