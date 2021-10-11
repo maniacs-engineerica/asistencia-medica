@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 
@@ -38,7 +39,7 @@ class RecetasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Handler(Looper.getMainLooper()).postDelayed({
-            RecetasFragmentDirections.actionRecetasToReceta()
+            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta())
         }, 2000)
     }
 

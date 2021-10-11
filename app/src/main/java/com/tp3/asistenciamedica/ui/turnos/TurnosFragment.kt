@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.databinding.FragmentTurnosBinding
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 import com.tp3.asistenciamedica.ui.recetas.TurnosViewModel
@@ -39,7 +40,7 @@ class TurnosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Handler(Looper.getMainLooper()).postDelayed({
-            TurnosFragmentDirections.actionTurnosToTurno()
+            findNavController().navigate(TurnosFragmentDirections.actionTurnosToTurno())
         }, 2000)
     }
 

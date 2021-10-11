@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/estudioFragment"
         android:name="com.tp3.asistenciamedica.ui.estudios.EstudioFragment"
-        android:label="estudio_fragment"
+        android:label="@string/estudio"
         tools:layout="@layout/estudio_fragment" />
     <fragment
         android:id="@+id/historiaFragment"
@@ -60,6 +60,7 @@
         tools:layout="@layout/historia_fragment" />
     <fragment
         android:id="@+id/recetaFragment"
+        android:name="com.tp3.asistenciamedica.ui.recetas.RecetaFragment"
         android:label="RecetaFragment"
         tools:layout="@layout/receta_fragment" />
     <fragment
