@@ -15,21 +15,56 @@
         android:id="@+id/navigation_recetas"
         android:name="com.tp3.asistenciamedica.ui.recetas.RecetasFragment"
         android:label="@string/recetas"
-        tools:layout="@layout/fragment_recetas" />
+        tools:layout="@layout/fragment_recetas" >
+        <action
+            android:id="@+id/action_recetas_to_receta"
+            app:destination="@id/recetaFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_historial"
-        android:name="com.tp3.asistenciamedica.ui.historial.HistorialesFragment"
+        android:name="com.tp3.asistenciamedica.ui.historial.HistorialFragment"
         android:label="@string/historial"
-        tools:layout="@layout/fragment_historial" />
+        tools:layout="@layout/fragment_historial">
+        <action
+            android:id="@+id/action_historial_to_historia"
+            app:destination="@id/historiaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_estudios"
         android:name="com.tp3.asistenciamedica.ui.estudios.EstudiosFragment"
         android:label="@string/estudios"
-        tools:layout="@layout/fragment_estudios" />
+        tools:layout="@layout/fragment_estudios" >
+        <action
+            android:id="@+id/action_estudios_to_estudio"
+            app:destination="@id/estudioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_turnos"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnosFragment"
         android:label="@string/turnos"
-        tools:layout="@layout/fragment_recetas" />
+        tools:layout="@layout/fragment_recetas" >
+        <action
+            android:id="@+id/action_turnos_to_turno"
+            app:destination="@id/turnoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/estudioFragment"
+        android:name="com.tp3.asistenciamedica.ui.estudios.EstudioFragment"
+        android:label="estudio_fragment"
+        tools:layout="@layout/estudio_fragment" />
+    <fragment
+        android:id="@+id/historiaFragment"
+        android:name="com.tp3.asistenciamedica.ui.historial.HistoriaFragment"
+        android:label="@string/historia"
+        tools:layout="@layout/historia_fragment" />
+    <fragment
+        android:id="@+id/recetaFragment"
+        android:label="RecetaFragment"
+        tools:layout="@layout/receta_fragment" />
+    <fragment
+        android:id="@+id/turnoFragment"
+        android:name="com.tp3.asistenciamedica.ui.turnos.TurnoFragment"
+        android:label="Turno"
+        tools:layout="@layout/turno_fragment" />
 </navigation>
