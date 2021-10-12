@@ -37,7 +37,7 @@
 
             <EditText
                 android:id="@+id/fechaAGenerar"
-                style="@style/EditTextLogin"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:hint="@string/fecha"
                 android:inputType="date" />
@@ -52,7 +52,7 @@
 
             <EditText
                 android:id="@+id/horaInicial"
-                style="@style/EditTextLogin"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:hint="@string/hora_ini"
                 android:inputType="time" />
@@ -67,7 +67,7 @@
 
             <EditText
                 android:id="@+id/horaFinal"
-                style="@style/EditTextLogin"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:hint="@string/hora_fin"
                 android:inputType="time" />
@@ -82,7 +82,7 @@
 
             <EditText
                 android:id="@+id/especialidad"
-                style="@style/EditTextLogin"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:hint="@string/especialidad"
                 android:inputType="textWebEditText" />
@@ -97,7 +97,7 @@
 
             <EditText
                 android:id="@+id/duracion"
-                style="@style/EditTextLogin"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:hint="@string/duracion_turno"
                 android:inputType="number" />
@@ -112,7 +112,7 @@
 
             <EditText
                 android:id="@+id/separacion"
-                style="@style/EditTextLogin"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:hint="@string/separacion_turnos"
                 android:inputType="number" />
