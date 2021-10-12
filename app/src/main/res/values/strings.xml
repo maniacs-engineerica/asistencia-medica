@@ -27,4 +27,17 @@
     <string name="resultado">Resultado</string>
     <string name="receta">Receta</string>
     <string name="historia">Historia</string>
+    <string name="clinica_medica">Clínica Médica</string>
+    <string name="oftalmologia">Oftalmología</string>
+    <string name="cardiologia">Cardiología</string>
+    <string name="hematologia">Hematología</string>
+    <string name="ginecologia">Ginecología</string>
+    <string name="kinesiologia">Kinesiología</string>
+    <string name="selec_especialidad">Seleccionar Especialidad</string>
+    <string name="turnos_disp">Turnos Disponibles</string>
+    <string name="nuevo_turno">Nuevo Turno</string>
+    <string name="horario">Horario</string>
+    <string name="doctora">Doctor/a</string>
+    <string name="ubicacion">Ubicación</string>
+    <string name="btn_solicitar"> Solicitar </string>
 </resources>
