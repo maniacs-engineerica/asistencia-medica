@@ -1,4 +1,4 @@
-package com.tp3.asistenciamedica
+package com.tp3.asistenciamedica.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.entities.Estudio
 
 class EstudiosAdapter(private var estudios: List<Estudio> = listOf()) :
