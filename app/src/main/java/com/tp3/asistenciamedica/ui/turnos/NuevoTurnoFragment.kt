@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.tp3.asistenciamedica.R
 
 class NuevoTurnoFragment : Fragment() {
@@ -13,6 +14,13 @@ class NuevoTurnoFragment : Fragment() {
     companion object {
         fun newInstance() = NuevoTurnoFragment()
     }
+    lateinit var v: View
+    lateinit var btn_clinica: Button
+    lateinit var btn_oftalmologia: Button
+    lateinit var btn_cardiologia: Button
+    lateinit var btn_hematologia: Button
+    lateinit var btn_ginecologia: Button
+    lateinit var btn_kinesiologia: Button
 
     private lateinit var viewModel: NuevoTurnoViewModel
 
@@ -20,7 +28,17 @@ class NuevoTurnoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.nuevoturno_selec_espec, container, false)
+        v=inflater.inflate(R.layout.nuevoturno_selec_espec, container, false)
+        btn_clinica= v.findViewById(R.id.btn_clinica)
+        btn_oftalmologia= v.findViewById(R.id.btn_oftalmologia)
+        btn_cardiologia=v.findViewById(R.id.btn_cardiologia)
+        btn_hematologia=v.findViewById(R.id.btn_hematologia)
+        btn_ginecologia=v.findViewById(R.id.btn_ginecologia)
+        btn_kinesiologia=v.findViewById(R.id.btn_kinesiologia)
+
+
+
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -28,5 +46,9 @@ class NuevoTurnoFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(NuevoTurnoViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
+
+
+
 
 }
