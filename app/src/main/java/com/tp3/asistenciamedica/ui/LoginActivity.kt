@@ -41,7 +41,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun datosValidos(): Boolean {
-        //TODO: validar
+        /*
+        if (binding.username.text.isNullOrEmpty()){
+            binding.username.error = getString(R.string.username_invalido)
+            return false
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(binding.username.text).matches()){
+            binding.username.error = getString(R.string.username_invalido)
+            return false
+        }
+
+        if (!binding.password.text.isNullOrEmpty()){
+            binding.password.error = getString(R.string.password_invalido)
+            return false
+        }
+        */
         return true
     }
 }
