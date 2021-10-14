@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/vh_item_background">
+
+    <TextView
+        android:id="@+id/profesional"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Lopez Rosetti"
+        style="@style/TextViewPrimary"/>
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Hipoglos 200mg"
+        style="@style/TextViewSecondary"/>
+
+</LinearLayout>

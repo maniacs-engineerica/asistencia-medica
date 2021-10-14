@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.tp3.asistenciamedica.adapters.EstudiosAdapter
+import com.tp3.asistenciamedica.adapters.RecetasAdapter
 import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 
@@ -23,6 +25,8 @@ class RecetasFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var adapter: RecetasAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,15 +36,23 @@ class RecetasFragment : Fragment() {
             ViewModelProvider(this).get(RecetasViewModel::class.java)
 
         _binding = FragmentRecetasBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Handler(Looper.getMainLooper()).postDelayed({
+        setupRecycler()
+    }
+
+    private fun setupRecycler(){
+        adapter = RecetasAdapter()
+        adapter.onRecetaClick = {
             findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta())
-        }, 2000)
+        }
+        binding.recetas.adapter = adapter
+
+        recetasViewModel.recetas.observe(viewLifecycleOwner, { result ->
+            adapter.swapRecetas(result)
+        })
     }
 
     override fun onDestroyView() {

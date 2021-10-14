@@ -1,4 +1,4 @@
 package com.tp3.asistenciamedica.entities
 
-class Receta(val descripcion: String) {
+class Receta(val profesional: String, val descripcion: String) {
 }
