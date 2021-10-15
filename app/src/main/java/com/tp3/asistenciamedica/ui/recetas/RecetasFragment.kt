@@ -1,20 +1,17 @@
 package com.tp3.asistenciamedica.ui.recetas
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.tp3.asistenciamedica.adapters.EstudiosAdapter
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.adapters.RecetasAdapter
 import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
-import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
+import com.tp3.asistenciamedica.entities.Receta
 
 class RecetasFragment : Fragment() {
 
@@ -26,6 +23,8 @@ class RecetasFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: RecetasAdapter
+
+    val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +42,15 @@ class RecetasFragment : Fragment() {
         setupRecycler()
     }
 
-    private fun setupRecycler(){
+    override fun onStart() {
+        super.onStart()
+
+        db.collection("recetas").get().addOnSuccessListener {
+            recetasViewModel.setRecetas(it.toObjects(Receta::class.java))
+        }
+    }
+
+    private fun setupRecycler() {
         adapter = RecetasAdapter()
         adapter.onRecetaClick = {
             findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta())
