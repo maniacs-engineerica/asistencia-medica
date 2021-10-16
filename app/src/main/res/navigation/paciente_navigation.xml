@@ -87,9 +87,5 @@
     <fragment
         android:id="@+id/turnoDetalleFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnoDetalleFragment"
-        android:label="TurnoDetalleFragment" >
-        <argument
-            android:name="position"
-            app:argType="integer" />
-    </fragment>
+        android:label="TurnoDetalleFragment" />
 </navigation>

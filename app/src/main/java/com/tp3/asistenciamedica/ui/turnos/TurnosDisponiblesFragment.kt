@@ -1,17 +1,18 @@
 package com.tp3.asistenciamedica.ui.turnos
-
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.tp3.asistenciamedica.R
-import com.tp3.asistenciamedica.adapters.TurnosAdapters
-import com.tp3.asistenciamedica.entities.Turno
+import com.tp3.asistenciamedica.adapters.TurnosAdapter
+import com.tp3.asistenciamedica.databinding.FragmentEstudiosBinding
+import com.tp3.asistenciamedica.databinding.TurnosDisponiblesFragmentBinding
+import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
+
 
 class TurnosDisponiblesFragment : Fragment() {
 
@@ -19,53 +20,49 @@ class TurnosDisponiblesFragment : Fragment() {
         fun newInstance() = TurnosDisponiblesFragment()
     }
 
-    private lateinit var v:View
-    private lateinit var viewModel: TurnosDisponiblesViewModel
-    private lateinit var recTurnos: RecyclerView
-    private lateinit var adapter: TurnosAdapters
-    private lateinit var linearLayoutManager: LinearLayoutManager
-    private var turnos= viewModel.getTurnosDisp()
+    private lateinit var turnosViewModel: TurnosDisponiblesViewModel
+    private var _binding: TurnosDisponiblesFragmentBinding? = null
+    private lateinit var txtEspecialidad: TextView
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
-
-
-
+    private lateinit var adapter: TurnosAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v=inflater.inflate(R.layout.turnos_disponibles_fragment, container, false)
-        recTurnos=v.findViewById(R.id.recyclerViewTurnosDisp)
+        turnosViewModel =
+            ViewModelProvider(this).get(TurnosDisponiblesViewModel::class.java)
 
+        _binding = TurnosDisponiblesFragmentBinding.inflate(inflater, container, false)
+        txtEspecialidad= binding.root.findViewById(R.id.txt_tituloTurnosDisp)
 
-
-        return v
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-
-    fun onItemClick(position:Int) {
-        val action= TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment(position)
-        findNavController().navigate(action)
+        setupRecycler()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TurnosDisponiblesViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
-    override fun OnStart() {
-        super.onStart()
-
-        recTurnos.setHasFixedSize(true)
-        linearLayoutManager= LinearLayoutManager(context)
-        recTurnos.layoutManager= linearLayoutManager
-        recTurnos.adapter= TurnosAdapters(turnos) { pos ->
-            onItemClick(pos)
-
+    private fun setupRecycler(){
+        adapter = TurnosAdapter()
+        adapter.onTurnoClick = {
+            findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment())
         }
+        binding.recyclerViewTurnosDisp.adapter = adapter
 
+        turnosViewModel.turnos.observe(viewLifecycleOwner, { result ->
+            adapter.swapTurnos(result)
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
