@@ -4,10 +4,4 @@ import androidx.lifecycle.ViewModel
 
 class NuevoTurnoViewModel : ViewModel() {
     // TODO: Implement the ViewModel
-
-
-
-
-
-
 }

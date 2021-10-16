@@ -28,7 +28,7 @@ class NuevoTurnoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v=inflater.inflate(R.layout.nuevoturno_selec_espec, container, false)
+        v=inflater.inflate(R.layout.nuevo_turno_fragment, container, false)
         btn_clinica= v.findViewById(R.id.btn_clinica)
         btn_oftalmologia= v.findViewById(R.id.btn_oftalmologia)
         btn_cardiologia=v.findViewById(R.id.btn_cardiologia)
@@ -41,14 +41,11 @@ class NuevoTurnoFragment : Fragment() {
         return v
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NuevoTurnoViewModel::class.java)
         // TODO: Use the ViewModel
     }
-
-
-
-
 
 }

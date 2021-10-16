@@ -62,5 +62,14 @@
         android:id="@+id/turnoFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnoFragment"
         android:label="Turno"
-        tools:layout="@layout/turno_fragment" />
+        tools:layout="@layout/turno_fragment" >
+        <action
+            android:id="@+id/action_turnoFragment_to_nuevoTurnoFragment"
+            app:destination="@id/nuevoTurnoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nuevoTurnoFragment"
+        android:name="com.tp3.asistenciamedica.ui.turnos.NuevoTurnoFragment"
+        android:label="nuevo_turno_fragment"
+        tools:layout="@layout/nuevo_turno_fragment" />
 </navigation>
