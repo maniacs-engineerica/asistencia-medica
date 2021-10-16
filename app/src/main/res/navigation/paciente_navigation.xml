@@ -79,5 +79,17 @@
         android:id="@+id/turnosDisponiblesFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnosDisponiblesFragment"
         android:label="turnos_disponibles_fragment"
-        tools:layout="@layout/turnos_disponibles_fragment" />
+        tools:layout="@layout/turnos_disponibles_fragment" >
+        <action
+            android:id="@+id/action_turnosDisponiblesFragment_to_turnoDetalleFragment"
+            app:destination="@id/turnoDetalleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/turnoDetalleFragment"
+        android:name="com.tp3.asistenciamedica.ui.turnos.TurnoDetalleFragment"
+        android:label="TurnoDetalleFragment" >
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
 </navigation>

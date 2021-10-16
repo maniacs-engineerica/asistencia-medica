@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/layout/selec_especialidad.xml" value="0.31851851851851853" />
         <entry key="app/src/main/res/layout/turno_cardview.xml" value="0.31851851851851853" />
         <entry key="app/src/main/res/layout/turno_detalle.xml" value="0.31851851851851853" />
+        <entry key="app/src/main/res/layout/turno_detalle_fragment.xml" value="0.35025641025641024" />
         <entry key="app/src/main/res/layout/turno_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/turnos_disponibles_fragment.xml" value="0.35025641025641024" />
         <entry key="app/src/main/res/layout/vh_estudio_item.xml" value="0.335" />
