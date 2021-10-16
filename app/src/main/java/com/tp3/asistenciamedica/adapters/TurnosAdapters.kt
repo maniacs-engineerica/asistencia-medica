@@ -16,7 +16,7 @@ class TurnosAdapters(var turnosList: MutableList<Turno>,
         viewType: Int
     ): TurnoHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.nuevoturno_turnosdisp, parent, false)
+            .inflate(R.layout.turnos_disponibles_fragment, parent, false)
 
         return (TurnoHolder(view))
 

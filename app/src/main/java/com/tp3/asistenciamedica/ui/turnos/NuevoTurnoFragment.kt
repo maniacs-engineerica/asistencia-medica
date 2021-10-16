@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import com.tp3.asistenciamedica.R
 
 class NuevoTurnoFragment : Fragment() {
@@ -15,12 +16,12 @@ class NuevoTurnoFragment : Fragment() {
         fun newInstance() = NuevoTurnoFragment()
     }
     lateinit var v: View
-    lateinit var btn_clinica: Button
-    lateinit var btn_oftalmologia: Button
-    lateinit var btn_cardiologia: Button
-    lateinit var btn_hematologia: Button
-    lateinit var btn_ginecologia: Button
-    lateinit var btn_kinesiologia: Button
+    lateinit var btn_clinica: ImageButton
+    lateinit var btn_oftalmologia: ImageButton
+    lateinit var btn_cardiologia: ImageButton
+    lateinit var btn_hematologia: ImageButton
+    lateinit var btn_ginecologia: ImageButton
+    lateinit var btn_kinesiologia: ImageButton
 
     private lateinit var viewModel: NuevoTurnoViewModel
 

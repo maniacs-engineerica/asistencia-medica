@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_turnos_to_turno"
             app:destination="@id/turnoFragment" />
+        <action
+            android:id="@+id/action_navigation_turnos_to_nuevoTurnoFragment"
+            app:destination="@id/nuevoTurnoFragment" />
     </fragment>
     <fragment
         android:id="@+id/estudioFragment"
@@ -62,11 +65,7 @@
         android:id="@+id/turnoFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnoFragment"
         android:label="Turno"
-        tools:layout="@layout/turno_fragment" >
-        <action
-            android:id="@+id/action_turnoFragment_to_nuevoTurnoFragment"
-            app:destination="@id/nuevoTurnoFragment" />
-    </fragment>
+        tools:layout="@layout/turno_fragment" />
     <fragment
         android:id="@+id/nuevoTurnoFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.NuevoTurnoFragment"
