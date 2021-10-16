@@ -70,5 +70,14 @@
         android:id="@+id/nuevoTurnoFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.NuevoTurnoFragment"
         android:label="nuevo_turno_fragment"
-        tools:layout="@layout/nuevo_turno_fragment" />
+        tools:layout="@layout/nuevo_turno_fragment" >
+        <action
+            android:id="@+id/action_nuevoTurnoFragment_to_turnosDisponiblesFragment"
+            app:destination="@id/turnosDisponiblesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/turnosDisponiblesFragment"
+        android:name="com.tp3.asistenciamedica.ui.turnos.TurnosDisponiblesFragment"
+        android:label="turnos_disponibles_fragment"
+        tools:layout="@layout/turnos_disponibles_fragment" />
 </navigation>

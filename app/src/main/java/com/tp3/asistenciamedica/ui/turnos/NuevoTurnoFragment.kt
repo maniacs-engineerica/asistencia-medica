@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.navigation.findNavController
 import com.tp3.asistenciamedica.R
 
 class NuevoTurnoFragment : Fragment() {
@@ -47,6 +48,26 @@ class NuevoTurnoFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NuevoTurnoViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    fun onClickEspecialidad(btn: ImageButton) {
+
+        btn.setOnClickListener{
+            var action= NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment()
+            v.findNavController().navigate(action)
+        }
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        onClickEspecialidad(btn_cardiologia)
+        onClickEspecialidad(btn_clinica)
+        onClickEspecialidad(btn_ginecologia)
+        onClickEspecialidad(btn_hematologia)
+        onClickEspecialidad(btn_kinesiologia)
+        onClickEspecialidad(btn_oftalmologia)
     }
 
 }
