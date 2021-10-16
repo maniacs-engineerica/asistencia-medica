@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
@@ -51,18 +52,27 @@ class TurnosDisponiblesFragment : Fragment() {
     private fun setupRecycler(){
         adapter = TurnosAdapter()
         adapter.onTurnoClick = {
-            findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment())
+            onTurnoClick()
         }
-        binding.recyclerViewTurnosDisp.adapter = adapter
-
+       /// binding.recyclerViewTurnosDisp.adapter = adapter
+        binding.recyclerViewTurnosDisp.adapter=adapter
         turnosViewModel.turnos.observe(viewLifecycleOwner, { result ->
             adapter.swapTurnos(result)
         })
     }
 
+
+    open fun onTurnoClick() {
+        findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment())
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
 
 }
