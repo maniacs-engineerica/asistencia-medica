@@ -53,5 +53,10 @@
     <string name="dni_invalido">Ingrese un DNI válido</string>
     <string name="telefono_invalido">Ingrese un teléfono válido</string>
 
-
+    <string name="proximos_pacientes">Próximos pacientes</string>
+    <string name="info_turnos">Información de los turnos</string>
+    <string name="turnos_disponibles">Turnos disponibles: </string>
+    <string name="turnos_reservados">Turnos reservados: </string>
+    <string name="ultimo_turno_disponible">Último turno disponible: </string>
+    <string name="ultimo_turno_reservado">Último turno reservado: </string>
 </resources>
