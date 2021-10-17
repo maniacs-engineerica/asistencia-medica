@@ -34,6 +34,17 @@
     <string name="separacion_turnos">Separación entre turnos en minutos</string>
     <string name="submit_turnos">Confirmar Generación</string>
 
+    <string name="doctor">Doctor</string>
+    <string name="ubicacion">Ubicación</string>
+    <string name="idturno">Turno #</string>
+    <string name="anadir_info">Añadir información</string>
+    <string name="cerrar_turno">Cerrar turno</string>
+    <string name="info_paciente">Información del paciente</string>
+    <string name="edad">Edad</string>
+    <string name="ver_estudios">Ver estudios</string>
+    <string name="ver_historial">Ver historial</string>
+
+
 
 
 </resources>
