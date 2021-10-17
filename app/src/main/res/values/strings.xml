@@ -45,6 +45,13 @@
     <string name="ver_historial">Ver historial</string>
 
 
+    <string name="username_invalido">Ingrese un email valido</string>
+    <string name="password_invalido">Ingrese una contraseña</string>
+    <string name="password_no_coincide">Las contraseñas no coinciden</string>
+    <string name="nombre_invalido">Ingrese un nombre válido</string>
+    <string name="apellido_invalido">Ingrese un apellido válido</string>
+    <string name="dni_invalido">Ingrese un DNI válido</string>
+    <string name="telefono_invalido">Ingrese un teléfono válido</string>
 
 
 </resources>
