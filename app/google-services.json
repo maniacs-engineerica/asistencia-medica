@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "252346157964",
+    "project_id": "asistencia-medica-44691",
+    "storage_bucket": "asistencia-medica-44691.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252346157964:android:5ca338123923b91cd124a9",
+        "android_client_info": {
+          "package_name": "com.tp3.asistenciamedica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252346157964-n3kudll5r99isb8g1k1aahc2fgahhsng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsSA19RnVpdQsW9jRuFs7m3uBdxFMRc5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252346157964-n3kudll5r99isb8g1k1aahc2fgahhsng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

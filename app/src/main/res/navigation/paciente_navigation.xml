@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_inicio">
+    app:startDestination="@id/navigation_inicio">
 
     <fragment
         android:id="@+id/navigation_inicio"
@@ -15,7 +15,7 @@
         android:id="@+id/navigation_recetas"
         android:name="com.tp3.asistenciamedica.ui.recetas.RecetasFragment"
         android:label="@string/recetas"
-        tools:layout="@layout/fragment_recetas" >
+        tools:layout="@layout/fragment_recetas">
         <action
             android:id="@+id/action_recetas_to_receta"
             app:destination="@id/recetaFragment" />
@@ -34,7 +34,7 @@
         android:id="@+id/navigation_estudios"
         android:name="com.tp3.asistenciamedica.ui.estudios.EstudiosFragment"
         android:label="@string/estudios"
-        tools:layout="@layout/fragment_estudios" >
+        tools:layout="@layout/fragment_estudios">
         <action
             android:id="@+id/action_estudios_to_estudio"
             app:destination="@id/estudioFragment" />
@@ -43,7 +43,7 @@
         android:id="@+id/navigation_turnos"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnosFragment"
         android:label="@string/turnos"
-        tools:layout="@layout/fragment_recetas" >
+        tools:layout="@layout/fragment_recetas">
         <action
             android:id="@+id/action_turnos_to_turno"
             app:destination="@id/turnoFragment" />

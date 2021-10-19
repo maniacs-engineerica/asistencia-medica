@@ -9,13 +9,10 @@ import com.tp3.asistenciamedica.entities.Turno
 
 class RecetasViewModel : ViewModel() {
 
-    private val _recetas = MutableLiveData<List<Receta>>().apply {
-        value = listOf(
-            Receta("Alberto Cormillot", "Hipoglos 200mg"),
-            Receta("Mario Socolinsky", "Ibupirac Jarabe 4%"),
-            Receta("Nelson Castro", "Amoxidal Duo 30 comprimidos"),
-            Receta("Daniel Lopez Rosetti", "Sertal 10 comprimidos")
-        )
-    }
+    private val _recetas = MutableLiveData<List<Receta>>()
     val recetas: LiveData<List<Receta>> = _recetas
+
+    fun setRecetas(recetas: List<Receta>) {
+        _recetas.value = recetas
+    }
 }
