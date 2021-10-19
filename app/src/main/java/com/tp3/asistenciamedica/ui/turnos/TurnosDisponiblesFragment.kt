@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
 import com.tp3.asistenciamedica.databinding.FragmentEstudiosBinding
@@ -27,6 +28,7 @@ class TurnosDisponiblesFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     private lateinit var adapter: TurnosAdapter
 
@@ -55,7 +57,10 @@ class TurnosDisponiblesFragment : Fragment() {
             onTurnoClick()
         }
        /// binding.recyclerViewTurnosDisp.adapter = adapter
+        linearLayoutManager = LinearLayoutManager(context)
         binding.recyclerViewTurnosDisp.adapter=adapter
+        binding.recyclerViewTurnosDisp.setHasFixedSize(true)
+        binding.recyclerViewTurnosDisp.layoutManager= linearLayoutManager
         turnosViewModel.turnos.observe(viewLifecycleOwner, { result ->
             adapter.swapTurnos(result)
         })
