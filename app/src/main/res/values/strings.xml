@@ -59,4 +59,8 @@
     <string name="turnos_reservados">Turnos reservados: </string>
     <string name="ultimo_turno_disponible">Último turno disponible: </string>
     <string name="ultimo_turno_reservado">Último turno reservado: </string>
+    <string name="guardando">Guardando…</string>
+    <string name="ingresando">Ingresando…</string>
+    <string name="usuario_existente">Ya existe un usuario con ese email</string>
+    <string name="usuario_no_existente">Email o contraseña invalido(s)</string>
 </resources>
