@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.databinding.FragmentGeneradorTurnosBinding
 import com.tp3.asistenciamedica.entities.Turno
