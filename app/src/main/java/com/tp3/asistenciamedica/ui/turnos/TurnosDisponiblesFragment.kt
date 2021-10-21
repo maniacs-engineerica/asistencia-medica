@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
-import com.tp3.asistenciamedica.databinding.FragmentEstudiosBinding
+
 import com.tp3.asistenciamedica.databinding.TurnosDisponiblesFragmentBinding
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 

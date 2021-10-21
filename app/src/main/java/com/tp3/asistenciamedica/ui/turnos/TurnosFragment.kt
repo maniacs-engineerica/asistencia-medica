@@ -1,5 +1,4 @@
 package com.tp3.asistenciamedica.ui.turnos
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
