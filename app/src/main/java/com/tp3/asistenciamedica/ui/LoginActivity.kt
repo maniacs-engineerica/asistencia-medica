@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.ActivityLoginBinding
 import com.tp3.asistenciamedica.utils.KeyboardUtils
+import kotlin.random.Random
 
 class LoginActivity : AppCompatActivity() {
 
@@ -57,9 +58,18 @@ class LoginActivity : AppCompatActivity() {
                     Snackbar.make(binding.login, R.string.usuario_no_existente, 3000).show()
                     return@addOnSuccessListener
                 }
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+
+                if (Random.nextInt(0, 100) < 0) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+                else {
+                    val intent = Intent(this, MainActivityDoctor::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+
             }
     }
 
