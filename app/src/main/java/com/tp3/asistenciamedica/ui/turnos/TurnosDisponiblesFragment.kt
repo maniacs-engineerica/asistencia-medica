@@ -31,10 +31,11 @@ class TurnosDisponiblesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var linearLayoutManager: LinearLayoutManager
-    val db = Firebase.firestore
     private lateinit var adapter: TurnosAdapter
 
-    val turnosDisp= db.collection("turnos_disponibles").get()
+   
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
