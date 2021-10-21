@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
 
@@ -29,8 +31,10 @@ class TurnosDisponiblesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var linearLayoutManager: LinearLayoutManager
-
+    val db = Firebase.firestore
     private lateinit var adapter: TurnosAdapter
+
+    val turnosDisp= db.collection("turnos_disponibles").get()
 
     override fun onCreateView(
         inflater: LayoutInflater,
