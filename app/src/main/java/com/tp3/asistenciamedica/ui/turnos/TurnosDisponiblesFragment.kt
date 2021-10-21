@@ -33,7 +33,7 @@ class TurnosDisponiblesFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: TurnosAdapter
 
-   
+
 
 
 
