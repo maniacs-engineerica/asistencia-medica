@@ -9,7 +9,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.ActivityDoctorMainBinding
-import com.tp3.asistenciamedica.databinding.ActivityMainBinding
 
 class MainActivityDoctor : AppCompatActivity() {
 
@@ -27,7 +26,7 @@ class MainActivityDoctor : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_doctor_inicio, R.id.navigation_doctor_generacion_turnos
+                R.id.navigation_doctor_inicio, R.id.navigation_doctor_turnos
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
