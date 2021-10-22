@@ -8,6 +8,11 @@
     <fragment
         android:id="@+id/navigation_doctor_inicio"
         android:name="com.tp3.asistenciamedica.ui.doctor.InicioDoctorFragment"
-        android:label="fragment_doctor_inicio"
+        android:label="@string/inicio"
         tools:layout="@layout/fragment_doctor_inicio" />
+    <fragment
+        android:id="@+id/navigation_doctor_turnos"
+        android:name="com.tp3.asistenciamedica.ui.generacion_turnos.GeneradorTurnoFragment"
+        android:label="@string/turnos"
+        tools:layout="@layout/fragment_generador_turnos" />
 </navigation>
