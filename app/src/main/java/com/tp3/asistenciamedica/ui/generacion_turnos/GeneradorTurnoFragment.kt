@@ -3,6 +3,7 @@ package com.tp3.asistenciamedica.ui.generacion_turnos
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,6 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.math.truncate
 
 
@@ -69,26 +69,31 @@ class GeneradorTurnoFragment : Fragment() {
 
         val parsedDate: LocalDate = LocalDate.parse(
             date,
-            DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy")
+            DateTimeFormatter.ofPattern("dd/MM/yyyy")
         )
 
 
         val parsedHoraFinal: Double = Integer.valueOf(horaFinal.toString().replace(":", "")).toDouble()
-        var parsedHoraInicial: Double = Integer.valueOf(horaFinal.toString().replace(":", "")).toDouble()
+        var parsedHoraInicial: Double = Integer.valueOf(horaInicial.toString().replace(":", "")).toDouble()
 
-        while (parsedHoraInicial < parsedHoraFinal ) {
-
-            val dateTime: ZonedDateTime = parsedDate.atStartOfDay(ZoneId.of("America/Argentina/Buenos_Aires"))
-
-            dateTime.plusHours(
-                truncate((parsedHoraInicial / 100)).toLong()
+        var finalTime: ZonedDateTime = parsedDate.atStartOfDay(ZoneId.of("America/Argentina/Buenos_Aires"))
+            .plusHours(
+                truncate((parsedHoraFinal / 100)).toLong()
+            )
+            .plusMinutes(
+                (parsedHoraFinal - truncate((parsedHoraFinal / 100)) * 100).toLong()
             )
 
-            dateTime.plusMinutes(
-                (parsedHoraInicial - truncate((parsedHoraInicial / 100)) * 100).toLong()
-            )
+        var dateTime: ZonedDateTime = parsedDate.atStartOfDay(ZoneId.of("America/Argentina/Buenos_Aires"))
 
-            val turno: Turno = Turno("someProfesional").withDate(dateTime)
+        while (dateTime <= finalTime ) {
+
+
+            val turno: Turno = Turno()
+                .withSpecialization(especial.toString())
+                .withDoctorId("id")
+
+                .withDate(dateTime.toString())
 
 
             generateTurno(turno)
@@ -100,6 +105,15 @@ class GeneradorTurnoFragment : Fragment() {
 
             parsedHoraInicial += (parsedDuration + parsedSeparation)
 
+            dateTime = parsedDate.atStartOfDay(ZoneId.of("America/Argentina/Buenos_Aires"))
+                .plusHours(
+                    truncate((parsedHoraInicial / 100)).toLong()
+                )
+                .plusMinutes(
+                    (parsedHoraInicial - truncate((parsedHoraInicial / 100)) * 100).toLong()
+                )
+
+
         }
 
 
@@ -108,13 +122,14 @@ class GeneradorTurnoFragment : Fragment() {
 
 
     private fun generateTurno(turno: Turno) {
-        db.collection("turnos")
+        db.collection(Turno.FIREBASE_COLLECTION)
             .add(turno)
             .addOnSuccessListener { documentReference ->
+                Log.d("TAG", "Document generated: "+ documentReference)
             }
             .addOnFailureListener { e ->
+                Log.d("TAG", "Error trying to insert turno: "+ e)
             }
-
 
     }
 

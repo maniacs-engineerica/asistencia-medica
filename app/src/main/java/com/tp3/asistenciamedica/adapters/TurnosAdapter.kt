@@ -34,8 +34,8 @@ class TurnosAdapter(private var turnos: List<Turno> = listOf()) :
 
     override fun onBindViewHolder(holder: TurnoHolder, position: Int) {
         val turno = turnos[position]
-
-        holder.profesionalView.text = turno.profesional
+        // TODO: Fix the turno
+//        holder.profesionalView.text = turno.profesional
         holder.fechaView.text = formatter.format(Date())
 
         onTurnoClick?.let {

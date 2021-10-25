@@ -9,11 +9,13 @@ import com.tp3.asistenciamedica.entities.Turno
 class TurnosViewModel : ViewModel() {
 
     private val _turnos = MutableLiveData<List<Turno>>().apply {
-        value = listOf(
+
+        // TODO: Fix this list
+        value = listOf(/*
             Turno("Alberto Cormillot"),
             Turno("Mario Socolinsky"),
             Turno("Nelson Castro"),
-            Turno("Daniel Lopez Rosetti")
+            Turno("Daniel Lopez Rosetti")*/
         )
     }
     val turnos: LiveData<List<Turno>> = _turnos
