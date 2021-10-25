@@ -1,12 +1,27 @@
 package com.tp3.asistenciamedica.entities
 
+import com.tp3.asistenciamedica.daos.EstudioDao
+import com.tp3.asistenciamedica.daos.RecetaDao
+
 class Estudio() {
 
-    public var profesional: Usuario? = null
+    companion object {
+        public var FIREBASE_COLLECTION: String = "estudios"
+    }
+
+    public var idEstudio: String = ""
+    public var doctor: Usuario? = null
     public var paciente: Usuario? = null
-    public val ruta: String = ""
-    public val fecha: String = ""
-    public val ubicacionDeReceta: String = ""
-    public val rutaDeImagenes: MutableList<String> = mutableListOf<String>()
+    public var fecha: String = ""
+    public var ubicacionDeEstudio: String = ""
+    public var rutaDeImagenes: MutableList<String> = mutableListOf<String>()
+
+
+    constructor(estudio: EstudioDao) : this() {
+        this.idEstudio = estudio.idEstudio
+        this.fecha = estudio.fecha
+        this.ubicacionDeEstudio = estudio.ubicacionDeEstudio
+        this.rutaDeImagenes = estudio.rutaDeImagenes
+    }
 
 }

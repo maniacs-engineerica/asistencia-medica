@@ -11,5 +11,9 @@ class Usuario(
     val tipo: UsuarioTypeEnum
 ) {
 
+    companion object {
+        public var FIREBASE_COLLECTION: String = "usuarios"
+    }
+
     constructor() : this("","", "", "", "", "", "", UsuarioTypeEnum.PACIENTE)
 }

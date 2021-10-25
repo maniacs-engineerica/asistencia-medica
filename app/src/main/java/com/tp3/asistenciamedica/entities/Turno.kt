@@ -12,7 +12,11 @@ class Turno() {
     }
 
     constructor(dao: TurnoDao) : this() {
-        idTurno
+        this.idTurno = dao.idTurno
+        this.dateTime = dao.dateTime
+        this.state =  dao.state
+        this.detail = dao.detail
+        this.specialization = this.specialization
     }
 
 
