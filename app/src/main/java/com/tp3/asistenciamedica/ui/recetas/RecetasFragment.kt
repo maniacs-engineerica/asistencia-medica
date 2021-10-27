@@ -65,7 +65,7 @@ class RecetasFragment : Fragment() {
     private fun setupRecycler() {
         adapter = RecetasAdapter()
         adapter.onRecetaClick = {
-            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta())
+            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta(it.idReceta))
         }
         binding.recetas.adapter = adapter
 

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
 import com.tp3.asistenciamedica.databinding.FragmentTurnosBinding
+import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.RecetaRepository
 import com.tp3.asistenciamedica.repositories.TurnoRepository
@@ -68,7 +69,7 @@ open class TurnosFragment : Fragment() {
     private fun setupRecycler(){
         adapter = TurnosAdapter()
         adapter.onTurnoClick = {
-            onTurnoClick()
+            onTurnoClick(it)
         }
         binding.turnos.adapter = adapter
 
@@ -77,8 +78,8 @@ open class TurnosFragment : Fragment() {
         })
     }
 
-    open fun onTurnoClick() {
-        findNavController().navigate(TurnosFragmentDirections.actionTurnosToTurno())
+    open fun onTurnoClick(turno: Turno) {
+        findNavController().navigate(TurnosFragmentDirections.actionTurnosToTurno(turno.idTurno))
     }
 
     override fun onDestroyView() {

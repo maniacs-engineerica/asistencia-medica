@@ -1,18 +1,20 @@
 package com.tp3.asistenciamedica.ui.turnos
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.tp3.asistenciamedica.R
+import com.tp3.asistenciamedica.databinding.EstudioFragmentBinding
+import com.tp3.asistenciamedica.databinding.TurnoFragmentBinding
+import com.tp3.asistenciamedica.ui.estudios.EstudioViewModel
 
 class TurnoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TurnoFragment()
-    }
+    private var _binding: TurnoFragmentBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: TurnoViewModel
 
@@ -20,13 +22,21 @@ class TurnoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.turno_fragment, container, false)
+        viewModel =
+            ViewModelProvider(this).get(TurnoViewModel::class.java)
+
+        _binding = TurnoFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TurnoViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onStart() {
+        super.onStart()
+
+        val turnoId = TurnoFragmentArgs.fromBundle(requireArguments()).turnoId
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

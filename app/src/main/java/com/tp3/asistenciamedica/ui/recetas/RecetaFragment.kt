@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tp3.asistenciamedica.R
+import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
+import com.tp3.asistenciamedica.databinding.RecetaFragmentBinding
 
 class RecetaFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RecetaFragment()
-    }
+    private var _binding: RecetaFragmentBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: RecetaViewModel
 
@@ -20,13 +21,23 @@ class RecetaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.receta_fragment, container, false)
+        viewModel =
+            ViewModelProvider(this).get(RecetaViewModel::class.java)
+
+        _binding = RecetaFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RecetaViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onStart() {
+        super.onStart()
+
+        val recetaId = RecetaFragmentArgs.fromBundle(requireArguments()).recetaId
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

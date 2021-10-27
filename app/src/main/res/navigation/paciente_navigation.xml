@@ -52,15 +52,27 @@
         android:id="@+id/estudioFragment"
         android:name="com.tp3.asistenciamedica.ui.estudios.EstudioFragment"
         android:label="@string/estudio"
-        tools:layout="@layout/estudio_fragment" />
+        tools:layout="@layout/estudio_fragment" >
+        <argument
+            android:name="estudioId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/recetaFragment"
         android:name="com.tp3.asistenciamedica.ui.recetas.RecetaFragment"
         android:label="@string/receta"
-        tools:layout="@layout/receta_fragment" />
+        tools:layout="@layout/receta_fragment" >
+        <argument
+            android:name="recetaId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/turnoFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnoFragment"
         android:label="Turno"
-        tools:layout="@layout/turno_fragment" />
+        tools:layout="@layout/turno_fragment" >
+        <argument
+            android:name="turnoId"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -61,7 +61,7 @@ class EstudiosFragment : Fragment() {
     private fun setupRecycler(){
         adapter = EstudiosAdapter()
         adapter.onEstudioClick = {
-            findNavController().navigate(EstudiosFragmentDirections.actionEstudiosToEstudio())
+            findNavController().navigate(EstudiosFragmentDirections.actionEstudiosToEstudio(it.idEstudio))
         }
         binding.estudios.adapter = adapter
 
