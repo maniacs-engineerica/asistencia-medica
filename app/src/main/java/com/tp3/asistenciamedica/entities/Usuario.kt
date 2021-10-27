@@ -1,7 +1,6 @@
 package com.tp3.asistenciamedica.entities
 
 class Usuario(
-    val id: String,
     val nombre: String,
     val apellido: String,
     val email: String,
@@ -11,9 +10,11 @@ class Usuario(
     val tipo: UsuarioTypeEnum
 ) {
 
+    lateinit var id: String
+
     companion object {
-        public var FIREBASE_COLLECTION: String = "usuarios"
+        var FIREBASE_COLLECTION: String = "usuarios"
     }
 
-    constructor() : this("","", "", "", "", "", "", UsuarioTypeEnum.PACIENTE)
+    constructor() : this("","", "", "", "", "", UsuarioTypeEnum.PACIENTE)
 }

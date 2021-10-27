@@ -12,6 +12,11 @@ import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.adapters.RecetasAdapter
 import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
 import com.tp3.asistenciamedica.entities.Receta
+import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
+import com.tp3.asistenciamedica.repositories.EstudioRepository
+import com.tp3.asistenciamedica.repositories.RecetaRepository
+import com.tp3.asistenciamedica.session.Session
+import kotlinx.coroutines.runBlocking
 
 class RecetasFragment : Fragment() {
 
@@ -23,8 +28,6 @@ class RecetasFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: RecetasAdapter
-
-    val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +48,18 @@ class RecetasFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        db.collection("recetas").get().addOnSuccessListener {
-            recetasViewModel.setRecetas(it.toObjects(Receta::class.java))
+        val usuario = Session.current()
+
+        val recetas = if (usuario.tipo == UsuarioTypeEnum.PACIENTE){
+            runBlocking {
+                RecetaRepository().findRecetaByPacientId(usuario.id)
+            }
+        } else {
+            runBlocking {
+                RecetaRepository().findRecetaByProfesionalId(usuario.id)
+            }
         }
+        recetasViewModel.setRecetas(recetas)
     }
 
     private fun setupRecycler() {

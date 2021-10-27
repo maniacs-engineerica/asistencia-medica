@@ -11,7 +11,7 @@ class UsuarioRepository {
     private val db = Firebase.firestore
 
 
-    public suspend fun findUserById(id: String): Usuario? {
+    suspend fun findUserById(id: String): Usuario? {
 
         var document = db.collection(Usuario.FIREBASE_COLLECTION).document(id)
             .get().await()
@@ -20,5 +20,33 @@ class UsuarioRepository {
 
 
         return user
+    }
+
+    suspend fun findUserByCredentials(email: String, password: String): Usuario? {
+
+        val document = db.collection(Usuario.FIREBASE_COLLECTION)
+            .whereEqualTo("email", email)
+            .whereEqualTo("contrasena", password)
+            .get()
+            .await()
+
+        if (document.isEmpty){
+            return null
+        }
+
+        return document.toObjects(Usuario::class.java).first()
+    }
+
+    suspend fun userExists(email: String): Boolean {
+        val document = db.collection(Usuario.FIREBASE_COLLECTION)
+            .whereEqualTo("email", email)
+            .get()
+            .await()
+
+        return !document.isEmpty
+    }
+
+    suspend fun create(usuario: Usuario) {
+        db.collection(Usuario.FIREBASE_COLLECTION).add(usuario).await()
     }
 }

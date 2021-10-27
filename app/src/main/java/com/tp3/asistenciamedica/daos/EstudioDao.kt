@@ -5,6 +5,7 @@ import com.tp3.asistenciamedica.entities.Usuario
 class EstudioDao {
 
     public var idEstudio: String = ""
+    public var nombre: String = ""
     public var doctorId: String = ""
     public var pacienteId: String = ""
     public var fecha: String = ""

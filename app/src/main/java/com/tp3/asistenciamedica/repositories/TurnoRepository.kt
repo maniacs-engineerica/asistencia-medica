@@ -11,16 +11,12 @@ import kotlinx.coroutines.tasks.await
 
 class TurnoRepository {
 
-
     private val db = Firebase.firestore
     private val userDb = UsuarioRepository()
 
+    suspend fun findTurnoByDocumentId(id: String): Turno? {
 
-
-    public suspend fun findTurnoByDocumentId(id: String): Turno? {
-
-
-        var document = db.collection(Turno.FIREBASE_COLLECTION).document(id)
+        val document = db.collection(Turno.FIREBASE_COLLECTION).document(id)
             .get().await()
 
         val dao = document.toObject(TurnoDao::class.java)
@@ -29,14 +25,28 @@ class TurnoRepository {
         return null
     }
 
-    public suspend fun findTurnoByState(state: TurnoStatusEnum): List<Turno> {
+    suspend fun findTurnosByPacienteId(id: String): List<Turno> {
 
-        var documents = db.collection(Turno.FIREBASE_COLLECTION)
+        val documents = db.collection(Turno.FIREBASE_COLLECTION)
+            .whereEqualTo("pacienteId", id)
+            .get()
+            .await()
+
+        val daos = documents.toObjects(TurnoDao::class.java)
+
+        return daos.map {
+            convertDaoToTurno(it)
+        }
+    }
+
+    suspend fun findTurnoByState(state: TurnoStatusEnum): List<Turno> {
+
+        val documents = db.collection(Turno.FIREBASE_COLLECTION)
             .whereEqualTo("state", state)
             .get()
             .await()
 
-        var daos = documents.toObjects(TurnoDao::class.java)
+        val daos = documents.toObjects(TurnoDao::class.java)
 
 
         return daos.map {
@@ -46,11 +56,9 @@ class TurnoRepository {
     }
 
 
-    public suspend fun findTurnoByProfesionalId(id: String): List<Turno> {
+    suspend fun findTurnoByProfesionalId(id: String): List<Turno> {
 
-
-
-        var documents = db.collection(Turno.FIREBASE_COLLECTION)
+        val documents = db.collection(Turno.FIREBASE_COLLECTION)
             .whereEqualTo("profesionalId", id)
             .get()
             .await()

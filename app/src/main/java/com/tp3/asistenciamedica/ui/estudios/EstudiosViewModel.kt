@@ -7,13 +7,10 @@ import com.tp3.asistenciamedica.entities.Estudio
 
 class EstudiosViewModel : ViewModel() {
 
-    private val _estudios = MutableLiveData<List<Estudio>>().apply {
-        value = listOf(
-            Estudio("Radiografía"),
-            Estudio("Tomografía"),
-            Estudio("Ergometría"),
-            Estudio("Ecografía")
-        )
-    }
+    private val _estudios = MutableLiveData<List<Estudio>>()
     val estudios: LiveData<List<Estudio>> = _estudios
+
+    fun setEstudios(estudios: List<Estudio>){
+        _estudios.value = estudios
+    }
 }

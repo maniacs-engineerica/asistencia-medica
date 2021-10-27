@@ -13,4 +13,11 @@
         android:text="Nombre del estudio"
         style="@style/TextViewPrimary"/>
 
+    <TextView
+        android:id="@+id/usuario"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Lopez Rosetti"
+        style="@style/TextViewSecondary"/>
+
 </LinearLayout>

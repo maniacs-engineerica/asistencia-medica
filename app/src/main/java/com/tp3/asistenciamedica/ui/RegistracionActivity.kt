@@ -8,7 +8,10 @@ import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.ActivityRegistracionBinding
 import com.tp3.asistenciamedica.entities.Usuario
+import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
+import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.utils.KeyboardUtils
+import kotlinx.coroutines.runBlocking
 
 class RegistracionActivity : AppCompatActivity() {
 
@@ -35,30 +38,34 @@ class RegistracionActivity : AppCompatActivity() {
 
         KeyboardUtils.close(this)
 
-        db.collection("usuarios")
-            .whereEqualTo("email", binding.email.text.toString())
-            .get()
-            .addOnSuccessListener {
-                if (!it.isEmpty) {
-                    Snackbar.make(binding.email, R.string.usuario_existente, 3000).show()
-                    return@addOnSuccessListener
-                }
-                crearUsuario()
-                finish()
-            }
-    }
+        val repository = UsuarioRepository()
 
-    private fun crearUsuario() {
+        val exists = runBlocking {
+            repository.userExists(binding.email.text.toString())
+        }
+
+        if (exists){
+            binding.registrarse.isEnabled = true
+            binding.registrarse.text = getString(R.string.registrarme)
+            Snackbar.make(binding.email, R.string.usuario_existente, 3000).show()
+            return
+        }
+
         val usuario = Usuario(
             binding.firstName.text.toString(),
             binding.lastName.text.toString(),
             binding.email.text.toString(),
             binding.password.text.toString(),
             binding.dni.text.toString(),
-            binding.phoneNumber.text.toString()
+            binding.phoneNumber.text.toString(),
+            UsuarioTypeEnum.PACIENTE
         )
 
-        db.collection("usuarios").add(usuario)
+        runBlocking {
+            repository.create(usuario)
+        }
+
+        finish()
     }
 
     private fun datosValidos(): Boolean {

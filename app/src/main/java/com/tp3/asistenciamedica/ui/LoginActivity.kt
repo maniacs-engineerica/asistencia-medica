@@ -8,7 +8,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.ActivityLoginBinding
+import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
+import com.tp3.asistenciamedica.repositories.UsuarioRepository
+import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.utils.KeyboardUtils
+import kotlinx.coroutines.runBlocking
 import kotlin.random.Random
 
 class LoginActivity : AppCompatActivity() {
@@ -47,30 +51,36 @@ class LoginActivity : AppCompatActivity() {
 
         KeyboardUtils.close(this)
 
-        db.collection("usuarios")
-            .whereEqualTo("email", binding.username.text.toString())
-            .whereEqualTo("contrasena", binding.password.text.toString())
-            .get()
-            .addOnSuccessListener {
-                if (it.isEmpty) {
-                    binding.login.isEnabled = true
-                    binding.login.setText(R.string.ingresar)
-                    Snackbar.make(binding.login, R.string.usuario_no_existente, 3000).show()
-                    return@addOnSuccessListener
-                }
+        val repository = UsuarioRepository()
 
-                if (Random.nextInt(0, 100) < 0) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                }
-                else {
-                    val intent = Intent(this, MainActivityDoctor::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                }
+        val user = runBlocking {
+            repository.findUserByCredentials(
+                binding.username.text.toString(),
+                binding.password.text.toString()
+            )
+        }
 
-            }
+        if (user == null) {
+            binding.login.isEnabled = true
+            binding.login.setText(R.string.ingresar)
+            Snackbar.make(binding.login, R.string.usuario_no_existente, 3000).show()
+            return
+        }
+
+        //TODO: esto hay que borrarlo cuando el id ya este
+        if (user.id != null){
+            Session.login(user)
+        }
+
+        if (user.tipo == UsuarioTypeEnum.PACIENTE) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        } else {
+            val intent = Intent(this, MainActivityDoctor::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
     }
 
     private fun datosValidos(): Boolean {

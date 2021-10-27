@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.entities.Receta
-import java.util.*
+import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
+import com.tp3.asistenciamedica.session.Session
 
 class RecetasAdapter(private var recetas: List<Receta> = listOf()) :
     RecyclerView.Adapter<RecetasAdapter.RecetaHolder>() {
@@ -30,7 +31,10 @@ class RecetasAdapter(private var recetas: List<Receta> = listOf()) :
     override fun onBindViewHolder(holder: RecetaHolder, position: Int) {
         val receta = recetas[position]
 
-        holder.profesionalView.text = receta.profesional
+        val usuario = Session.current()
+
+        holder.usuarioView.text = if (usuario.tipo == UsuarioTypeEnum.PACIENTE)
+            receta.doctor?.nombre else receta.paciente?.nombre
         holder.descripcionView.text = receta.descripcion
 
         onRecetaClick?.let {
@@ -44,7 +48,7 @@ class RecetasAdapter(private var recetas: List<Receta> = listOf()) :
 
     class RecetaHolder(v: View) : RecyclerView.ViewHolder(v) {
 
-        var profesionalView: TextView = v.findViewById(R.id.profesional)
+        var usuarioView: TextView = v.findViewById(R.id.usuario)
         var descripcionView: TextView = v.findViewById(R.id.descripcion)
 
     }

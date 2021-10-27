@@ -13,37 +13,30 @@ class EstudioRepository {
     private val db = Firebase.firestore
     private val userDb = UsuarioRepository()
 
+    suspend fun findEstudiosByProfesionalId(id: String): List<Estudio> {
 
-    public suspend fun findEstudioByProfesionalId(id: String): List<Estudio> {
-
-
-
-        var documents = db.collection(Estudio.FIREBASE_COLLECTION)
+        val documents = db.collection(Estudio.FIREBASE_COLLECTION)
             .whereEqualTo("profesionalId", id)
             .get()
             .await()
 
 
-        var daos = documents.toObjects(EstudioDao::class.java)
-
+        val daos = documents.toObjects(EstudioDao::class.java)
 
         return daos.map {
             convertDaoToEstudio(it)
         }
     }
 
-    public suspend fun findEstudioByPacientId(id: String): List<Estudio> {
+    suspend fun findEstudiosByPacientId(id: String): List<Estudio> {
 
-
-
-        var documents = db.collection(Estudio.FIREBASE_COLLECTION)
+        val documents = db.collection(Estudio.FIREBASE_COLLECTION)
             .whereEqualTo("pacienteId", id)
             .get()
             .await()
 
 
-        var daos = documents.toObjects(EstudioDao::class.java)
-
+        val daos = documents.toObjects(EstudioDao::class.java)
 
         return daos.map {
             convertDaoToEstudio(it)
