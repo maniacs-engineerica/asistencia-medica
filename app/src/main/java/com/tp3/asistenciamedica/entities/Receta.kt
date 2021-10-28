@@ -18,7 +18,6 @@ class Receta() {
 
 
     constructor(receta: RecetaDao) : this() {
-        this.idReceta = receta.idReceta
         this.fecha = receta.fecha
         this.descripcion = receta.descripcion
         this.ubicacionDeReceta = receta.ubicacionDeReceta

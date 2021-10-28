@@ -1,17 +1,18 @@
 package com.tp3.asistenciamedica.repositories
 
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.daos.EstudioDao
 import com.tp3.asistenciamedica.daos.TurnoDao
 import com.tp3.asistenciamedica.entities.Estudio
 import com.tp3.asistenciamedica.entities.Turno
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 
 class EstudioRepository {
 
     private val db = Firebase.firestore
-    private val userDb = UsuarioRepository()
 
     suspend fun findEstudiosByProfesionalId(id: String): List<Estudio> {
 
@@ -20,12 +21,7 @@ class EstudioRepository {
             .get()
             .await()
 
-
-        val daos = documents.toObjects(EstudioDao::class.java)
-
-        return daos.map {
-            convertDaoToEstudio(it)
-        }
+        return documents.toEstudios()
     }
 
     suspend fun findEstudiosByPacientId(id: String): List<Estudio> {
@@ -35,40 +31,26 @@ class EstudioRepository {
             .get()
             .await()
 
-
-        val daos = documents.toObjects(EstudioDao::class.java)
-
-        return daos.map {
-            convertDaoToEstudio(it)
-        }
+        return documents.toEstudios()
     }
 
+}
 
-    private suspend fun convertDaoToEstudio(estudioDao: EstudioDao): Estudio {
+private fun QuerySnapshot.toEstudios(): List<Estudio> {
+    val userDb = UsuarioRepository()
+    return map { document ->
+        val dao = document.toObject(EstudioDao::class.java)
+        val estudio = Estudio(dao)
 
-        lateinit var estudio: Estudio
+        estudio.idEstudio = document.id
 
-
-        if (estudioDao != null) {
-
-            estudio = Estudio(estudioDao)
-
-            if (estudioDao.doctorId != null && estudioDao.doctorId != "") {
-
-                estudio.doctor = userDb.findUserById(estudioDao.doctorId)
-
-            }
-
-            if (estudioDao.pacienteId != null && estudioDao.pacienteId != "") {
-                estudio.paciente = userDb.findUserById(estudioDao.pacienteId)
-            }
-
-
+        if (dao.doctorId.isNotEmpty()) {
+            estudio.doctor = runBlocking { userDb.findUserById(dao.doctorId)  }
         }
 
-        return estudio
-
+        if (dao.pacienteId.isNotEmpty()) {
+            estudio.paciente = runBlocking { userDb.findUserById(dao.pacienteId) }
+        }
+        estudio
     }
-
-
 }

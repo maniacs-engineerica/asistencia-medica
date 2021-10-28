@@ -10,7 +10,7 @@ class Usuario(
     val tipo: UsuarioTypeEnum
 ) {
 
-    lateinit var id: String
+    var id: String = ""
 
     companion object {
         var FIREBASE_COLLECTION: String = "usuarios"

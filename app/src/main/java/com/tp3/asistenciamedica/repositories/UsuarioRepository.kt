@@ -13,28 +13,32 @@ class UsuarioRepository {
 
     suspend fun findUserById(id: String): Usuario? {
 
-        var document = db.collection(Usuario.FIREBASE_COLLECTION).document(id)
+        val document = db.collection(Usuario.FIREBASE_COLLECTION).document(id)
             .get().await()
 
         val user = document.toObject(Usuario::class.java)
 
+        user?.id = document.id
 
         return user
     }
 
     suspend fun findUserByCredentials(email: String, password: String): Usuario? {
 
-        val document = db.collection(Usuario.FIREBASE_COLLECTION)
+        val documents = db.collection(Usuario.FIREBASE_COLLECTION)
             .whereEqualTo("email", email)
             .whereEqualTo("contrasena", password)
             .get()
             .await()
 
-        if (document.isEmpty){
+        if (documents.isEmpty){
             return null
         }
 
-        return document.toObjects(Usuario::class.java).first()
+        val user = documents.toObjects(Usuario::class.java).first()
+        user.id = documents.first().id
+
+        return user
     }
 
     suspend fun userExists(email: String): Boolean {
@@ -47,6 +51,7 @@ class UsuarioRepository {
     }
 
     suspend fun create(usuario: Usuario) {
-        db.collection(Usuario.FIREBASE_COLLECTION).add(usuario).await()
+        val document = db.collection(Usuario.FIREBASE_COLLECTION).add(usuario).await()
+        usuario.id = document.id
     }
 }

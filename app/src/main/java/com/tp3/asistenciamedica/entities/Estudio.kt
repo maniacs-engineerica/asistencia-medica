@@ -19,7 +19,6 @@ class Estudio() {
 
 
     constructor(estudio: EstudioDao) : this() {
-        this.idEstudio = estudio.idEstudio
         this.nombre = estudio.nombre
         this.fecha = estudio.fecha
         this.ubicacionDeEstudio = estudio.ubicacionDeEstudio

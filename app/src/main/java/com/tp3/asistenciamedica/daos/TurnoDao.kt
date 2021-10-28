@@ -5,12 +5,11 @@ import com.tp3.asistenciamedica.entities.Usuario
 
 class TurnoDao {
 
-    public var idTurno: String = ""
-    public var dateTime: String = ""
-    public var state: TurnoStatusEnum = TurnoStatusEnum.DISPONIBLE
-    public var doctorId: String = ""
-    public var pacienteId: String = ""
-    public var detail: String = ""
-    public var specialization: String = ""
+    var dateTime: String = ""
+    var state: TurnoStatusEnum = TurnoStatusEnum.DISPONIBLE
+    var doctorId: String = ""
+    var pacienteId: String = ""
+    var detail: String = ""
+    var specialization: String = ""
 
 }
