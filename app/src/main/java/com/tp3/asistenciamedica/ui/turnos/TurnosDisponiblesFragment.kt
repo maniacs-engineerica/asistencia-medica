@@ -15,6 +15,7 @@ import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
 
 import com.tp3.asistenciamedica.databinding.TurnosDisponiblesFragmentBinding
+import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 
 
@@ -37,6 +38,10 @@ class TurnosDisponiblesFragment : Fragment() {
 
 
 
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,6 +52,7 @@ class TurnosDisponiblesFragment : Fragment() {
 
         _binding = TurnosDisponiblesFragmentBinding.inflate(inflater, container, false)
         txtEspecialidad= binding.root.findViewById(R.id.txt_tituloTurnosDisp)
+
 
         return binding.root
     }
@@ -66,6 +72,7 @@ class TurnosDisponiblesFragment : Fragment() {
         binding.recyclerViewTurnosDisp.adapter=adapter
         binding.recyclerViewTurnosDisp.setHasFixedSize(true)
         binding.recyclerViewTurnosDisp.layoutManager= linearLayoutManager
+
         turnosViewModel.turnos.observe(viewLifecycleOwner, { result ->
             adapter.swapTurnos(result)
         })
