@@ -1,11 +1,13 @@
 package com.tp3.asistenciamedica.ui.recetas
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,6 +18,7 @@ import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.EstudioRepository
 import com.tp3.asistenciamedica.repositories.RecetaRepository
 import com.tp3.asistenciamedica.session.Session
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class RecetasFragment : Fragment() {
@@ -43,6 +46,10 @@ class RecetasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecycler()
+
+        Handler().postDelayed({
+            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta(""))
+        }, 2000)
     }
 
     override fun onStart() {
@@ -50,16 +57,14 @@ class RecetasFragment : Fragment() {
 
         val usuario = Session.current()
 
-        val recetas = if (usuario.tipo == UsuarioTypeEnum.PACIENTE){
-            runBlocking {
+        lifecycleScope.launch {
+            val recetas = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
                 RecetaRepository().findRecetaByPacientId(usuario.id)
-            }
-        } else {
-            runBlocking {
+            } else {
                 RecetaRepository().findRecetaByProfesionalId(usuario.id)
             }
+            recetasViewModel.setRecetas(recetas)
         }
-        recetasViewModel.setRecetas(recetas)
     }
 
     private fun setupRecycler() {

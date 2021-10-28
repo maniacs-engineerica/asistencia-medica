@@ -17,6 +17,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/paciente"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:hint="@string/paciente" />

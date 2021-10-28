@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
 import com.tp3.asistenciamedica.databinding.FragmentTurnosBinding
@@ -20,6 +21,7 @@ import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 import com.tp3.asistenciamedica.ui.recetas.TurnosViewModel
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 open class TurnosFragment : Fragment() {
@@ -54,19 +56,17 @@ open class TurnosFragment : Fragment() {
 
         val usuario = Session.current()
 
-        val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE){
-            runBlocking {
+        lifecycleScope.launch {
+            val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
                 TurnoRepository().findTurnosByPacienteId(usuario.id)
-            }
-        } else {
-            runBlocking {
+            } else {
                 TurnoRepository().findTurnoByProfesionalId(usuario.id)
             }
+            turnosViewModel.setTurnos(turnos)
         }
-        turnosViewModel.setTurnos(turnos)
     }
 
-    private fun setupRecycler(){
+    private fun setupRecycler() {
         adapter = TurnosAdapter()
         adapter.onTurnoClick = {
             onTurnoClick(it)

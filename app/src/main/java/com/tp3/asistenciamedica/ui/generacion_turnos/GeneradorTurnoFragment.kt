@@ -88,16 +88,14 @@ class GeneradorTurnoFragment : Fragment() {
 
         while (dateTime <= finalTime ) {
 
-
             val turno: Turno = Turno()
                 .withSpecialization(especial.toString())
-                .withDoctorId("id")
+                //.withDoctorId("id")
 
                 .withDate(dateTime.toString())
 
 
             generateTurno(turno)
-
 
             val parsedDuration = Integer.valueOf(duration.toString())
             val parsedSeparation = Integer.valueOf(separation.toString())

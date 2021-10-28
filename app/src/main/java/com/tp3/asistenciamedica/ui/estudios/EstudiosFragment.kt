@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.adapters.EstudiosAdapter
 import com.tp3.asistenciamedica.databinding.FragmentEstudiosBinding
@@ -13,6 +14,7 @@ import com.tp3.asistenciamedica.entities.Estudio
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.EstudioRepository
 import com.tp3.asistenciamedica.session.Session
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class EstudiosFragment : Fragment() {
@@ -46,16 +48,14 @@ class EstudiosFragment : Fragment() {
 
         val usuario = Session.current()
 
-        val estudios = if (usuario.tipo == UsuarioTypeEnum.PACIENTE){
-            runBlocking {
+        lifecycleScope.launch {
+            val estudios = if (usuario.tipo == UsuarioTypeEnum.PACIENTE){
                 EstudioRepository().findEstudiosByPacientId(usuario.id)
-            }
-        } else {
-            runBlocking {
+            } else {
                 EstudioRepository().findEstudiosByProfesionalId(usuario.id)
             }
+            estudiosViewModel.setEstudios(estudios)
         }
-        estudiosViewModel.setEstudios(estudios)
     }
 
     private fun setupRecycler(){

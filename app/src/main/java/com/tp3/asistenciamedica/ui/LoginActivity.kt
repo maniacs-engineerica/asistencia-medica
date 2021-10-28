@@ -3,16 +3,19 @@ package com.tp3.asistenciamedica.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.ActivityLoginBinding
+import com.tp3.asistenciamedica.entities.Usuario
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.utils.KeyboardUtils
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 import kotlin.random.Random
 
 class LoginActivity : AppCompatActivity() {
@@ -53,25 +56,25 @@ class LoginActivity : AppCompatActivity() {
 
         val repository = UsuarioRepository()
 
-        val user = runBlocking {
-            repository.findUserByCredentials(
+        lifecycleScope.launch {
+            val user = repository.findUserByCredentials(
                 binding.username.text.toString(),
                 binding.password.text.toString()
             )
-        }
 
-        if (user == null) {
-            binding.login.isEnabled = true
-            binding.login.setText(R.string.ingresar)
-            Snackbar.make(binding.login, R.string.usuario_no_existente, 3000).show()
-            return
-        }
+            if (user == null) {
+                binding.login.isEnabled = true
+                binding.login.setText(R.string.ingresar)
+                Snackbar.make(binding.login, R.string.usuario_no_existente, 3000).show()
+                return@launch
+            }
 
-        //TODO: esto hay que borrarlo cuando el id ya este
-        if (user.id != null){
             Session.login(user)
+            startForUser(user)
         }
+    }
 
+    private fun startForUser(user: Usuario) {
         if (user.tipo == UsuarioTypeEnum.PACIENTE) {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

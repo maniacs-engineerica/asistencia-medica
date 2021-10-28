@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.25833333333333336" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_dropdown_item_1line.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/layout/activity_doctor_main.xml" value="0.25" />
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
@@ -61,7 +63,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.335" />
+        <option name="scale" value="0.22327898550724637" />
       </ProjectState>
     </option>
   </component>

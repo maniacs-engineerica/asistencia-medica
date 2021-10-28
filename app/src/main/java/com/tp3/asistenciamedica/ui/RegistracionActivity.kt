@@ -10,6 +10,7 @@ import com.tp3.asistenciamedica.databinding.ActivityRegistracionBinding
 import com.tp3.asistenciamedica.entities.Usuario
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.UsuarioRepository
+import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.utils.KeyboardUtils
 import kotlinx.coroutines.runBlocking
 
@@ -44,7 +45,7 @@ class RegistracionActivity : AppCompatActivity() {
             repository.userExists(binding.email.text.toString())
         }
 
-        if (exists){
+        if (exists) {
             binding.registrarse.isEnabled = true
             binding.registrarse.text = getString(R.string.registrarme)
             Snackbar.make(binding.email, R.string.usuario_existente, 3000).show()
