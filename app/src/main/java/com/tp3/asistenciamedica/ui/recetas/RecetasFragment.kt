@@ -48,7 +48,7 @@ class RecetasFragment : Fragment() {
         setupRecycler()
 
         Handler().postDelayed({
-            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta(""))
+            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta("D7hd7jA7EbB83IoQo1cR"))
         }, 2000)
     }
 

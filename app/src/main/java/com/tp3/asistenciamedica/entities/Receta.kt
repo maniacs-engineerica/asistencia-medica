@@ -9,8 +9,8 @@ class Receta() {
     }
 
     var idReceta: String = ""
-    var doctor: Usuario? = null
-    var paciente: Usuario? = null
+    lateinit var doctor: Usuario
+    lateinit var paciente: Usuario
     var fecha: String = ""
     var descripcion: String = ""
     var ubicacionDeReceta: String = ""

@@ -60,11 +60,15 @@ private fun DocumentSnapshot.toReceta(): Receta? {
     val userDb = UsuarioRepository()
 
     if (dao.doctorId.isNotEmpty()) {
-        receta.doctor = runBlocking { userDb.findUserById(dao.doctorId) }
+        runBlocking { userDb.findUserById(dao.doctorId) }?.let {
+            receta.doctor = it
+        }
     }
 
     if (dao.pacienteId.isNotEmpty()) {
-        receta.paciente = runBlocking { userDb.findUserById(dao.pacienteId) }
+        runBlocking { userDb.findUserById(dao.pacienteId) }?.let {
+            receta.paciente = it
+        }
     }
     return receta
 }

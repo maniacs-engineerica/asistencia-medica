@@ -12,6 +12,9 @@ class Usuario(
 
     var id: String = ""
 
+    var nombreCompleto: String = ""
+        get() = "$nombre $apellido"
+
     companion object {
         var FIREBASE_COLLECTION: String = "usuarios"
     }
