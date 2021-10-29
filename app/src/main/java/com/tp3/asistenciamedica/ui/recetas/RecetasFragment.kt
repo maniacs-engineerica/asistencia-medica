@@ -18,16 +18,13 @@ import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.EstudioRepository
 import com.tp3.asistenciamedica.repositories.RecetaRepository
 import com.tp3.asistenciamedica.session.Session
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 class RecetasFragment : Fragment() {
 
     private lateinit var recetasViewModel: RecetasViewModel
     private var _binding: FragmentRecetasBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private lateinit var adapter: RecetasAdapter
@@ -46,10 +43,6 @@ class RecetasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecycler()
-
-        Handler().postDelayed({
-            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta("D7hd7jA7EbB83IoQo1cR"))
-        }, 2000)
     }
 
     override fun onStart() {
@@ -57,13 +50,18 @@ class RecetasFragment : Fragment() {
 
         val usuario = Session.current()
 
-        lifecycleScope.launch {
+        val parentJob = Job()
+        val scope = CoroutineScope(Dispatchers.Default + parentJob)
+
+        scope.launch {
             val recetas = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
                 RecetaRepository().findRecetaByPacientId(usuario.id)
             } else {
                 RecetaRepository().findRecetaByProfesionalId(usuario.id)
             }
-            recetasViewModel.setRecetas(recetas)
+            withContext(Dispatchers.Main){
+                recetasViewModel.setRecetas(recetas)
+            }
         }
     }
 

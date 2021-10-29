@@ -66,4 +66,7 @@
     <string name="emitir_receta">Emitir Receta</string>
 
     <string name="fecha_formato">Fecha (DD/MM/AAAA)</string>
+    <string name="validacion_paciente">Seleccione un paciente</string>
+    <string name="validacion_fecha">Ingrese una fecha válida</string>
+    <string name="validacion_receta">Ingrese una receta</string>
 </resources>

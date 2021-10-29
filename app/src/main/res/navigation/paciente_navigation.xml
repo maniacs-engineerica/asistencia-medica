@@ -64,7 +64,8 @@
         tools:layout="@layout/receta_fragment" >
         <argument
             android:name="recetaId"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/turnoFragment"

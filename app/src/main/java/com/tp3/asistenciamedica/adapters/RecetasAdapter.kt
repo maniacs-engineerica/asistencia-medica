@@ -33,8 +33,8 @@ class RecetasAdapter(private var recetas: List<Receta> = listOf()) :
 
         val usuario = Session.current()
 
-        holder.usuarioView.text = if (usuario.tipo == UsuarioTypeEnum.PACIENTE)
-            receta.doctor?.nombre else receta.paciente?.nombre
+        holder.usuarioView.text = (if (usuario.tipo == UsuarioTypeEnum.PACIENTE)
+            receta.doctor else receta.paciente).nombreCompleto
         holder.descripcionView.text = receta.descripcion
 
         onRecetaClick?.let {

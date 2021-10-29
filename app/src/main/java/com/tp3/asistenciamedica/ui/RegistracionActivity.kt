@@ -2,6 +2,7 @@ package com.tp3.asistenciamedica.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -12,6 +13,7 @@ import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.utils.KeyboardUtils
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class RegistracionActivity : AppCompatActivity() {
@@ -41,32 +43,30 @@ class RegistracionActivity : AppCompatActivity() {
 
         val repository = UsuarioRepository()
 
-        val exists = runBlocking {
-            repository.userExists(binding.email.text.toString())
-        }
+        lifecycleScope.launch {
 
-        if (exists) {
-            binding.registrarse.isEnabled = true
-            binding.registrarse.text = getString(R.string.registrarme)
-            Snackbar.make(binding.email, R.string.usuario_existente, 3000).show()
-            return
-        }
+            val exists = repository.userExists(binding.email.text.toString())
 
-        val usuario = Usuario(
-            binding.firstName.text.toString(),
-            binding.lastName.text.toString(),
-            binding.email.text.toString(),
-            binding.password.text.toString(),
-            binding.dni.text.toString(),
-            binding.phoneNumber.text.toString(),
-            UsuarioTypeEnum.PACIENTE
-        )
+            if (exists) {
+                binding.registrarse.isEnabled = true
+                binding.registrarse.text = getString(R.string.registrarme)
+                Snackbar.make(binding.email, R.string.usuario_existente, 3000).show()
+                return@launch
+            }
 
-        runBlocking {
+            val usuario = Usuario(
+                binding.firstName.text.toString(),
+                binding.lastName.text.toString(),
+                binding.email.text.toString(),
+                binding.password.text.toString(),
+                binding.dni.text.toString(),
+                binding.phoneNumber.text.toString(),
+                UsuarioTypeEnum.PACIENTE
+            )
+
             repository.create(usuario)
+            finish()
         }
-
-        finish()
     }
 
     private fun datosValidos(): Boolean {

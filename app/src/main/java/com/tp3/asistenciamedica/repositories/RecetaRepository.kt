@@ -29,7 +29,7 @@ class RecetaRepository {
     suspend fun findRecetaByProfesionalId(id: String): List<Receta> {
 
         val documents = db.collection(Receta.FIREBASE_COLLECTION)
-            .whereEqualTo("profesionalId", id)
+            .whereEqualTo("doctorId", id)
             .get()
             .await()
 
@@ -44,6 +44,10 @@ class RecetaRepository {
             .await()
 
         return documents.toRecetas()
+    }
+
+    suspend fun create(receta: RecetaDao) {
+        db.collection(Receta.FIREBASE_COLLECTION).add(receta).await()
     }
 }
 

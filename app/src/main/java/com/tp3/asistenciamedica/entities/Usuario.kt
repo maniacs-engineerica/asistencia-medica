@@ -20,4 +20,8 @@ class Usuario(
     }
 
     constructor() : this("","", "", "", "", "", UsuarioTypeEnum.PACIENTE)
+
+    override fun toString(): String {
+        return nombreCompleto
+    }
 }

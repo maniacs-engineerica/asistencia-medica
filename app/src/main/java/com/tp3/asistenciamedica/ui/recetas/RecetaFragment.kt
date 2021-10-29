@@ -8,15 +8,19 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.R
+import com.tp3.asistenciamedica.daos.RecetaDao
 import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
 import com.tp3.asistenciamedica.databinding.RecetaFragmentBinding
+import com.tp3.asistenciamedica.entities.Receta
+import com.tp3.asistenciamedica.entities.Usuario
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.RecetaRepository
 import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.session.Session
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.tp3.asistenciamedica.utils.DateUtils
+import kotlinx.coroutines.*
 
 class RecetaFragment : Fragment() {
 
@@ -40,20 +44,25 @@ class RecetaFragment : Fragment() {
 
         val usuario = Session.current()
 
-        if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
+        val exists = RecetaFragmentArgs.fromBundle(requireArguments()).recetaId != null
+
+        if (usuario.tipo == UsuarioTypeEnum.PACIENTE || exists) {
             binding.paciente.isEnabled = false
             binding.fecha.isEnabled = false
             binding.descripcion.isEnabled = false
             binding.emitir.visibility = GONE
         } else {
-            binding.profesional.setText(usuario.nombreCompleto)
+            binding.profesional.setSelectedItem(usuario)
+            lifecycleScope.launch {
+                binding.paciente.options = UsuarioRepository().allPacientes()
+            }
         }
 
         binding.emitir.setOnClickListener { emitirReceta() }
 
         viewModel.receta.observe(viewLifecycleOwner, { result ->
-            binding.paciente.setText(result.paciente.nombreCompleto)
-            binding.profesional.setText(result.doctor.nombreCompleto)
+            binding.paciente.setSelectedItem(result.paciente)
+            binding.profesional.setSelectedItem(result.doctor)
             binding.descripcion.setText(result.descripcion)
             binding.fecha.setText(result.fecha)
         })
@@ -62,16 +71,45 @@ class RecetaFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val id = RecetaFragmentArgs.fromBundle(requireArguments()).recetaId
+        val id = RecetaFragmentArgs.fromBundle(requireArguments()).recetaId ?: return
 
-        lifecycleScope.launch {
+        val parentJob = Job()
+        val scope = CoroutineScope(Dispatchers.Default + parentJob)
+
+        scope.launch {
             val receta = RecetaRepository().findRecetaById(id) ?: return@launch
-            viewModel.setReceta(receta)
+            withContext(Dispatchers.Main){
+                viewModel.setReceta(receta)
+            }
         }
     }
 
-    private fun emitirReceta(){
+    private fun emitirReceta() {
+        if (binding.paciente.getSelectedItem() == null){
+            binding.paciente.error = getString(R.string.validacion_paciente)
+            return
+        }
 
+        if (!DateUtils.isValidDate(binding.fecha.text.toString(), "dd/MM/yyyy")){
+            binding.fecha.error = getString(R.string.validacion_fecha)
+            return
+        }
+
+        if (binding.descripcion.text.isEmpty()){
+            binding.descripcion.error = getString(R.string.validacion_receta)
+            return
+        }
+
+        val receta = RecetaDao()
+        receta.pacienteId = (binding.paciente.getSelectedItem() as Usuario).id
+        receta.doctorId = (binding.profesional.getSelectedItem() as Usuario).id
+        receta.fecha = binding.fecha.text.toString()
+        receta.descripcion = binding.descripcion.text.toString()
+
+        lifecycleScope.launch {
+            RecetaRepository().create(receta)
+            findNavController().navigateUp()
+        }
     }
 
     override fun onDestroyView() {

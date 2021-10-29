@@ -51,14 +51,17 @@ class UsuarioRepository {
         usuario.id = document.id
     }
 
-    suspend fun findPacientes(nombre: String): List<Usuario> {
+    suspend fun allPacientes(nombre: String? = null): List<Usuario> {
         val documents = db.collection(Usuario.FIREBASE_COLLECTION)
-            .whereEqualTo("tipo", UsuarioTypeEnum.PACIENTE)
+            .whereEqualTo("tipo", UsuarioTypeEnum.PACIENTE.name)
             .get()
             .await()
 
         val users = documents.toUsers()
-        return users.filter { it.nombre.contains(nombre, true) || it.apellido.contains(nombre) }
+
+        return nombre?.let {
+            users.filter { it.nombre.contains(nombre, true) || it.apellido.contains(nombre) }
+        } ?: users
     }
 }
 

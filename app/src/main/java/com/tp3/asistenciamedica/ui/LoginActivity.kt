@@ -22,8 +22,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
-    private val db = Firebase.firestore
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -37,6 +35,27 @@ class LoginActivity : AppCompatActivity() {
         binding.registrarme.setOnClickListener {
             abrirRegistracion()
         }
+
+        /*
+        ESTO ES PARA GENERAR MEDICOS
+        lifecycleScope.launch {
+            var index = 1
+            repeat(5) {
+                val user = Usuario(
+                    "Medico$index",
+                    "Apellido$index",
+                    "medico$index@medico.com",
+                    "123",
+                    "123",
+                    "123",
+                    UsuarioTypeEnum.MEDICO
+                )
+                UsuarioRepository().create(user)
+                index++
+            }
+        }
+         */
+
     }
 
     private fun abrirRegistracion() {
@@ -75,6 +94,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startForUser(user: Usuario) {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        /*
         if (user.tipo == UsuarioTypeEnum.PACIENTE) {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -84,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+         */
     }
 
     private fun datosValidos(): Boolean {
