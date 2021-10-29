@@ -35,9 +35,9 @@ class EstudiosAdapter(private var estudios: List<Estudio> = listOf()) :
 
         val usuario = Session.current()
         if (usuario.tipo == UsuarioTypeEnum.PACIENTE){
-            holder.usuarioView.text = "${holder.itemView.context.getString(R.string.profesional)}: ${estudio.doctor?.nombre.orEmpty()}"
+            holder.usuarioView.text = "${holder.itemView.context.getString(R.string.profesional)}: ${estudio.doctor.nombreCompleto}"
         } else {
-            holder.usuarioView.text = "${holder.itemView.context.getString(R.string.paciente)}: ${estudio.paciente?.nombre.orEmpty()}"
+            holder.usuarioView.text = "${holder.itemView.context.getString(R.string.paciente)}: ${estudio.paciente.nombreCompleto}"
         }
 
         onEstudioClick?.let {

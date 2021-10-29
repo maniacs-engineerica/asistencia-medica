@@ -1,23 +1,17 @@
 package com.tp3.asistenciamedica.ui.recetas
 
 import android.os.Bundle
-import android.os.Handler
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.RecetasAdapter
 import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
-import com.tp3.asistenciamedica.entities.Receta
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
-import com.tp3.asistenciamedica.repositories.EstudioRepository
 import com.tp3.asistenciamedica.repositories.RecetaRepository
 import com.tp3.asistenciamedica.session.Session
+import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 import kotlinx.coroutines.*
 
 class RecetasFragment : Fragment() {
@@ -42,6 +36,7 @@ class RecetasFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         setupRecycler()
     }
 
@@ -62,6 +57,16 @@ class RecetasFragment : Fragment() {
             withContext(Dispatchers.Main){
                 recetasViewModel.setRecetas(recetas)
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.recetas_fragment, menu)
+        val add = menu.findItem(R.id.add)
+        add.isVisible = Session.current().tipo == UsuarioTypeEnum.MEDICO
+        add.setOnMenuItemClickListener {
+            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta(null))
+            true
         }
     }
 

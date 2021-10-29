@@ -69,4 +69,9 @@
     <string name="validacion_paciente">Seleccione un paciente</string>
     <string name="validacion_fecha">Ingrese una fecha válida</string>
     <string name="validacion_receta">Ingrese una receta</string>
+    <string name="subir_resultado">Subir Resultado</string>
+    <string name="validacion_resultado">Ingrese un resultado</string>
+    <string name="validacion_estudio">Ingrese un estudio</string>
+    <string name="agregar">Agregar</string>
+    <string name="salir">Salir</string>
 </resources>

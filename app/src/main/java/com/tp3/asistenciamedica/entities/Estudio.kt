@@ -11,8 +11,9 @@ class Estudio() {
 
     var idEstudio: String = ""
     var nombre: String = ""
-    var doctor: Usuario? = null
-    var paciente: Usuario? = null
+    var resultado: String = ""
+    lateinit var doctor: Usuario
+    lateinit var paciente: Usuario
     var fecha: String = ""
     var ubicacionDeEstudio: String = ""
     var rutaDeImagenes: MutableList<String> = mutableListOf<String>()
@@ -20,6 +21,7 @@ class Estudio() {
 
     constructor(estudio: EstudioDao) : this() {
         this.nombre = estudio.nombre
+        this.resultado = estudio.resultado
         this.fecha = estudio.fecha
         this.ubicacionDeEstudio = estudio.ubicacionDeEstudio
         this.rutaDeImagenes = estudio.rutaDeImagenes

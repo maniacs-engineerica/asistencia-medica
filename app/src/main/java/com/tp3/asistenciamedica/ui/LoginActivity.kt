@@ -3,6 +3,7 @@ package com.tp3.asistenciamedica.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.VISIBLE
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
@@ -27,6 +28,18 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        if (Session.isValid) {
+            lifecycleScope.launch {
+                val user = UsuarioRepository().findUserById(Session.current().id)
+                Session.login(user!!)
+                startForUser(user)
+            }
+            return
+        }
+
+        binding.form.visibility = VISIBLE
+        binding.registrarme.visibility = VISIBLE
 
         binding.login.setOnClickListener {
             ingresar()
@@ -94,10 +107,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startForUser(user: Usuario) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        /*
         if (user.tipo == UsuarioTypeEnum.PACIENTE) {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -107,7 +116,6 @@ class LoginActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
-         */
     }
 
     private fun datosValidos(): Boolean {
