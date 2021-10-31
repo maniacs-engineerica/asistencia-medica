@@ -11,8 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.tp3.asistenciamedica.daos.TurnoDao
 import com.tp3.asistenciamedica.databinding.FragmentGeneradorTurnosBinding
 import com.tp3.asistenciamedica.entities.Turno
+import com.tp3.asistenciamedica.repositories.TurnoRepository
+import com.tp3.asistenciamedica.session.Session
+import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -23,11 +27,13 @@ import kotlin.math.truncate
 class GeneradorTurnoFragment : Fragment() {
 
     private val db = Firebase.firestore
-
+    private val turnoRepo = TurnoRepository()
 
     companion object {
         fun newInstance() = GeneradorTurnoFragment()
     }
+
+
 
     private lateinit var viewModel: GeneradorTurnoViewModel
     private  var _binding: FragmentGeneradorTurnosBinding? = null
@@ -58,6 +64,9 @@ class GeneradorTurnoFragment : Fragment() {
     private fun generateTurnos() {
         // TODO: Replace logic with the correct API code
 
+
+        var listDao = mutableListOf<TurnoDao>()
+
         // Assumes that here we are with valid data
         val date: Editable = binding.fechaAGenerar.text
         val especial: Editable = binding.especialidad.text
@@ -66,6 +75,8 @@ class GeneradorTurnoFragment : Fragment() {
         val horaFinal: Editable = binding.horaFinal.text
         val horaInicial: Editable = binding.horaInicial.text
         val separation: Editable = binding.separacion.text
+
+        val currentUser = Session.current()
 
         val parsedDate: LocalDate = LocalDate.parse(
             date,
@@ -85,50 +96,50 @@ class GeneradorTurnoFragment : Fragment() {
             )
 
         var dateTime: ZonedDateTime = parsedDate.atStartOfDay(ZoneId.of("America/Argentina/Buenos_Aires"))
+            .plusHours(
+                truncate((parsedHoraInicial / 100)).toLong()
+            )
+            .plusMinutes(
+                (parsedHoraInicial - truncate((parsedHoraInicial / 100)) * 100).toLong()
+            )
+
 
         while (dateTime <= finalTime ) {
 
-            val turno: Turno = Turno()
-                .withSpecialization(especial.toString())
-                //.withDoctorId("id")
-
-                .withDate(dateTime.toString())
+            var turno: TurnoDao = TurnoDao()
 
 
-            generateTurno(turno)
+            turno.specialization = especial.toString()
+            turno.dateTime = dateTime.toString()
+            turno.doctorId = currentUser.id
+
+            listDao.add(turno)
 
             val parsedDuration = Integer.valueOf(duration.toString())
             val parsedSeparation = Integer.valueOf(separation.toString())
 
+            Log.d("TAG", "Turno datetime: "+ dateTime.toString())
 
             parsedHoraInicial += (parsedDuration + parsedSeparation)
 
-            dateTime = parsedDate.atStartOfDay(ZoneId.of("America/Argentina/Buenos_Aires"))
-                .plusHours(
-                    truncate((parsedHoraInicial / 100)).toLong()
-                )
-                .plusMinutes(
-                    (parsedHoraInicial - truncate((parsedHoraInicial / 100)) * 100).toLong()
-                )
-
+            dateTime = dateTime.plusMinutes((parsedDuration + parsedSeparation).toLong())
+*/
 
         }
 
+
+        generateTurnos(listDao)
 
 
     }
 
 
-    private fun generateTurno(turno: Turno) {
-        db.collection(Turno.FIREBASE_COLLECTION)
-            .add(turno)
-            .addOnSuccessListener { documentReference ->
-                Log.d("TAG", "Document generated: "+ documentReference)
-            }
-            .addOnFailureListener { e ->
-                Log.d("TAG", "Error trying to insert turno: "+ e)
-            }
+    private fun generateTurnos(turnosDao: List<TurnoDao>) {
+        runBlocking {
+            turnoRepo.saveTurnosDao(turnosDao)
+            // TODO: Add something to show the user the process finished
 
+        }
     }
 
 

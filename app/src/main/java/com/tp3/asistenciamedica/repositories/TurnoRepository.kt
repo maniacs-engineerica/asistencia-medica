@@ -1,5 +1,6 @@
 package com.tp3.asistenciamedica.repositories
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
@@ -11,6 +12,7 @@ import com.tp3.asistenciamedica.daos.TurnoDao
 import com.tp3.asistenciamedica.entities.Estudio
 import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 
@@ -58,6 +60,52 @@ class TurnoRepository {
 
         return documents.toTurnos()
     }
+
+
+    suspend fun saveTurnos(turnos: List<Turno>) {
+        turnos.forEach { saveTurno(it) }
+    }
+
+    suspend fun saveTurno(turno: Turno) {
+        val dao = TurnoDao(turno);
+
+        if (dao.idTurno == "") {
+            db.collection(Turno.FIREBASE_COLLECTION)
+                .add(dao)
+                .await()
+        }
+        else {
+            db.collection(Turno.FIREBASE_COLLECTION)
+                .document(dao.idTurno)
+                .set(dao)
+                .await()
+        }
+    }
+
+    suspend fun saveTurnosDao(turnos: List<TurnoDao>) {
+        turnos.forEach { saveTurnoDao(it) }
+    }
+
+    suspend fun saveTurnoDao(dao: TurnoDao) {
+
+        if (dao.idTurno == "") {
+            db.collection(Turno.FIREBASE_COLLECTION)
+                .add(dao)
+                .addOnSuccessListener { documentReference ->
+                    //Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    //Log.w(TAG, "Error adding document", e)
+                }
+        }
+        else {
+            db.collection(Turno.FIREBASE_COLLECTION)
+                .document(dao.idTurno)
+                .set(dao)
+        }
+    }
+
+
 }
 
 private fun QuerySnapshot.toTurnos(): List<Turno> {
@@ -73,12 +121,18 @@ private fun DocumentSnapshot.toTurno(): Turno? {
 
     turno.idTurno = id
 
-    if (dao.doctorId.isNotEmpty()) {
-        turno.doctor = runBlocking { userDb.findUserById(dao.doctorId)  }
+    runBlocking {
+        launch {
+            if (dao.doctorId.isNotEmpty()) {
+                turno.doctor = runBlocking { userDb.findUserById(dao.doctorId)  }
+            }
+        }
+        launch {
+            if (dao.pacienteId.isNotEmpty()) {
+                turno.paciente = runBlocking { userDb.findUserById(dao.pacienteId) }
+            }
+        }
     }
 
-    if (dao.pacienteId.isNotEmpty()) {
-        turno.paciente = runBlocking { userDb.findUserById(dao.pacienteId) }
-    }
     return turno
 }
