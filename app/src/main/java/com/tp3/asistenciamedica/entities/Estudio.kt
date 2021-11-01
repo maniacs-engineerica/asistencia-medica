@@ -2,6 +2,7 @@ package com.tp3.asistenciamedica.entities
 
 import com.tp3.asistenciamedica.daos.EstudioDao
 import com.tp3.asistenciamedica.daos.RecetaDao
+import java.util.*
 
 class Estudio() {
 
@@ -14,7 +15,7 @@ class Estudio() {
     var resultado: String = ""
     lateinit var doctor: Usuario
     lateinit var paciente: Usuario
-    var fecha: String = ""
+    var fecha: Date = Date()
     var ubicacionDeEstudio: String = ""
     var rutaDeImagenes: MutableList<String> = mutableListOf<String>()
 

@@ -1,6 +1,7 @@
 package com.tp3.asistenciamedica.entities
 
 import com.tp3.asistenciamedica.daos.RecetaDao
+import java.util.*
 
 class Receta() {
 
@@ -11,7 +12,7 @@ class Receta() {
     var idReceta: String = ""
     lateinit var doctor: Usuario
     lateinit var paciente: Usuario
-    var fecha: String = ""
+    var fecha: Date = Date()
     var descripcion: String = ""
     var ubicacionDeReceta: String = ""
     var rutaDeImagenes: MutableList<String> = mutableListOf<String>()

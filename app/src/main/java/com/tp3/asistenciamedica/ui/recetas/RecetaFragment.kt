@@ -21,6 +21,8 @@ import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.utils.DateUtils
 import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RecetaFragment : Fragment() {
 
@@ -28,6 +30,8 @@ class RecetaFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: RecetaViewModel
+
+    private val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +68,7 @@ class RecetaFragment : Fragment() {
             binding.paciente.setSelectedItem(result.paciente)
             binding.profesional.setSelectedItem(result.doctor)
             binding.descripcion.setText(result.descripcion)
-            binding.fecha.setText(result.fecha)
+            binding.fecha.setText(formatter.format(result.fecha))
         })
     }
 
@@ -103,7 +107,7 @@ class RecetaFragment : Fragment() {
         val receta = RecetaDao()
         receta.pacienteId = (binding.paciente.getSelectedItem() as Usuario).id
         receta.doctorId = (binding.profesional.getSelectedItem() as Usuario).id
-        receta.fecha = binding.fecha.text.toString()
+        receta.fecha = formatter.parse(binding.fecha.text.toString())!!
         receta.descripcion = binding.descripcion.text.toString()
 
         lifecycleScope.launch {

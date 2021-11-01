@@ -123,7 +123,6 @@ class GeneradorTurnoFragment : Fragment() {
             parsedHoraInicial += (parsedDuration + parsedSeparation)
 
             dateTime = dateTime.plusMinutes((parsedDuration + parsedSeparation).toLong())
-*/
 
         }
 
