@@ -54,6 +54,7 @@
     <string name="telefono_invalido">Ingrese un teléfono válido</string>
 
     <string name="proximos_pacientes">Próximos pacientes</string>
+    <string name="ir_pacientes">Ver todos los pacientes</string>
     <string name="info_turnos">Información de los turnos</string>
     <string name="turnos_disponibles">Turnos disponibles: </string>
     <string name="turnos_reservados">Turnos reservados: </string>

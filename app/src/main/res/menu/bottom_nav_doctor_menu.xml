@@ -7,6 +7,16 @@
         android:title="@string/inicio" />
 
     <item
+        android:id="@+id/navigation_doctor_recetas"
+        android:icon="@drawable/ic_recetas"
+        android:title="@string/receta" />
+
+    <item
+        android:id="@+id/navigation_doctor_estudios"
+        android:icon="@drawable/ic_estudios"
+        android:title="@string/estudios" />
+
+    <item
         android:id="@+id/navigation_doctor_turnos"
         android:icon="@drawable/ic_turnos"
         android:title="@string/turnos" />
