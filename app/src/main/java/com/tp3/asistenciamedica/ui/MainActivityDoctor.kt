@@ -26,7 +26,8 @@ class MainActivityDoctor : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_doctor_inicio, R.id.navigation_doctor_turnos
+                R.id.navigation_doctor_inicio, R.id.navigation_doctor_recetas,
+                R.id.navigation_doctor_estudios, R.id.navigation_doctor_turnos
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
