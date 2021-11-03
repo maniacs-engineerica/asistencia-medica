@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.entities.Turno
+import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
+import com.tp3.asistenciamedica.session.Session
 import java.text.DateFormat
 import java.text.DateFormat.MEDIUM
 import java.text.DateFormat.SHORT
@@ -35,7 +37,10 @@ class TurnosAdapter(private var turnos: List<Turno> = listOf()) :
     override fun onBindViewHolder(holder: TurnoHolder, position: Int) {
         val turno = turnos[position]
 
-        holder.profesionalView.text = turno.profesional
+        val usuario = Session.current()
+
+        holder.usuarioView.text = if (usuario.tipo == UsuarioTypeEnum.PACIENTE)
+            turno.doctor?.nombre else turno.paciente?.nombre
         holder.fechaView.text = formatter.format(Date())
 
         onTurnoClick?.let {
@@ -49,7 +54,7 @@ class TurnosAdapter(private var turnos: List<Turno> = listOf()) :
 
     class TurnoHolder(v: View) : RecyclerView.ViewHolder(v) {
 
-        var profesionalView: TextView = v.findViewById(R.id.profesional)
+        var usuarioView: TextView = v.findViewById(R.id.usuario)
         var fechaView: TextView = v.findViewById(R.id.fecha)
 
     }

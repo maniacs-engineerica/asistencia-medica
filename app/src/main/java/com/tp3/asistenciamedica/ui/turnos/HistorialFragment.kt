@@ -1,11 +1,12 @@
 package com.tp3.asistenciamedica.ui.turnos
 
 import androidx.navigation.fragment.findNavController
+import com.tp3.asistenciamedica.entities.Turno
 
-class HistorialFragment : TurnosFragment(){
+class HistorialFragment : TurnosFragment() {
 
-    override fun onTurnoClick() {
-        findNavController().navigate(HistorialFragmentDirections.actionHistorialToTurno())
+    override fun onTurnoClick(turno: Turno) {
+        findNavController().navigate(HistorialFragmentDirections.actionHistorialToTurno(turno.idTurno))
     }
 
 }

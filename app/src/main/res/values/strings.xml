@@ -69,10 +69,29 @@
 
 =======
     <string name="proximos_pacientes">Próximos pacientes</string>
+    <string name="ir_pacientes">Ver todos los pacientes</string>
     <string name="info_turnos">Información de los turnos</string>
     <string name="turnos_disponibles">Turnos disponibles: </string>
     <string name="turnos_reservados">Turnos reservados: </string>
     <string name="ultimo_turno_disponible">Último turno disponible: </string>
     <string name="ultimo_turno_reservado">Último turno reservado: </string>
+<<<<<<< HEAD
 >>>>>>> db0b515af961cc1546ae65654d0cce9fedb23e94
+=======
+    <string name="guardando">Guardando…</string>
+    <string name="ingresando">Ingresando…</string>
+    <string name="usuario_existente">Ya existe un usuario con ese email</string>
+    <string name="usuario_no_existente">Email o contraseña invalido(s)</string>
+    <string name="emitir_receta">Emitir Receta</string>
+
+    <string name="fecha_formato">Fecha (DD/MM/AAAA)</string>
+    <string name="validacion_paciente">Seleccione un paciente</string>
+    <string name="validacion_fecha">Ingrese una fecha válida</string>
+    <string name="validacion_receta">Ingrese una receta</string>
+    <string name="subir_resultado">Subir Resultado</string>
+    <string name="validacion_resultado">Ingrese un resultado</string>
+    <string name="validacion_estudio">Ingrese un estudio</string>
+    <string name="agregar">Agregar</string>
+    <string name="salir">Salir</string>
+>>>>>>> origin/main
 </resources>
