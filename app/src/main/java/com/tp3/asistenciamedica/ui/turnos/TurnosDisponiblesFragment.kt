@@ -80,7 +80,8 @@ class TurnosDisponiblesFragment : Fragment() {
 
 
     open fun onTurnoClick() {
-        findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment())
+        //TODO: Fix this dependency
+        //findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment())
     }
 
 

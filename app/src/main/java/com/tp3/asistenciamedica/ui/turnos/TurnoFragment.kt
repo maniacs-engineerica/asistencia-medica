@@ -37,8 +37,8 @@ class TurnoFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-        val turnoId = TurnoFragmentArgs.fromBundle(requireArguments()).turnoId
+    // TODO: Fix this dependency
+    //    val turnoId = TurnoFragmentArgs.fromBundle(requireArguments()).turnoId
     }
 
     override fun onDestroyView() {

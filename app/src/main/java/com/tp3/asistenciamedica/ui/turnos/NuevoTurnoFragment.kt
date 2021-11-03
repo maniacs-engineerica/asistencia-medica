@@ -53,8 +53,9 @@ class NuevoTurnoFragment : Fragment() {
     fun onClickEspecialidad(btn: ImageButton) {
 
         btn.setOnClickListener{
-            var action= NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment()
-            v.findNavController().navigate(action)
+            // TODO: Fix this implementation
+           /* var action= NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment()
+            v.findNavController().navigate(action)*/
         }
 
 

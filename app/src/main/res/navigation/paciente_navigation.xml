@@ -21,7 +21,7 @@
             app:destination="@id/recetaFragment" />
     </fragment>
 
-    <fragment
+ <!--   <fragment
         android:id="@+id/navigation_historial"
         android:name="com.tp3.asistenciamedica.ui.turnos.HistorialFragment"
         android:label="@string/historial"
@@ -29,7 +29,7 @@
         <action
             android:id="@+id/action_historial_to_turno"
             app:destination="@id/turnoFragment" />
-    </fragment>
+    </fragment>-->
     <fragment
         android:id="@+id/navigation_estudios"
         android:name="com.tp3.asistenciamedica.ui.estudios.EstudiosFragment"
@@ -39,7 +39,7 @@
             android:id="@+id/action_estudios_to_estudio"
             app:destination="@id/estudioFragment" />
     </fragment>
-    <fragment
+<!--    <fragment
         android:id="@+id/navigation_turnos"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnosFragment"
         android:label="@string/turnos"
@@ -50,7 +50,7 @@
         <action
             android:id="@+id/action_navigation_turnos_to_nuevoTurnoFragment"
             app:destination="@id/nuevoTurnoFragment" />
-    </fragment>
+    </fragment>-->
     <fragment
         android:id="@+id/estudioFragment"
         android:name="com.tp3.asistenciamedica.ui.estudios.EstudioFragment"
@@ -76,7 +76,7 @@
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnoFragment"
         android:label="Turno"
         tools:layout="@layout/turno_fragment" />
-    <fragment
+ <!--   <fragment
         android:id="@+id/nuevoTurnoFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.NuevoTurnoFragment"
         android:label="nuevo_turno_fragment"
@@ -86,21 +86,23 @@
             app:destination="@id/turnosDisponiblesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/turnosDisponiblesFragment"
-        android:name="com.tp3.asistenciamedica.ui.turnos.TurnosDisponiblesFragment"
-        android:label="turnos_disponibles_fragment"
-        tools:layout="@layout/turnos_disponibles_fragment" >
-        <action
-            android:id="@+id/action_turnosDisponiblesFragment_to_turnoDetalleFragment"
-            app:destination="@id/turnoDetalleFragment" />
-    </fragment>
+         android:id="@+id/turnosDisponiblesFragment"
+         android:name="com.tp3.asistenciamedica.ui.turnos.TurnosDisponiblesFragment"
+         android:label="turnos_disponibles_fragment"
+         tools:layout="@layout/turnos_disponibles_fragment" >
+         <action
+             android:id="@+id/action_turnosDisponiblesFragment_to_turnoDetalleFragment"
+             app:destination="@id/turnoDetalleFragment" />
+     </fragment>
+
+    TODO: this fragment is not OK
     <fragment
-        android:id="@+id/turnoDetalleFragment"
-        android:name="com.tp3.asistenciamedica.ui.turnos.TurnoDetalleFragment"
-        android:label="TurnoDetalleFragment" />
-        tools:layout="@layout/turno_fragment" >
-        <argument
-            android:name="turnoId"
-            app:argType="string" />
-    </fragment>
+         android:id="@+id/turnoDetalleFragment"
+         android:name="com.tp3.asistenciamedica.ui.turnos.TurnoDetalleFragment"
+         android:label="TurnoDetalleFragment" />
+         tools:layout="@layout/turno_fragment" >
+         <argument
+             android:name="turnoId"
+             app:argType="string" />
+     </fragment> -->
 </navigation>
