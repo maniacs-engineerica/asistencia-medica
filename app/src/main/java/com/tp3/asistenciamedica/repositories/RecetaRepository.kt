@@ -20,7 +20,7 @@ class RecetaRepository {
 
     suspend fun findRecetaById(id: String): Receta? {
 
-        val document = db.collection(Usuario.FIREBASE_COLLECTION).document(id)
+        val document = db.collection(Receta.FIREBASE_COLLECTION).document(id)
             .get().await()
 
         return document.toReceta()
