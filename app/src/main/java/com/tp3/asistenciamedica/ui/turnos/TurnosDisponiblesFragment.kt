@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,12 @@ import com.tp3.asistenciamedica.adapters.TurnosAdapter
 
 import com.tp3.asistenciamedica.databinding.TurnosDisponiblesFragmentBinding
 import com.tp3.asistenciamedica.entities.Turno
+import com.tp3.asistenciamedica.entities.TurnoStatusEnum
+import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
+import com.tp3.asistenciamedica.repositories.TurnoRepository
+import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
+import kotlinx.coroutines.launch
 
 
 class TurnosDisponiblesFragment : Fragment() {
@@ -50,6 +56,22 @@ class TurnosDisponiblesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecycler()
     }
+
+    override fun onStart() {
+        super.onStart()
+        val usuario = Session.current()
+        lifecycleScope.launch {
+            val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
+                TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
+            } else {
+                TurnoRepository().findTurnoByProfesionalId(usuario.id)
+            }
+            turnosViewModel.setTurnos(turnos)
+        }
+    }
+
+
+
 
     private fun setupRecycler(){
         adapter = TurnosAdapter()
