@@ -15,3 +15,4 @@ class TurnosViewModel : ViewModel() {
         _turnos.value = turnos
     }
 }
+
