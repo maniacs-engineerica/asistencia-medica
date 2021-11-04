@@ -9,14 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.daos.TurnoDao
 import com.tp3.asistenciamedica.databinding.FragmentGeneradorTurnosBinding
 import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -26,7 +29,6 @@ import kotlin.math.truncate
 
 class GeneradorTurnoFragment : Fragment() {
 
-    private val db = Firebase.firestore
     private val turnoRepo = TurnoRepository()
 
     companion object {
@@ -52,11 +54,74 @@ class GeneradorTurnoFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GeneradorTurnoViewModel::class.java)
 
         binding.submitTurnos.setOnClickListener {
-            generateTurnos()
+            if(datosValidos()) {
+                generateTurnos()
+            }
         }
 
 
         return root
+    }
+
+    @SuppressLint("NewApi")
+    private fun datosValidos(): Boolean {
+        var success: Boolean = true;
+
+        val date: Editable = binding.fechaAGenerar.text
+        val regex = Regex("([01]?[0-9]|2[0-3]):[0-5][0-9]")
+        val numRegex = Regex("-?\\d+(\\.\\d+)?")
+
+        val horaFinal: Editable = binding.horaFinal.text
+        val horaInicial: Editable = binding.horaInicial.text
+
+        val especial: Editable = binding.especialidad.text
+
+
+        val duration: Editable = binding.duracion.text
+        val separation: Editable = binding.separacion.text
+
+        if (date.isNullOrEmpty()) {
+            binding.fechaAGenerar.error = "La fecha a generar no puede estar vacia"
+            success =  false
+        }
+
+        try {
+            val parsedDate: LocalDate = LocalDate.parse(
+                date,
+                DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            )
+        } catch (e: Exception) {
+            binding.fechaAGenerar.error = "La fecha no tiene un formato valido: [dd/MM/YYYY]"
+            success = false
+        }
+
+        if (especial.isNullOrEmpty()) {
+            binding.especialidad.error = "La especialidad no puede estar vacia"
+            success = false
+            //TODO: Poner especialidades en un ENUM!
+        }
+
+        if (!regex.matches(horaInicial.toString())) {
+            binding.horaInicial.error = "El formato para la hora inicial es: HH:MM"
+            success = false
+        }
+        if (!regex.matches(horaFinal.toString())) {
+            binding.horaFinal.error = "El formato para la hora final es: HH:MM"
+            success = false
+        }
+
+
+        if(!duration.matches(numRegex)) {
+            binding.duracion.error = "La duración debe ser un numero"
+            success = false
+        }
+
+        if (!separation.matches(numRegex)) {
+            binding.separacion.error = "La separacion debe ser un numero"
+            success = false
+        }
+
+        return success
     }
 
 
@@ -138,6 +203,8 @@ class GeneradorTurnoFragment : Fragment() {
             // TODO: Add something to show the user the process finished
 
         }
+        findNavController().navigateUp()
+
     }
 
 
