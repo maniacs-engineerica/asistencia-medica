@@ -19,10 +19,22 @@
         android:id="@+id/navigation_doctor_estudios"
         android:name="com.tp3.asistenciamedica.ui.estudios.EstudioFragment"
         android:label="@string/estudios"
-        tools:layout="@layout/estudio_fragment" />
+        tools:layout="@layout/estudio_fragment" >
+        <argument
+            android:name="estudioId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
     <fragment
         android:id="@+id/navigation_doctor_recetas"
         android:name="com.tp3.asistenciamedica.ui.recetas.RecetaFragment"
         android:label="@string/recetas"
-        tools:layout="@layout/receta_fragment" />
+        tools:layout="@layout/receta_fragment" >
+        <argument
+            android:name="recetaId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
 </navigation>
