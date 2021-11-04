@@ -6,12 +6,15 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButtonToggleGroup
+import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
 import com.tp3.asistenciamedica.databinding.FragmentTurnosBinding
 import com.tp3.asistenciamedica.entities.Turno
@@ -32,7 +35,7 @@ open class TurnosFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    private lateinit var btnNuevoTurno:Button
     private lateinit var adapter: TurnosAdapter
 
     override fun onCreateView(
@@ -44,6 +47,7 @@ open class TurnosFragment : Fragment() {
             ViewModelProvider(this).get(TurnosViewModel::class.java)
 
         _binding = FragmentTurnosBinding.inflate(inflater, container, false)
+        btnNuevoTurno= binding.root.findViewById(R.id.btn_turno_nuevo)
         return binding.root
     }
 
@@ -63,6 +67,10 @@ open class TurnosFragment : Fragment() {
                 TurnoRepository().findTurnoByProfesionalId(usuario.id)
             }
             turnosViewModel.setTurnos(turnos)
+        }
+
+        btnNuevoTurno.setOnClickListener{
+            findNavController().navigate(TurnosFragmentDirections.actionNavigationTurnosToNuevoTurnoFragment())
         }
     }
 
