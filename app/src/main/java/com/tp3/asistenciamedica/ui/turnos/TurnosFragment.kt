@@ -21,8 +21,7 @@ import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 import com.tp3.asistenciamedica.ui.recetas.TurnosViewModel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 open class TurnosFragment : Fragment() {
 
@@ -54,15 +53,14 @@ open class TurnosFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val usuario = Session.current()
+        val parentJob = Job()
+        val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
-        lifecycleScope.launch {
-            val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
-                TurnoRepository().findTurnosByPacienteId(usuario.id)
-            } else {
-                TurnoRepository().findTurnoByProfesionalId(usuario.id)
+        scope.launch {
+            val turnos = onLoadTurnos()
+            withContext(Dispatchers.Main) {
+                turnosViewModel.setTurnos(turnos)
             }
-            turnosViewModel.setTurnos(turnos)
         }
     }
 
@@ -76,6 +74,15 @@ open class TurnosFragment : Fragment() {
         turnosViewModel.turnos.observe(viewLifecycleOwner, { result ->
             adapter.swapTurnos(result)
         })
+    }
+
+    open suspend fun onLoadTurnos(): List<Turno> {
+        val usuario = Session.current()
+        return if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
+            TurnoRepository().findTurnosByPacienteId(usuario.id)
+        } else {
+            TurnoRepository().findTurnoByProfesionalId(usuario.id)
+        }
     }
 
     open fun onTurnoClick(turno: Turno) {

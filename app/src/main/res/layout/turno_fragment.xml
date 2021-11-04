@@ -17,8 +17,10 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/paciente"
                 style="@style/EditText"
                 android:layout_width="match_parent"
+                android:enabled="false"
                 android:hint="@string/paciente" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -30,8 +32,10 @@
             android:layout_marginTop="16dp">
 
             <EditText
+                android:id="@+id/profesional"
                 style="@style/EditText"
                 android:layout_width="match_parent"
+                android:enabled="false"
                 android:hint="@string/profesional" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -43,8 +47,10 @@
             android:layout_marginTop="16dp">
 
             <EditText
+                android:id="@+id/especialidad"
                 style="@style/EditText"
                 android:layout_width="match_parent"
+                android:enabled="false"
                 android:hint="@string/especialidad" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -56,8 +62,10 @@
             android:layout_marginTop="16dp">
 
             <EditText
+                android:id="@+id/fecha"
                 style="@style/EditText"
                 android:layout_width="match_parent"
+                android:enabled="false"
                 android:hint="@string/fecha" />
 
         </com.google.android.material.textfield.TextInputLayout>

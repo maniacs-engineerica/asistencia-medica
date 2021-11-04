@@ -106,8 +106,7 @@ class GeneradorTurnoFragment : Fragment() {
 
         while (dateTime <= finalTime ) {
 
-            var turno: TurnoDao = TurnoDao()
-
+            val turno = TurnoDao()
 
             turno.specialization = especial.toString()
             turno.dateTime = dateTime.toString()

@@ -19,7 +19,7 @@ class Turno() {
     var idTurno: String = ""
     var dateTime: String = ""
     var state: TurnoStatusEnum = TurnoStatusEnum.DISPONIBLE
-    var doctor: Usuario? = null
+    lateinit var doctor: Usuario
     var paciente: Usuario? = null
     var detail: String = ""
     var specialization: String = ""

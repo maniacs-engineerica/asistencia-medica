@@ -1,7 +1,10 @@
 package com.tp3.asistenciamedica.repositories
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
@@ -15,13 +18,15 @@ import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
+import java.time.ZonedDateTime
+import java.util.*
 
 
 class TurnoRepository {
 
     private val db = Firebase.firestore
 
-    suspend fun findTurnoByDocumentId(id: String): Turno? {
+    suspend fun findTurnoById(id: String): Turno? {
 
         val document = db.collection(Turno.FIREBASE_COLLECTION).document(id)
             .get().await()
@@ -29,6 +34,7 @@ class TurnoRepository {
         return document.toTurno()
     }
 
+    @SuppressLint("NewApi")
     suspend fun findTurnosByPacienteId(id: String): List<Turno> {
 
         val documents = db.collection(Turno.FIREBASE_COLLECTION)
@@ -36,7 +42,8 @@ class TurnoRepository {
             .get()
             .await()
 
-        return documents.toTurnos()
+        val turnos = documents.toTurnos()
+        return turnos.filter { ZonedDateTime.parse(it.dateTime).isAfter(ZonedDateTime.now()) }
     }
 
     suspend fun findTurnoByState(state: TurnoStatusEnum): List<Turno> {
@@ -73,8 +80,7 @@ class TurnoRepository {
             db.collection(Turno.FIREBASE_COLLECTION)
                 .add(dao)
                 .await()
-        }
-        else {
+        } else {
             db.collection(Turno.FIREBASE_COLLECTION)
                 .document(dao.idTurno)
                 .set(dao)
@@ -97,12 +103,22 @@ class TurnoRepository {
                 .addOnFailureListener { e ->
                     //Log.w(TAG, "Error adding document", e)
                 }
-        }
-        else {
+        } else {
             db.collection(Turno.FIREBASE_COLLECTION)
                 .document(dao.idTurno)
                 .set(dao)
         }
+    }
+
+    @SuppressLint("NewApi")
+    suspend fun findHistorialByPacienteId(id: String): List<Turno> {
+        val documents = db.collection(Turno.FIREBASE_COLLECTION)
+            .whereEqualTo("pacienteId", id)
+            .get()
+            .await()
+
+        val turnos = documents.toTurnos()
+        return turnos.filter { ZonedDateTime.parse(it.dateTime).isBefore(ZonedDateTime.now()) }
     }
 
 
@@ -121,16 +137,15 @@ private fun DocumentSnapshot.toTurno(): Turno? {
 
     turno.idTurno = id
 
-    runBlocking {
-        launch {
-            if (dao.doctorId.isNotEmpty()) {
-                turno.doctor = runBlocking { userDb.findUserById(dao.doctorId)  }
-            }
+    if (dao.doctorId.isNotEmpty()) {
+        runBlocking { userDb.findUserById(dao.doctorId) }?.let {
+            turno.doctor = it
         }
-        launch {
-            if (dao.pacienteId.isNotEmpty()) {
-                turno.paciente = runBlocking { userDb.findUserById(dao.pacienteId) }
-            }
+    }
+
+    if (dao.pacienteId.isNotEmpty()) {
+        runBlocking { userDb.findUserById(dao.pacienteId) }?.let {
+            turno.paciente = it
         }
     }
 

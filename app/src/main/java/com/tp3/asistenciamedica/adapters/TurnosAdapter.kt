@@ -13,6 +13,7 @@ import com.tp3.asistenciamedica.session.Session
 import java.text.DateFormat
 import java.text.DateFormat.MEDIUM
 import java.text.DateFormat.SHORT
+import java.time.ZonedDateTime
 import java.util.*
 
 class TurnosAdapter(private var turnos: List<Turno> = listOf()) :
@@ -34,14 +35,21 @@ class TurnosAdapter(private var turnos: List<Turno> = listOf()) :
         return TurnoHolder(view)
     }
 
+    @SuppressLint("NewApi")
     override fun onBindViewHolder(holder: TurnoHolder, position: Int) {
         val turno = turnos[position]
 
         val usuario = Session.current()
 
-        holder.usuarioView.text = if (usuario.tipo == UsuarioTypeEnum.PACIENTE)
-            turno.doctor?.nombre else turno.paciente?.nombre
-        holder.fechaView.text = formatter.format(Date())
+        if (usuario.tipo == UsuarioTypeEnum.PACIENTE){
+            holder.usuarioView.text = "${turno.doctor.nombreCompleto} - ${turno.specialization}"
+        } else {
+            holder.usuarioView.text = turno.paciente!!.nombreCompleto
+        }
+
+        val date = Date.from(ZonedDateTime.parse(turno.dateTime).toInstant())
+
+        holder.fechaView.text = formatter.format(date)
 
         onTurnoClick?.let {
             holder.itemView.setOnClickListener { it(turno) }
