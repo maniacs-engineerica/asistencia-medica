@@ -27,7 +27,6 @@ class TurnoFragment : Fragment() {
     ): View? {
         v= inflater.inflate(R.layout.turno_fragment, container, false)
 
-        return v
         viewModel =
             ViewModelProvider(this).get(TurnoViewModel::class.java)
 
@@ -37,8 +36,8 @@ class TurnoFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-    // TODO: Fix this dependency
-    //    val turnoId = TurnoFragmentArgs.fromBundle(requireArguments()).turnoId
+
+        val turnoId = TurnoFragmentArgs.fromBundle(requireArguments()).turnoId
     }
 
     override fun onDestroyView() {

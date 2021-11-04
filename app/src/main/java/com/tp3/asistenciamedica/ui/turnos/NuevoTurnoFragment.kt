@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.R
 
 class NuevoTurnoFragment : Fragment() {
@@ -16,6 +17,7 @@ class NuevoTurnoFragment : Fragment() {
     companion object {
         fun newInstance() = NuevoTurnoFragment()
     }
+
     lateinit var v: View
     lateinit var btn_clinica: ImageButton
     lateinit var btn_oftalmologia: ImageButton
@@ -30,13 +32,13 @@ class NuevoTurnoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v=inflater.inflate(R.layout.nuevo_turno_fragment, container, false)
-        btn_clinica= v.findViewById(R.id.btn_clinica)
-        btn_oftalmologia= v.findViewById(R.id.btn_oftalmologia)
-        btn_cardiologia=v.findViewById(R.id.btn_cardiologia)
-        btn_hematologia=v.findViewById(R.id.btn_hematologia)
-        btn_ginecologia=v.findViewById(R.id.btn_ginecologia)
-        btn_kinesiologia=v.findViewById(R.id.btn_kinesiologia)
+        v = inflater.inflate(R.layout.nuevo_turno_fragment, container, false)
+        btn_clinica = v.findViewById(R.id.btn_clinica)
+        btn_oftalmologia = v.findViewById(R.id.btn_oftalmologia)
+        btn_cardiologia = v.findViewById(R.id.btn_cardiologia)
+        btn_hematologia = v.findViewById(R.id.btn_hematologia)
+        btn_ginecologia = v.findViewById(R.id.btn_ginecologia)
+        btn_kinesiologia = v.findViewById(R.id.btn_kinesiologia)
 
 
 
@@ -51,14 +53,10 @@ class NuevoTurnoFragment : Fragment() {
     }
 
     fun onClickEspecialidad(btn: ImageButton) {
-
-        btn.setOnClickListener{
-            // TODO: Fix this implementation
-           /* var action= NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment()
-            v.findNavController().navigate(action)*/
+        btn.setOnClickListener {
+            val action = NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment()
+            findNavController().navigate(action)
         }
-
-
     }
 
     override fun onStart() {

@@ -28,19 +28,9 @@ class TurnosDisponiblesFragment : Fragment() {
     private lateinit var turnosViewModel: TurnosDisponiblesViewModel
     private var _binding: TurnosDisponiblesFragmentBinding? = null
     private lateinit var txtEspecialidad: TextView
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: TurnosAdapter
-
-
-
-
-
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,14 +48,13 @@ class TurnosDisponiblesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         setupRecycler()
     }
 
     private fun setupRecycler(){
         adapter = TurnosAdapter()
         adapter.onTurnoClick = {
-            onTurnoClick()
+            onTurnoClick(it)
         }
        /// binding.recyclerViewTurnosDisp.adapter = adapter
         linearLayoutManager = LinearLayoutManager(context)
@@ -79,9 +68,8 @@ class TurnosDisponiblesFragment : Fragment() {
     }
 
 
-    open fun onTurnoClick() {
-        //TODO: Fix this dependency
-        //findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment())
+    fun onTurnoClick(turno: Turno) {
+        findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment(turno.idTurno))
     }
 
 
