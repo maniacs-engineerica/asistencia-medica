@@ -6,8 +6,7 @@ import com.tp3.asistenciamedica.entities.Turno
 class HistorialFragment : TurnosFragment() {
 
     override fun onTurnoClick(turno: Turno) {
-        //TODO: Review where is HistorialFragmentDirections
-        //findNavController().navigate(HistorialFragmentDirections.actionHistorialToTurno(turno.idTurno))
+        findNavController().navigate(HistorialFragmentDirections.actionHistorialToTurno(turno.idTurno))
     }
 
 }
