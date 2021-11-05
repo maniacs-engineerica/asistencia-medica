@@ -90,10 +90,20 @@ class GeneradorTurnoFragment : Fragment() {
                 date,
                 DateTimeFormatter.ofPattern("dd/MM/yyyy")
             )
+
+            if (parsedDate.isBefore(LocalDate.now())) {
+                binding.fechaAGenerar.error = "La fecha no puede ser anterior al dia de hoy."
+                success = false
+            }
+
         } catch (e: Exception) {
             binding.fechaAGenerar.error = "La fecha no tiene un formato valido: [dd/MM/YYYY]"
             success = false
         }
+
+
+
+
 
         if (especial.isNullOrEmpty()) {
             binding.especialidad.error = "La especialidad no puede estar vacia"
@@ -109,6 +119,9 @@ class GeneradorTurnoFragment : Fragment() {
             binding.horaFinal.error = "El formato para la hora final es: HH:MM"
             success = false
         }
+
+
+
 
 
         if(!duration.matches(numRegex)) {
