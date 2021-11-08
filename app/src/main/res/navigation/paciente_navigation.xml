@@ -9,7 +9,14 @@
         android:id="@+id/navigation_inicio"
         android:name="com.tp3.asistenciamedica.ui.inicio.InicioFragment"
         android:label="@string/inicio"
-        tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_navigation_inicio_to_estudio"
+            app:destination="@id/estudioFragment" />
+        <action
+            android:id="@+id/action_navigation_inicio_to_turno"
+            app:destination="@id/turnoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_recetas"

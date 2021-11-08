@@ -42,7 +42,7 @@ class TurnoRepository {
             .get()
             .await()
 
-        val turnos = documents.toTurnos()
+        val turnos = documents.toTurnos().sortedBy { ZonedDateTime.parse(it.dateTime) }
         return turnos.filter { ZonedDateTime.parse(it.dateTime).isAfter(ZonedDateTime.now()) }
     }
 
@@ -64,8 +64,7 @@ class TurnoRepository {
             .get()
             .await()
 
-
-        return documents.toTurnos()
+        return documents.toTurnos().sortedBy { ZonedDateTime.parse(it.dateTime) }
     }
 
 
@@ -117,7 +116,7 @@ class TurnoRepository {
             .get()
             .await()
 
-        val turnos = documents.toTurnos()
+        val turnos = documents.toTurnos().sortedBy { ZonedDateTime.parse(it.dateTime) }
         return turnos.filter { ZonedDateTime.parse(it.dateTime).isBefore(ZonedDateTime.now()) }
     }
 

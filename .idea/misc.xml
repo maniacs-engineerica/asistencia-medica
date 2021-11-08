@@ -51,6 +51,7 @@
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.29259259259259257" />
         <entry key="app/src/main/res/drawable/vh_item_background.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/drawable/vh_widget_background.xml" value="0.25887445887445887" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_registracion.xml" value="0.22327898550724637" />
@@ -70,6 +71,8 @@
         <entry key="app/src/main/res/layout/vh_estudio_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/vh_receta_item.xml" value="0.1480978260869565" />
         <entry key="app/src/main/res/layout/vh_turno_item.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/vh_turno_widget_item.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/vh_widget_item.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/estudios_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/menu/inicio_fragment.xml" value="0.12938596491228072" />

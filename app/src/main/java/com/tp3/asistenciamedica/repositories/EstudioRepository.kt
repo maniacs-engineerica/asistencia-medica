@@ -6,9 +6,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.daos.EstudioDao
 import com.tp3.asistenciamedica.entities.Estudio
-import com.tp3.asistenciamedica.entities.Receta
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
+import java.time.ZonedDateTime
+import java.util.*
 
 class EstudioRepository {
 
@@ -39,11 +40,16 @@ class EstudioRepository {
             .get()
             .await()
 
-        return documents.toEstudios()
+        return documents.toEstudios().sortedBy { it.fecha }
     }
 
     suspend fun create(estudio: EstudioDao) {
         db.collection(Estudio.FIREBASE_COLLECTION).add(estudio).await()
+    }
+
+    suspend fun findEstudiosHistoriaByPacientId(id: String): List<Estudio> {
+        val estudios = findEstudiosByPacientId(id)
+        return estudios.filter { it.fecha < Date() }
     }
 
 }
