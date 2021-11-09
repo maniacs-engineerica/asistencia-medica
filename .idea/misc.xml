@@ -48,6 +48,7 @@
         <entry key="app/src/main/res/layout/nuevo_turno_fragment.xml" value="1.1492964079102632" />
         <entry key="app/src/main/res/layout/receta_fragment.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/turno_fragment.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/turnos_disponibles_fragment.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/vh_estudio_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/vh_receta_item.xml" value="0.1480978260869565" />
         <entry key="app/src/main/res/layout/vh_turno_item.xml" value="0.335" />
