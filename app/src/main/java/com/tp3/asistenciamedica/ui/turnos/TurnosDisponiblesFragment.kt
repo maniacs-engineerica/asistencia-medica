@@ -64,7 +64,8 @@ class TurnosDisponiblesFragment : Fragment() {
             val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
                 TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
             } else {
-                TurnoRepository().findTurnoByProfesionalId(usuario.id)
+                 TurnoRepository().findTurnoByProfesionalId(usuario.id)
+                ///TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
             }
             turnosViewModel.setTurnos(turnos)
         }
@@ -78,7 +79,7 @@ class TurnosDisponiblesFragment : Fragment() {
         adapter.onTurnoClick = {
             onTurnoClick(it)
         }
-       /// binding.recyclerViewTurnosDisp.adapter = adapter
+       binding.recyclerViewTurnosDisp.adapter = adapter
         linearLayoutManager = LinearLayoutManager(context)
         binding.recyclerViewTurnosDisp.adapter=adapter
         binding.recyclerViewTurnosDisp.setHasFixedSize(true)
