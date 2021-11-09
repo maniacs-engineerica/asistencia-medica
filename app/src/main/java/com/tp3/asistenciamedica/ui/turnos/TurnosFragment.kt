@@ -81,7 +81,7 @@ open class TurnosFragment : Fragment() {
         return if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
             TurnoRepository().findTurnosByPacienteId(usuario.id)
         } else {
-            TurnoRepository().findTurnoByProfesionalId(usuario.id)
+            TurnoRepository().findTurnoByProfesionalId(usuario)
         }
     }
 

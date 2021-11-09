@@ -15,6 +15,7 @@ import com.tp3.asistenciamedica.daos.TurnoDao
 import com.tp3.asistenciamedica.entities.Estudio
 import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
+import com.tp3.asistenciamedica.entities.Usuario
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
@@ -57,14 +58,15 @@ class TurnoRepository {
     }
 
 
-    suspend fun findTurnoByProfesionalId(id: String): List<Turno> {
+    @SuppressLint("NewApi")
+    suspend fun findTurnoByProfesionalId(profesional: Usuario): List<Turno> {
 
         val documents = db.collection(Turno.FIREBASE_COLLECTION)
-            .whereEqualTo("profesionalId", id)
+            .whereEqualTo("doctorId", profesional.id)
             .get()
             .await()
 
-        return documents.toTurnos().sortedBy { ZonedDateTime.parse(it.dateTime) }
+        return documents.toTurnos(profesional).sortedBy { ZonedDateTime.parse(it.dateTime) }
     }
 
 
@@ -123,6 +125,10 @@ class TurnoRepository {
 
 }
 
+private fun QuerySnapshot.toTurnos(profesional: Usuario): List<Turno> {
+    return mapNotNull { it.toTurno(profesional) }
+}
+
 private fun QuerySnapshot.toTurnos(): List<Turno> {
     return mapNotNull { it.toTurno() }
 }
@@ -141,6 +147,26 @@ private fun DocumentSnapshot.toTurno(): Turno? {
             turno.doctor = it
         }
     }
+
+    if (dao.pacienteId.isNotEmpty()) {
+        runBlocking { userDb.findUserById(dao.pacienteId) }?.let {
+            turno.paciente = it
+        }
+    }
+
+    return turno
+}
+
+private fun DocumentSnapshot.toTurno(profesional: Usuario): Turno? {
+    val userDb = UsuarioRepository()
+
+    val dao = toObject(TurnoDao::class.java) ?: return null
+
+    val turno = Turno(dao)
+
+    turno.idTurno = id
+
+    turno.doctor = profesional
 
     if (dao.pacienteId.isNotEmpty()) {
         runBlocking { userDb.findUserById(dao.pacienteId) }?.let {
