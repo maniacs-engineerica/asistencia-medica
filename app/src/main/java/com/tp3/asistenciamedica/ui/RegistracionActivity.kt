@@ -16,7 +16,7 @@ import com.tp3.asistenciamedica.utils.KeyboardUtils
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class RegistracionActivity : AppCompatActivity() {
+class RegistracionActivity : BaseActivity() {
 
     private lateinit var binding: ActivityRegistracionBinding
 

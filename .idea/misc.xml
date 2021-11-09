@@ -5,6 +5,37 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.25833333333333336" />
         <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_dropdown_item_1line.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/drawable/edit_text_background.xml" value="0.225" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/drawable/edit_text_login_background.xml" value="0.225" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.225" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/activity_doctor_main.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/activity_login.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/activity_main.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/activity_registracion.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/card_receta.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/estudio_fragment.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_anadirinfo.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_doctor_inicio.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_estudios.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_generador_turnos.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_infoturnopaciente.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_inicio.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_recetas.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_turnoid.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/fragment_turnos.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/historia_fragment.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/receta_fragment.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/turno_fragment.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/vh_estudio_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/vh_receta_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/layout/vh_turno_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/menu/bottom_nav_doctor_menu.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/menu/estudios_fragment.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/menu/inicio_fragment.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/menu/recetas_fragment.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.225" />
+        <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.225" />
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/layout/activity_doctor_main.xml" value="0.25" />
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
@@ -51,7 +82,6 @@
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.29259259259259257" />
         <entry key="app/src/main/res/drawable/vh_item_background.xml" value="0.16927083333333334" />
-        <entry key="app/src/main/res/drawable/vh_widget_background.xml" value="0.25887445887445887" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_registracion.xml" value="0.22327898550724637" />
@@ -70,9 +100,8 @@
         <entry key="app/src/main/res/layout/turno_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/vh_estudio_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/vh_receta_item.xml" value="0.1480978260869565" />
+        <entry key="app/src/main/res/layout/vh_resource_item.xml" value="0.1337719298245614" />
         <entry key="app/src/main/res/layout/vh_turno_item.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/vh_turno_widget_item.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/vh_widget_item.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/estudios_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/menu/inicio_fragment.xml" value="0.12938596491228072" />

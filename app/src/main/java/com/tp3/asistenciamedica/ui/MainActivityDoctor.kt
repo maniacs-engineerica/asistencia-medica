@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.ActivityDoctorMainBinding
 
-class MainActivityDoctor : AppCompatActivity() {
+class MainActivityDoctor : BaseActivity() {
 
     private lateinit var binding: ActivityDoctorMainBinding
 

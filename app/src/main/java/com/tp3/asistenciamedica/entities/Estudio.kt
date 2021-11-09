@@ -17,7 +17,7 @@ class Estudio() {
     lateinit var paciente: Usuario
     var fecha: Date = Date()
     var ubicacionDeEstudio: String = ""
-    var rutaDeImagenes: MutableList<String> = mutableListOf<String>()
+    var rutaDeImagenes: List<String> = listOf()
 
 
     constructor(estudio: EstudioDao) : this() {

@@ -1,13 +1,11 @@
 package com.tp3.asistenciamedica.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.VISIBLE
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.ActivityLoginBinding
 import com.tp3.asistenciamedica.entities.Usuario
@@ -16,10 +14,8 @@ import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.utils.KeyboardUtils
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
-import kotlin.random.Random
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 

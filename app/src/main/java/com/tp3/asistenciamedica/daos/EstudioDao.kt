@@ -10,6 +10,6 @@ class EstudioDao {
     var pacienteId: String = ""
     var fecha: Date = Date()
     var ubicacionDeEstudio: String = ""
-    var rutaDeImagenes: MutableList<String> = mutableListOf<String>()
+    var rutaDeImagenes: List<String> = listOf()
 
 }
