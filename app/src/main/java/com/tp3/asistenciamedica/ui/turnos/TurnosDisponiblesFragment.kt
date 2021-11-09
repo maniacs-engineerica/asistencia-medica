@@ -1,6 +1,7 @@
 package com.tp3.asistenciamedica.ui.turnos
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,7 @@ import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class TurnosDisponiblesFragment : Fragment() {
@@ -60,14 +61,23 @@ class TurnosDisponiblesFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val usuario = Session.current()
-        lifecycleScope.launch {
+
+        val parentJob = Job()
+        val scope = CoroutineScope(Dispatchers.Default + parentJob)
+
+        scope.launch {
             val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
+                Log.d("TAG", "Repository request :D")
                 TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
             } else {
                  TurnoRepository().findTurnoByProfesionalId(usuario.id)
                 ///TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
             }
-            turnosViewModel.setTurnos(turnos)
+
+            Log.d("TAG", "Turnos fetched:"+ turnos)
+            withContext(Dispatchers.Main) {
+                turnosViewModel.setTurnos(turnos)
+            }
         }
     }
 

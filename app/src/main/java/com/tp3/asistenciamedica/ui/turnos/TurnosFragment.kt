@@ -61,12 +61,12 @@ open class TurnosFragment : Fragment() {
         val usuario = Session.current()
 
         lifecycleScope.launch {
-            val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
+           /* val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
                 TurnoRepository().findTurnosByPacienteId(usuario.id)
             } else {
                 TurnoRepository().findTurnoByProfesionalId(usuario.id)
             }
-            turnosViewModel.setTurnos(turnos)
+            turnosViewModel.setTurnos(turnos)*/
         }
 
         btnNuevoTurno.setOnClickListener{
