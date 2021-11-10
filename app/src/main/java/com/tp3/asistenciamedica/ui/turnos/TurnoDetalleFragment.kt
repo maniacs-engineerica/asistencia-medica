@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.entities.Turno
+import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import kotlinx.coroutines.*
 
@@ -48,8 +49,6 @@ class TurnoDetalleFragment : Fragment() {
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
-
-
         scope.launch {
             val turno = TurnoRepository().findTurnoByDocumentId(
                 TurnoDetalleFragmentArgs.fromBundle(requireArguments()).turnoId
@@ -63,14 +62,13 @@ class TurnoDetalleFragment : Fragment() {
 
                 scope.launch {
 
-                    withContext(Dispatchers.Main) {
-                        turno?.state?.nextStatus()
-                        if (turno != null) {
-                            TurnoRepository().saveTurno(turno)
-                        }
-
-                        Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT)
+                    turno?.state=TurnoStatusEnum.DISPONIBLE.nextStatus()
+                    if (turno != null) {
+                        TurnoRepository().saveTurno(turno)
                     }
+
+                    Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT)
+
 
                 }
             }
