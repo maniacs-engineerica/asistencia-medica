@@ -3,6 +3,7 @@ package com.tp3.asistenciamedica.ui.turnos
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +19,14 @@ import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.TurnosAdapter
 import com.tp3.asistenciamedica.databinding.FragmentTurnosBinding
 import com.tp3.asistenciamedica.entities.Turno
+import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.RecetaRepository
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 import com.tp3.asistenciamedica.ui.recetas.TurnosViewModel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 open class TurnosFragment : Fragment() {
 
@@ -57,18 +58,25 @@ open class TurnosFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
         val usuario = Session.current()
 
-        lifecycleScope.launch {
-           /* val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
+        val parentJob = Job()
+        val scope = CoroutineScope(Dispatchers.Default + parentJob)
+
+        scope.launch {
+            val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
+                Log.d("TAG", "Repository request :D")
                 TurnoRepository().findTurnosByPacienteId(usuario.id)
             } else {
                 TurnoRepository().findTurnoByProfesionalId(usuario.id)
+                ///TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
             }
-            turnosViewModel.setTurnos(turnos)*/
-        }
 
+            Log.d("TAG", "Turnos fetched:"+ turnos)
+            withContext(Dispatchers.Main) {
+                turnosViewModel.setTurnos(turnos)
+            }
+        }
         btnNuevoTurno.setOnClickListener{
             findNavController().navigate(TurnosFragmentDirections.actionNavigationTurnosToNuevoTurnoFragment())
         }
