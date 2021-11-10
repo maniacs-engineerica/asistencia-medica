@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
+import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.repositories.TurnoRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class TurnoDetalleFragment : Fragment() {
 
@@ -49,23 +48,35 @@ class TurnoDetalleFragment : Fragment() {
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
+
+
         scope.launch {
-            val turno=TurnoRepository().findTurnoByDocumentId(TurnoDetalleFragmentArgs.fromBundle(requireArguments()).turnoId)
+            val turno = TurnoRepository().findTurnoByDocumentId(
+                TurnoDetalleFragmentArgs.fromBundle(requireArguments()).turnoId
+            )
 
-            txtFecha.text= turno?.dateTime
-            txtEspecialidad.text=turno?.specialization
+            withContext(Dispatchers.Main) {
+                txtFecha.text = turno?.dateTime
+                txtEspecialidad.text = turno?.specialization
+            }
+            btnSolicitarTurno.setOnClickListener {
 
+                scope.launch {
 
-        ///// modificar estado
-         /*   btnSolicitarTurno.setOnClickListener{
-                turno?.state?.nextStatus()
-            }*/
+                    withContext(Dispatchers.Main) {
+                        turno?.state?.nextStatus()
+                        if (turno != null) {
+                            TurnoRepository().saveTurno(turno)
+                        }
+
+                        Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT)
+                    }
+
+                }
+            }
 
 
         }
-
-
-
 
     }
 
