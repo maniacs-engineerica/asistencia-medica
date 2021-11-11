@@ -1,5 +1,6 @@
 package com.tp3.asistenciamedica.ui.turnos
 
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
@@ -16,6 +18,8 @@ import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import kotlinx.coroutines.*
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class TurnoDetalleFragment : Fragment() {
 
@@ -46,6 +50,7 @@ class TurnoDetalleFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
         val usuario = Session.current()
@@ -58,7 +63,7 @@ class TurnoDetalleFragment : Fragment() {
             )
 
             withContext(Dispatchers.Main) {
-                txtFecha.text = turno?.dateTime
+                txtFecha.text = turno?.dateTime?.subSequence(0,10)
                 txtEspecialidad.text = turno?.specialization
             }
             btnSolicitarTurno.setOnClickListener {
