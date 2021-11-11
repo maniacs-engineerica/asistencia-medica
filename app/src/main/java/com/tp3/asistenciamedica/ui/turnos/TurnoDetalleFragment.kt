@@ -13,6 +13,7 @@ import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
+import com.tp3.asistenciamedica.session.Session
 import kotlinx.coroutines.*
 
 class TurnoDetalleFragment : Fragment() {
@@ -46,6 +47,7 @@ class TurnoDetalleFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        val usuario = Session.current()
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
@@ -63,6 +65,7 @@ class TurnoDetalleFragment : Fragment() {
                 scope.launch {
 
                     turno?.state=TurnoStatusEnum.DISPONIBLE.nextStatus()
+                    turno?.paciente=usuario
                     if (turno != null) {
                         TurnoRepository().saveTurno(turno)
                     }

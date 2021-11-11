@@ -52,21 +52,21 @@ class NuevoTurnoFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    fun onClickEspecialidad(btn: ImageButton) {
+    fun onClickEspecialidad(btn: ImageButton,especialidad:String) {
         btn.setOnClickListener {
-            val action = NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment()
+            val action = NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment(especialidad)
             findNavController().navigate(action)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        onClickEspecialidad(btn_cardiologia)
-        onClickEspecialidad(btn_clinica)
-        onClickEspecialidad(btn_ginecologia)
-        onClickEspecialidad(btn_hematologia)
-        onClickEspecialidad(btn_kinesiologia)
-        onClickEspecialidad(btn_oftalmologia)
+        onClickEspecialidad(btn_cardiologia,"Cardiología")
+        onClickEspecialidad(btn_clinica,"Clínica")
+        onClickEspecialidad(btn_ginecologia,"Ginecología")
+        onClickEspecialidad(btn_hematologia,"Hematología")
+        onClickEspecialidad(btn_kinesiologia,"Kinesiología")
+        onClickEspecialidad(btn_oftalmologia,"Oftalmología")
     }
 
 }

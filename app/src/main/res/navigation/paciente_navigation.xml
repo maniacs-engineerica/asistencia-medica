@@ -97,6 +97,9 @@
         <action
             android:id="@+id/action_turnosDisponiblesFragment_to_turnoDetalleFragment"
             app:destination="@id/turnoDetalleFragment" />
+        <argument
+            android:name="especialidad"
+            app:argType="string" />
     </fragment>
 
     <fragment
