@@ -142,7 +142,8 @@ private fun QuerySnapshot.toTurnos(profesional: Usuario): List<Turno> {
 }
 
 private fun QuerySnapshot.toTurnos(): List<Turno> {
-    return mapNotNull { it.toTurno() }
+    val mapUser = mutableMapOf<String, Usuario>()
+    return mapNotNull { it.toTurno(mapUser) }
 }
 
 private fun DocumentSnapshot.toTurno(): Turno? {
@@ -155,15 +156,65 @@ private fun DocumentSnapshot.toTurno(): Turno? {
     turno.idTurno = id
 
     if (dao.doctorId.isNotEmpty()) {
-        runBlocking { userDb.findUserById(dao.doctorId) }?.let {
-            turno.doctor = it
-        }
+
+            runBlocking { userDb.findUserById(dao.doctorId) }?.let {
+                turno.doctor = it
+            }
+
     }
 
     if (dao.pacienteId.isNotEmpty()) {
         runBlocking { userDb.findUserById(dao.pacienteId) }?.let {
             turno.paciente = it
         }
+    }
+
+    return turno
+}
+
+private fun DocumentSnapshot.toTurno(mapUser: MutableMap<String, Usuario>): Turno? {
+    val userDb = UsuarioRepository()
+
+    val dao = toObject(TurnoDao::class.java) ?: return null
+
+    val turno = Turno(dao)
+
+    turno.idTurno = id
+
+    if (dao.doctorId.isNotEmpty()) {
+
+        if (mapUser.containsKey(dao.doctorId)) {
+            turno.doctor = mapUser[dao.doctorId]!!
+        }
+        else {
+            runBlocking { userDb.findUserById(dao.doctorId) }?.let {
+                turno.doctor = it
+
+                if (!mapUser.containsKey(dao.doctorId)) {
+                    mapUser[dao.doctorId] = it
+                }
+
+            }
+
+        }
+    }
+
+    if (dao.pacienteId.isNotEmpty()) {
+
+        if (mapUser.containsKey(dao.pacienteId)) {
+            turno.paciente = mapUser[dao.pacienteId]!!
+        }
+        else {
+            runBlocking { userDb.findUserById(dao.pacienteId) }?.let {
+                turno.paciente = it
+
+                if (!mapUser.containsKey(dao.pacienteId)) {
+                    mapUser[dao.pacienteId] = it
+                }
+
+            }
+        }
+
     }
 
     return turno
