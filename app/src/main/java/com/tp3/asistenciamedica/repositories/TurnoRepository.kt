@@ -69,6 +69,15 @@ class TurnoRepository {
         return documents.toTurnos(profesional).sortedBy { ZonedDateTime.parse(it.dateTime) }
     }
 
+    suspend fun findTurnosByEspecialidad(especialidad:String,state: TurnoStatusEnum): List<Turno> {
+        val documents = db.collection(Turno.FIREBASE_COLLECTION)
+            .whereEqualTo("specialization",especialidad)
+            .whereEqualTo("state",state)
+            .get()
+            .await()
+
+        return documents.toTurnos()
+    }
 
     suspend fun saveTurnos(turnos: List<Turno>) {
         turnos.forEach { saveTurno(it) }

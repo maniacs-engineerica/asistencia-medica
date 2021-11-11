@@ -49,7 +49,7 @@ class TurnoFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val turnoId = TurnoFragmentArgs.fromBundle(requireArguments()).turnoId
+        val turnoId = TurnoFragmentArgs.fromBundle(requireArguments()).turnoId ?: return
 
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
