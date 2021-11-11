@@ -43,6 +43,9 @@ class RecetaFragment : Fragment() {
 
     private val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
+    val recetaId: String?
+        get() = RecetaFragmentArgs.fromBundle(requireArguments()).recetaId.takeIf { it != "-1" }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,7 +62,7 @@ class RecetaFragment : Fragment() {
 
         val usuario = Session.current()
 
-        val exists = RecetaFragmentArgs.fromBundle(requireArguments()).recetaId != null
+        val exists = recetaId != null
 
         if (usuario.tipo == UsuarioTypeEnum.PACIENTE || exists) {
             binding.paciente.isEnabled = false
@@ -91,14 +94,14 @@ class RecetaFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val id = RecetaFragmentArgs.fromBundle(requireArguments()).recetaId ?: return
+        val id = recetaId ?: return
 
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
         scope.launch {
             val receta = RecetaRepository().findRecetaById(id) ?: return@launch
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 viewModel.setReceta(receta)
             }
         }
@@ -151,17 +154,17 @@ class RecetaFragment : Fragment() {
     }
 
     private fun emitirReceta() {
-        if (binding.paciente.getSelectedItem() == null){
+        if (binding.paciente.getSelectedItem() == null) {
             binding.paciente.error = getString(R.string.validacion_paciente)
             return
         }
 
-        if (!DateUtils.isValidDate(binding.fecha.text.toString(), "dd/MM/yyyy")){
+        if (!DateUtils.isValidDate(binding.fecha.text.toString(), "dd/MM/yyyy")) {
             binding.fecha.error = getString(R.string.validacion_fecha)
             return
         }
 
-        if (binding.descripcion.text.isEmpty()){
+        if (binding.descripcion.text.isEmpty()) {
             binding.descripcion.error = getString(R.string.validacion_receta)
             return
         }

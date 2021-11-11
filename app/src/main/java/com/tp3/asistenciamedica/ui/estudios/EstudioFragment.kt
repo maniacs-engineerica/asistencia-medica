@@ -48,6 +48,9 @@ class EstudioFragment : Fragment() {
 
     private val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
+    val estudioId: String?
+        get() = EstudioFragmentArgs.fromBundle(requireArguments()).estudioId.takeIf { it != "-1" }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,7 +67,7 @@ class EstudioFragment : Fragment() {
 
         val usuario = Session.current()
 
-        val exists = EstudioFragmentArgs.fromBundle(requireArguments()).estudioId != null
+        val exists = estudioId != null
 
         if (usuario.tipo == UsuarioTypeEnum.PACIENTE || exists) {
             binding.paciente.isEnabled = false
@@ -98,7 +101,7 @@ class EstudioFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val id = EstudioFragmentArgs.fromBundle(requireArguments()).estudioId ?: return
+        val id = estudioId ?: return
 
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
