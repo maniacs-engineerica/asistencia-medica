@@ -63,7 +63,7 @@ class TurnoDetalleFragment : Fragment() {
             )
 
             withContext(Dispatchers.Main) {
-                txtFecha.text = turno?.dateTime?.subSequence(0,10)
+                txtFecha.text = turno?.dateTime?.subSequence(0,16)
                 txtEspecialidad.text = turno?.specialization
             }
             btnSolicitarTurno.setOnClickListener {
@@ -84,7 +84,7 @@ class TurnoDetalleFragment : Fragment() {
 
 
                 }
-                Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT)
+                Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT).show()
             }
 
 
