@@ -15,8 +15,7 @@ class Receta() {
     var fecha: Date = Date()
     var descripcion: String = ""
     var ubicacionDeReceta: String = ""
-    var rutaDeImagenes: MutableList<String> = mutableListOf<String>()
-
+    var rutaDeImagenes: List<String> = listOf()
 
     constructor(receta: RecetaDao) : this() {
         this.fecha = receta.fecha
