@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.doctor.TurnoPacienteFragment">
 
     <TextView
         android:id="@+id/idTurno"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="44dp"
-        android:text="@string/idturno"
+        android:text="@string/turno"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -21,10 +22,10 @@
         android:id="@+id/txtEspecialidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="170dp"
         android:text="@string/especialidad"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/txtNomEspecialidad"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDoctor" />
@@ -33,10 +34,10 @@
         android:id="@+id/txtDoctor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="208dp"
         android:text="@string/doctor"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/txtNomDoctor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPaciente" />
@@ -45,31 +46,35 @@
         android:id="@+id/txtNomPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="267dp"
         android:layout_marginTop="70dp"
-        android:layout_marginEnd="87dp"
+        android:layout_marginEnd="30dp"
         android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtPaciente"
         app:layout_constraintTop_toBottomOf="@+id/idTurno" />
 
     <TextView
-        android:id="@+id/txtNomUbi"
+        android:id="@+id/txtNomFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
         android:layout_marginTop="22dp"
+        android:layout_marginEnd="30dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/txtUbicacion"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtFecha"
         app:layout_constraintTop_toBottomOf="@+id/txtNomEspecialidad" />
 
     <TextView
         android:id="@+id/txtNomEspecialidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
         android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtEspecialidad"
         app:layout_constraintTop_toBottomOf="@+id/txtNomDoctor" />
 
@@ -77,9 +82,11 @@
         android:id="@+id/txtNomDoctor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="208dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
         android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtDoctor"
         app:layout_constraintTop_toBottomOf="@+id/txtNomPaciente" />
 
@@ -87,23 +94,23 @@
         android:id="@+id/txtPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="70dp"
-        android:layout_marginEnd="196dp"
         android:text="@string/paciente"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/txtNomPaciente"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTurno" />
 
     <TextView
-        android:id="@+id/txtUbicacion"
+        android:id="@+id/txtFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="22dp"
-        android:layout_marginEnd="188dp"
-        android:text="@string/ubicacion"
-        app:layout_constraintEnd_toStartOf="@+id/txtNomUbi"
+        android:text="@string/fecha"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/txtNomFecha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEspecialidad" />
 
@@ -118,7 +125,7 @@
         android:text="@string/anadir_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNomUbi" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNomFecha" />
 
     <Button
         android:id="@+id/btnverpaciente"

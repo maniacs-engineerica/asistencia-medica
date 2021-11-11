@@ -16,6 +16,7 @@
     <string name="historial">Historial</string>
     <string name="estudios">Estudios</string>
     <string name="turnos">Turnos</string>
+    <string name="turno">Turno</string>
     <string name="proximos_turnos">Próximos turnos</string>
     <string name="ultimos_estudios">Últimos estudios</string>
     <string name="ultimas_historias">Últimas historias</string>
@@ -76,4 +77,5 @@
     <string name="agregar">Agregar</string>
     <string name="salir">Salir</string>
     <string name="adjuntar">Adjuntar</string>
+    <string name="validacion_descripcion">Ingrese una descripción</string>
 </resources>
