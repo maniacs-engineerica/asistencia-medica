@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.entities.Turno
@@ -68,9 +69,13 @@ class TurnoDetalleFragment : Fragment() {
                     turno?.paciente=usuario
                     if (turno != null) {
                         TurnoRepository().saveTurno(turno)
+
                     }
 
-                    Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT)
+                    withContext(Dispatchers.Main) {
+                        Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT)
+                        findNavController().navigate(TurnoDetalleFragmentDirections.actionTurnoDetalleFragmentToNavigationTurnos())
+                    }
 
 
                 }

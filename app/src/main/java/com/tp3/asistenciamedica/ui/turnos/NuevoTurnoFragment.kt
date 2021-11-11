@@ -61,12 +61,12 @@ class NuevoTurnoFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        onClickEspecialidad(btn_cardiologia,"Cardiología")
-        onClickEspecialidad(btn_clinica,"Clínica")
-        onClickEspecialidad(btn_ginecologia,"Ginecología")
-        onClickEspecialidad(btn_hematologia,"Hematología")
-        onClickEspecialidad(btn_kinesiologia,"Kinesiología")
-        onClickEspecialidad(btn_oftalmologia,"Oftalmología")
+        onClickEspecialidad(btn_cardiologia,"Cardiologia")
+        onClickEspecialidad(btn_clinica,"Clinica")
+        onClickEspecialidad(btn_ginecologia,"Ginecologia")
+        onClickEspecialidad(btn_hematologia,"Hematologia")
+        onClickEspecialidad(btn_kinesiologia,"Kinesiologia")
+        onClickEspecialidad(btn_oftalmologia,"Oftalmologia")
     }
 
 }
