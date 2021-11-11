@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.R
@@ -66,13 +67,16 @@ class TurnosDisponiblesFragment : Fragment() {
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
         scope.launch {
-            val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
+            val turnosDisp=TurnoRepository().findTurnosByEspecialidad(TurnosDisponiblesFragmentArgs.fromBundle(requireArguments()).especialidad,TurnoStatusEnum.DISPONIBLE)
+            val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE && turnosDisp !=null) {
                 Log.d("TAG", "Repository request :D")
                 ////TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
-                TurnoRepository().findTurnosByEspecialidad(TurnosDisponiblesFragmentArgs.fromBundle(requireArguments()).especialidad,TurnoStatusEnum.DISPONIBLE)
+                turnosDisp
+
             } else {
-                 TurnoRepository().findTurnoByProfesionalId(usuario.id)
-                ///TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
+                Snackbar.make(binding.root, "No hay turnos para esa Especialidad Disponibles", Snackbar.LENGTH_SHORT)
+                TurnoRepository().findTurnoByProfesionalId(usuario.id)
+
             }
 
             Log.d("TAG", "Turnos fetched:"+ turnos)

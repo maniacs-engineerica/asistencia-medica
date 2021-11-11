@@ -73,12 +73,13 @@ class TurnoDetalleFragment : Fragment() {
                     }
 
                     withContext(Dispatchers.Main) {
-                        Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT)
+
                         findNavController().navigate(TurnoDetalleFragmentDirections.actionTurnoDetalleFragmentToNavigationTurnos())
                     }
 
 
                 }
+                Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT)
             }
 
 
