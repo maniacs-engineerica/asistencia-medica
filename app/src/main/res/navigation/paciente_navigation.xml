@@ -117,5 +117,8 @@
         <argument
             android:name="turnoId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_turnoDetalleFragment_to_navigation_turnos"
+            app:destination="@id/navigation_turnos" />
     </fragment>
 </navigation>

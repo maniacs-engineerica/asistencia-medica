@@ -1,4 +1,5 @@
 package com.tp3.asistenciamedica.ui.turnos
+
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tp3.asistenciamedica.R
@@ -48,7 +50,7 @@ class TurnosDisponiblesFragment : Fragment() {
             ViewModelProvider(this).get(TurnosDisponiblesViewModel::class.java)
 
         _binding = TurnosDisponiblesFragmentBinding.inflate(inflater, container, false)
-        txtEspecialidad= binding.root.findViewById(R.id.txt_tituloTurnosDisp)
+        txtEspecialidad = binding.root.findViewById(R.id.txt_tituloTurnosDisp)
 
 
         return binding.root
@@ -66,35 +68,36 @@ class TurnosDisponiblesFragment : Fragment() {
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
         scope.launch {
-            val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
-                Log.d("TAG", "Repository request :D")
-                ////TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
-                TurnoRepository().findTurnosByEspecialidad(TurnosDisponiblesFragmentArgs.fromBundle(requireArguments()).especialidad,TurnoStatusEnum.DISPONIBLE)
-            } else {
-                 TurnoRepository().findTurnoByProfesionalId(usuario)
-                ///TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
-            }
+            val especialidad =
+                TurnosDisponiblesFragmentArgs.fromBundle(requireArguments()).especialidad
+            val turnos =
+                TurnoRepository().findTurnosByEspecialidad(especialidad, TurnoStatusEnum.DISPONIBLE)
 
-            Log.d("TAG", "Turnos fetched:"+ turnos)
+            Log.d("TAG", "Turnos fetched:" + turnos)
             withContext(Dispatchers.Main) {
+                if (turnos.isEmpty()) {
+                    Snackbar.make(
+                        binding.root,
+                        "No hay turnos para esa Especialidad Disponibles",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
                 turnosViewModel.setTurnos(turnos)
             }
         }
     }
 
 
-
-
-    private fun setupRecycler(){
+    private fun setupRecycler() {
         adapter = TurnosAdapter()
         adapter.onTurnoClick = {
             onTurnoClick(it)
         }
-       binding.recyclerViewTurnosDisp.adapter = adapter
+        binding.recyclerViewTurnosDisp.adapter = adapter
         linearLayoutManager = LinearLayoutManager(context)
-        binding.recyclerViewTurnosDisp.adapter=adapter
+        binding.recyclerViewTurnosDisp.adapter = adapter
         binding.recyclerViewTurnosDisp.setHasFixedSize(true)
-        binding.recyclerViewTurnosDisp.layoutManager= linearLayoutManager
+        binding.recyclerViewTurnosDisp.layoutManager = linearLayoutManager
 
         turnosViewModel.turnos.observe(viewLifecycleOwner, { result ->
             adapter.swapTurnos(result)
@@ -103,7 +106,11 @@ class TurnosDisponiblesFragment : Fragment() {
 
 
     fun onTurnoClick(turno: Turno) {
-        findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment(turno.idTurno))
+        findNavController().navigate(
+            TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToTurnoDetalleFragment(
+                turno.idTurno
+            )
+        )
     }
 
 
@@ -111,8 +118,6 @@ class TurnosDisponiblesFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 
 
 }
