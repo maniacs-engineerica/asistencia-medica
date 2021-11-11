@@ -63,7 +63,7 @@ class TurnoRepository {
 
     suspend fun findTurnosByEspecialidad(especialidad:String): List<Turno> {
         val documents = db.collection(Turno.FIREBASE_COLLECTION)
-            .whereEqualTo("Especialidad",especialidad)
+            .whereEqualTo("specialization",especialidad)
             .get()
             .await()
 
