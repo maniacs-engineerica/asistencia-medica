@@ -68,7 +68,8 @@ class TurnosDisponiblesFragment : Fragment() {
         scope.launch {
             val turnos = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
                 Log.d("TAG", "Repository request :D")
-                TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
+                ////TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
+                TurnoRepository().findTurnosByEspecialidad(TurnosDisponiblesFragmentArgs.fromBundle(requireArguments()).especialidad,TurnoStatusEnum.DISPONIBLE)
             } else {
                  TurnoRepository().findTurnoByProfesionalId(usuario.id)
                 ///TurnoRepository().findTurnoByState(TurnoStatusEnum.DISPONIBLE)
