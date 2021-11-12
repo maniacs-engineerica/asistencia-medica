@@ -90,7 +90,7 @@
     <fragment
         android:id="@+id/nuevoTurnoFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.NuevoTurnoFragment"
-        android:label="nuevo_turno_fragment"
+        android:label="Solicitar Turno Nuevo"
         tools:layout="@layout/nuevo_turno_fragment">
         <action
             android:id="@+id/action_nuevoTurnoFragment_to_turnosDisponiblesFragment"
@@ -99,7 +99,7 @@
     <fragment
         android:id="@+id/turnosDisponiblesFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnosDisponiblesFragment"
-        android:label="turnos_disponibles_fragment"
+        android:label="Turnos Disponibles"
         tools:layout="@layout/turnos_disponibles_fragment">
         <action
             android:id="@+id/action_turnosDisponiblesFragment_to_turnoDetalleFragment"
@@ -112,7 +112,7 @@
     <fragment
         android:id="@+id/turnoDetalleFragment"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnoDetalleFragment"
-        android:label="TurnoDetalleFragment"
+        android:label="Detalles del Turno"
         tools:layout="@layout/turno_fragment">
         <argument
             android:name="turnoId"

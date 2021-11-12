@@ -50,7 +50,7 @@ class TurnosDisponiblesFragment : Fragment() {
             ViewModelProvider(this).get(TurnosDisponiblesViewModel::class.java)
 
         _binding = TurnosDisponiblesFragmentBinding.inflate(inflater, container, false)
-        txtEspecialidad = binding.root.findViewById(R.id.txt_tituloTurnosDisp)
+
 
 
         return binding.root
