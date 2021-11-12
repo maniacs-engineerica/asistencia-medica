@@ -107,6 +107,9 @@
         <argument
             android:name="especialidad"
             app:argType="string" />
+        <action
+            android:id="@+id/action_turnosDisponiblesFragment_to_navigation_turnos"
+            app:destination="@id/navigation_turnos" />
     </fragment>
 
     <fragment

@@ -81,6 +81,7 @@ class TurnosDisponiblesFragment : Fragment() {
                         "No hay turnos para esa Especialidad Disponibles",
                         Snackbar.LENGTH_SHORT
                     ).show()
+                    findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToNavigationTurnos())
                 }
                 turnosViewModel.setTurnos(turnos)
             }
