@@ -30,6 +30,7 @@ class TurnoDetalleFragment : Fragment() {
     private lateinit var viewModel: TurnoDetalleViewModel
     lateinit var txtFecha: TextView
     lateinit var txtEspecialidad: TextView
+    lateinit var txtProfesional: TextView
     lateinit var btnSolicitarTurno: Button
     private lateinit var v: View
 
@@ -40,6 +41,7 @@ class TurnoDetalleFragment : Fragment() {
         v = inflater.inflate(R.layout.turno_detalle_fragment, container, false)
         txtFecha = v.findViewById(R.id.txt_fecha)
         txtEspecialidad = v.findViewById(R.id.txt_especialidad)
+        txtProfesional= v.findViewById(R.id.txt_profesional)
         btnSolicitarTurno = v.findViewById(R.id.btn_solicitar)
         return v
     }
@@ -65,7 +67,7 @@ class TurnoDetalleFragment : Fragment() {
             withContext(Dispatchers.Main) {
 
                 txtFecha.text = turno?.dateTime?.subSequence(0,10).toString() + " "+ turno?.dateTime?.subSequence(11,16).toString()
-
+                txtProfesional.text= turno?.doctor.toString()
                 txtEspecialidad.text = turno?.specialization
             }
             btnSolicitarTurno.setOnClickListener {
