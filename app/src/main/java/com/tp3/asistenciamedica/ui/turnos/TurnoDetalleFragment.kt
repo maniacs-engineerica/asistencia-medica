@@ -88,7 +88,7 @@ class TurnoDetalleFragment : Fragment() {
 
 
                 }
-                Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_LONG).show()
             }
 
 

@@ -79,7 +79,7 @@ class TurnosDisponiblesFragment : Fragment() {
                     Snackbar.make(
                         binding.root,
                         "No hay turnos para esa Especialidad Disponibles",
-                        Snackbar.LENGTH_SHORT
+                        Snackbar.LENGTH_LONG
                     ).show()
                     findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToNavigationTurnos())
                 }
