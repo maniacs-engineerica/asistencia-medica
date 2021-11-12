@@ -36,7 +36,7 @@ class TurnosDisponiblesFragment : Fragment() {
 
     private lateinit var turnosViewModel: TurnosDisponiblesViewModel
     private var _binding: TurnosDisponiblesFragmentBinding? = null
-    private lateinit var txtEspecialidad: TextView
+
     private val binding get() = _binding!!
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: TurnosAdapter
