@@ -1,7 +1,6 @@
 package com.tp3.asistenciamedica.ui.doctor
 
 import android.annotation.SuppressLint
-import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
@@ -39,7 +38,7 @@ class TurnoPacienteFragment : Fragment() {
     @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         turnoPacienteviewModel.turno.observe(viewLifecycleOwner, { result ->
-            binding.txtNomPaciente.setText(result.paciente?.nombreCompleto) //cambiar
+            binding.txtNomPaciente.setText(result.paciente!!.nombreCompleto)
             binding.txtNomDoctor.setText(result.doctor.nombreCompleto)
             binding.txtNomEspecialidad.setText(result.specialization)
             val date = Date.from(ZonedDateTime.parse(result.dateTime).toInstant())
@@ -47,6 +46,7 @@ class TurnoPacienteFragment : Fragment() {
         })
 
         binding.anadirInfo.setOnClickListener { agregarInformacion() }
+        binding.btnverpaciente.setOnClickListener { verInformacionPaciente() }
 
 
     }
@@ -69,7 +69,13 @@ class TurnoPacienteFragment : Fragment() {
 
     private fun agregarInformacion() {
         lifecycleScope.launch {
-            findNavController().navigate(TurnoPacienteFragmentDirections.actionNavigationDoctorTurnoPacienteToTurnoInformacionFragment())
+            findNavController().navigate(TurnoPacienteFragmentDirections.actionNavigationDoctorTurnoPacienteToTurnoInformacionFragment("4MOd85EaF1KXvVG0yAGn"))
+        }
+    }
+
+    private fun verInformacionPaciente() {
+        lifecycleScope.launch {
+            findNavController().navigate(TurnoPacienteFragmentDirections.actionNavigationDoctorTurnoPacienteToTurnoVerInformacionFragment("4MOd85EaF1KXvVG0yAGn"))
         }
     }
 
