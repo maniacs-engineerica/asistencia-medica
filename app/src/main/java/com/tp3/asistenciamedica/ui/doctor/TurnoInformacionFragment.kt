@@ -3,16 +3,19 @@ package com.tp3.asistenciamedica.ui.doctor
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.daos.RecetaDao
 import com.tp3.asistenciamedica.daos.TurnoDao
 import com.tp3.asistenciamedica.databinding.FragmentAnadirinfoBinding
+import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.entities.Usuario
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.RecetaRepository
@@ -24,6 +27,9 @@ import com.tp3.asistenciamedica.utils.DateUtils
 import kotlinx.coroutines.*
 import java.time.ZonedDateTime
 import java.util.*
+import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
+
 
 class TurnoInformacionFragment : Fragment() {
 
@@ -70,12 +76,14 @@ class TurnoInformacionFragment : Fragment() {
 
         if (binding.txtAnInfo.text.isEmpty()){
             binding.txtAnInfo.error = getString(R.string.validacion_descripcion)
+            Snackbar.make(binding.txtAnInfo, R.string.validacion_descripcion, Snackbar.LENGTH_SHORT).show()
             return
         }
 
         val turno = TurnoDao()
         turno.detail = binding.edtInfo.text.toString()
-        turno.idTurno = id
+        turno.state = TurnoStatusEnum.CERRADO
+        turno.idTurno = id //hacer update o pasar todos los datos
 
         lifecycleScope.launch {
             TurnoRepository().saveTurnoDao(turno)

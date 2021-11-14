@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.FragmentDoctorInicioBinding
 import com.tp3.asistenciamedica.databinding.FragmentInicioBinding
@@ -19,6 +20,7 @@ import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.LoginActivity
+import com.tp3.asistenciamedica.ui.inicio.InicioFragmentDirections
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
@@ -126,6 +128,9 @@ class InicioDoctorFragment : Fragment() {
                     binding.txtUltimoTurnoReservado.text = "N/A"
                 }
 
+                binding.btnPrimerTurno.setOnClickListener{
+                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente("4MOd85EaF1KXvVG0yAGn"))
+                }
 
             }
 
