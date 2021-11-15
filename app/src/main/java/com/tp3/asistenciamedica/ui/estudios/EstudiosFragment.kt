@@ -52,6 +52,8 @@ class EstudiosFragment : Fragment() {
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
+        binding.estudios.showShimmerAdapter()
+
         scope.launch {
             val recetas = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
                 EstudioRepository().findEstudiosByPacientId(usuario.id)
@@ -59,7 +61,9 @@ class EstudiosFragment : Fragment() {
                 EstudioRepository().findEstudiosByProfesionalId(usuario.id)
             }
             withContext(Dispatchers.Main) {
+                if (!isAdded) return@withContext
                 estudiosViewModel.setEstudios(recetas)
+                binding.estudios.hideShimmerAdapter()
             }
         }
     }

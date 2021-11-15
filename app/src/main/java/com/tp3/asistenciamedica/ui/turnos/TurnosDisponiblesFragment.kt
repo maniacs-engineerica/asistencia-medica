@@ -38,7 +38,6 @@ class TurnosDisponiblesFragment : Fragment() {
     private var _binding: TurnosDisponiblesFragmentBinding? = null
 
     private val binding get() = _binding!!
-    private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: TurnosAdapter
 
     override fun onCreateView(
@@ -62,10 +61,11 @@ class TurnosDisponiblesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val usuario = Session.current()
 
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
+
+        binding.turnosDisponibles.showShimmerAdapter()
 
         scope.launch {
             val especialidad =
@@ -75,6 +75,7 @@ class TurnosDisponiblesFragment : Fragment() {
 
             Log.d("TAG", "Turnos fetched:" + turnos)
             withContext(Dispatchers.Main) {
+                if (!isAdded) return@withContext
                 if (turnos.isEmpty()) {
                     Snackbar.make(
                         binding.root,
@@ -82,8 +83,10 @@ class TurnosDisponiblesFragment : Fragment() {
                         Snackbar.LENGTH_LONG
                     ).show()
                     findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToNavigationTurnos())
+                    return@withContext
                 }
                 turnosViewModel.setTurnos(turnos)
+                binding.turnosDisponibles.hideShimmerAdapter()
             }
         }
     }
@@ -94,11 +97,7 @@ class TurnosDisponiblesFragment : Fragment() {
         adapter.onTurnoClick = {
             onTurnoClick(it)
         }
-        binding.recyclerViewTurnosDisp.adapter = adapter
-        linearLayoutManager = LinearLayoutManager(context)
-        binding.recyclerViewTurnosDisp.adapter = adapter
-        binding.recyclerViewTurnosDisp.setHasFixedSize(true)
-        binding.recyclerViewTurnosDisp.layoutManager = linearLayoutManager
+        binding.turnosDisponibles.adapter = adapter
 
         turnosViewModel.turnos.observe(viewLifecycleOwner, { result ->
             adapter.swapTurnos(result)

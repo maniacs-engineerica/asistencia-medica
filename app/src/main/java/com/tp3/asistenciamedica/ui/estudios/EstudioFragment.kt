@@ -109,6 +109,7 @@ class EstudioFragment : Fragment() {
         scope.launch {
             val estudio = EstudioRepository().findEstudioById(id) ?: return@launch
             withContext(Dispatchers.Main) {
+                if (!isAdded) return@withContext
                 viewModel.setEstudio(estudio)
             }
         }

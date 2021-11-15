@@ -28,6 +28,8 @@ class WidgetAdapter<T>() : RecyclerView.Adapter<WidgetAdapter.WidgetHolder>() {
 
     var onLoadItems: (suspend () -> List<T>)? = null
 
+    var onLoaded: (()->Unit)? = null
+
     var onBindViewHolder: ((T, WidgetHolder) -> Unit)? = null
 
     fun load() {
@@ -37,6 +39,7 @@ class WidgetAdapter<T>() : RecyclerView.Adapter<WidgetAdapter.WidgetHolder>() {
             scope.launch {
                 val items = it()
                 withContext(Dispatchers.Main) {
+                    onLoaded?.let { it() }
                     swapItems(items)
                 }
             }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.view.View.GONE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -66,11 +67,14 @@ class InicioFragment : Fragment() {
     }
 
     @SuppressLint("NewApi")
-    private fun setupTurnos(){
+    private fun setupTurnos() {
         val user = Session.current()
         val turnosAdapter = WidgetAdapter<Turno>()
-        turnosAdapter.onLoadItems = onLoadItems@ {
+        turnosAdapter.onLoadItems = onLoadItems@{
             return@onLoadItems TurnoRepository().findTurnosByPacienteId(user.id)
+        }
+        turnosAdapter.onLoaded = {
+            binding.loadingTurnos.visibility = GONE
         }
         turnosAdapter.onBindViewHolder = { turno, holder ->
             val date = Date.from(ZonedDateTime.parse(turno.dateTime).toInstant())
@@ -86,15 +90,19 @@ class InicioFragment : Fragment() {
     }
 
     @SuppressLint("NewApi")
-    private fun setupEstudios(){
+    private fun setupEstudios() {
         val user = Session.current()
         val estudiosAdapter = WidgetAdapter<Estudio>()
-        estudiosAdapter.onLoadItems = onLoadItems@ {
+        estudiosAdapter.onLoadItems = onLoadItems@{
             return@onLoadItems EstudioRepository().findEstudiosHistoriaByPacientId(user.id)
+        }
+        estudiosAdapter.onLoaded = {
+            binding.loadingEstudios.visibility = GONE
         }
         estudiosAdapter.onBindViewHolder = { estudio, holder ->
             holder.dayView.text = dayFormatter.format(estudio.fecha)
-            holder.monthView.text = monthFormatter.format(estudio.fecha).uppercase(Locale.getDefault())
+            holder.monthView.text =
+                monthFormatter.format(estudio.fecha).uppercase(Locale.getDefault())
             holder.descriptionView.text = "${estudio.nombre}\n${estudio.doctor.nombreCompleto}"
         }
         estudiosAdapter.onItemClick = {
@@ -105,11 +113,14 @@ class InicioFragment : Fragment() {
     }
 
     @SuppressLint("NewApi")
-    private fun setupHistoria(){
+    private fun setupHistoria() {
         val user = Session.current()
         val historiaAdapter = WidgetAdapter<Turno>()
-        historiaAdapter.onLoadItems = onLoadItems@ {
+        historiaAdapter.onLoadItems = onLoadItems@{
             return@onLoadItems TurnoRepository().findHistorialByPacienteId(user.id)
+        }
+        historiaAdapter.onLoaded = {
+            binding.loadingHistorias.visibility = GONE
         }
         historiaAdapter.onBindViewHolder = { turno, holder ->
             val date = Date.from(ZonedDateTime.parse(turno.dateTime).toInstant())

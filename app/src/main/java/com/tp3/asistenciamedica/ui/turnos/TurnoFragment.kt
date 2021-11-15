@@ -57,6 +57,7 @@ class TurnoFragment : Fragment() {
         scope.launch {
             val turno = TurnoRepository().findTurnoById(turnoId) ?: return@launch
             withContext(Dispatchers.Main){
+                if (!isAdded) return@withContext
                 viewModel.setTurno(turno)
             }
         }

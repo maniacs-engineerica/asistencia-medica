@@ -60,10 +60,14 @@ open class TurnosFragment : Fragment() {
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
+        binding.turnos.showShimmerAdapter()
+
         scope.launch {
             val turnos = onLoadTurnos()
             withContext(Dispatchers.Main) {
+                if (!isAdded) return@withContext
                 turnosViewModel.setTurnos(turnos)
+                binding.turnos.hideShimmerAdapter()
             }
         }
 

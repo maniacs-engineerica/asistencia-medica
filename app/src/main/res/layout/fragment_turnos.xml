@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.turnos.TurnosFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.tp3.asistenciamedica.ui.views.ShimmerRecyclerView
         android:id="@+id/turnos"
-        android:layout_width="412dp"
-        android:layout_height="456dp"
+        style="@style/ShimmerRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/btn_turno_nuevo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,11 +21,11 @@
         android:id="@+id/btn_turno_nuevo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/nuevo_turno"
+        app:layout_constraintBottom_toBottomOf="@+id/turnos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/turnos" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

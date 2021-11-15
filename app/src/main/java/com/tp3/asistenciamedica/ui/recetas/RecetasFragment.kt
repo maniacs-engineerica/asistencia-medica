@@ -48,14 +48,18 @@ class RecetasFragment : Fragment() {
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
+        binding.recetas.showShimmerAdapter()
+
         scope.launch {
             val recetas = if (usuario.tipo == UsuarioTypeEnum.PACIENTE) {
                 RecetaRepository().findRecetaByPacientId(usuario.id)
             } else {
                 RecetaRepository().findRecetaByProfesionalId(usuario.id)
             }
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
+                if (!isAdded) return@withContext
                 recetasViewModel.setRecetas(recetas)
+                binding.recetas.hideShimmerAdapter()
             }
         }
     }

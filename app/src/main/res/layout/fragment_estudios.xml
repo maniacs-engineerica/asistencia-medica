@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.estudios.EstudiosFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.tp3.asistenciamedica.ui.views.ShimmerRecyclerView
         android:id="@+id/estudios"
+        style="@style/ShimmerRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

@@ -102,6 +102,7 @@ class RecetaFragment : Fragment() {
         scope.launch {
             val receta = RecetaRepository().findRecetaById(id) ?: return@launch
             withContext(Dispatchers.Main) {
+                if (!isAdded) return@withContext
                 viewModel.setReceta(receta)
             }
         }

@@ -79,7 +79,6 @@
         android:layout_marginStart="134dp"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="108dp"
-        android:text="@string/horario"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +95,6 @@
         android:layout_marginTop="45dp"
         android:layout_marginEnd="108dp"
         android:layout_marginBottom="192dp"
-        android:text="@string/especialidad"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_solicitar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,7 +130,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
         android:layout_marginTop="48dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
