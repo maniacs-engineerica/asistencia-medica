@@ -23,6 +23,8 @@ class TurnoPacienteFragment : Fragment() {
 
     private val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
+    private lateinit var id: String
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,7 +56,7 @@ class TurnoPacienteFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val id = TurnoPacienteFragmentArgs.fromBundle(requireArguments()).turnoId ?: return
+        id = TurnoPacienteFragmentArgs.fromBundle(requireArguments()).turnoId ?: return
 
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
@@ -69,13 +71,13 @@ class TurnoPacienteFragment : Fragment() {
 
     private fun agregarInformacion() {
         lifecycleScope.launch {
-            findNavController().navigate(TurnoPacienteFragmentDirections.actionNavigationDoctorTurnoPacienteToTurnoInformacionFragment("4MOd85EaF1KXvVG0yAGn"))
+            findNavController().navigate(TurnoPacienteFragmentDirections.actionNavigationDoctorTurnoPacienteToTurnoInformacionFragment(id))
         }
     }
 
     private fun verInformacionPaciente() {
         lifecycleScope.launch {
-            findNavController().navigate(TurnoPacienteFragmentDirections.actionNavigationDoctorTurnoPacienteToTurnoVerInformacionFragment("4MOd85EaF1KXvVG0yAGn"))
+            findNavController().navigate(TurnoPacienteFragmentDirections.actionNavigationDoctorTurnoPacienteToTurnoVerInformacionFragment(id))
         }
     }
 

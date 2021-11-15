@@ -39,6 +39,11 @@ class TurnoInformacionFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var fecha: String
+    private lateinit var doctorId: String
+    private lateinit var pacienteId: String
+    private lateinit var specialization: String
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,6 +74,10 @@ class TurnoInformacionFragment : Fragment() {
             withContext(Dispatchers.Main){
                 turnoInformacionViewModel.setTurno(turno)
             }
+            fecha = turno.dateTime
+            doctorId = turno?.doctor?.id
+            pacienteId = turno.paciente!!.id
+            specialization = turno.specialization
         }
     }
 
@@ -81,9 +90,13 @@ class TurnoInformacionFragment : Fragment() {
         }
 
         val turno = TurnoDao()
+        turno.dateTime = fecha
         turno.detail = binding.edtInfo.text.toString()
+        turno.doctorId = doctorId
+        turno.idTurno = id
+        turno.pacienteId = pacienteId
+        turno.specialization = specialization
         turno.state = TurnoStatusEnum.CERRADO
-        turno.idTurno = id //hacer update o pasar todos los datos
 
         lifecycleScope.launch {
             TurnoRepository().saveTurnoDao(turno)
