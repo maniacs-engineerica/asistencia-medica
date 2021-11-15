@@ -5,6 +5,12 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.25833333333333336" />
         <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_dropdown_item_1line.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/fragment_anadirinfo.xml" value="0.25" />
+        <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/fragment_doctor_inicio.xml" value="0.25" />
+        <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/fragment_infoturnopaciente.xml" value="0.33" />
+        <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/fragment_turnoid.xml" value="0.25" />
+        <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/turno_detalle_fragment.xml" value="0.19519927536231885" />
+        <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/turnos_disponibles_fragment.xml" value="0.19519927536231885" />
         <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/drawable/edit_text_background.xml" value="0.225" />
         <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/drawable/edit_text_login_background.xml" value="0.225" />
         <entry key="..\:/Users/ivansfreaks/AndroidStudioProjects/asistencia-medica/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.225" />

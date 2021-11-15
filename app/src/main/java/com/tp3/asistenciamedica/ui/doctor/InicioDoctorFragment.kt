@@ -35,6 +35,8 @@ class InicioDoctorFragment : Fragment() {
 
     private val dayFormatter = SimpleDateFormat("dd", Locale.getDefault())
     private val monthFormatter = SimpleDateFormat("MMM", Locale.getDefault())
+    private lateinit var id1: String
+    private lateinit var id0: String
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -121,6 +123,10 @@ class InicioDoctorFragment : Fragment() {
                     binding.btnSegundoTurno.visibility = VISIBLE
                     binding.btnSegundoTurno.text = ""+timeTurno1.hour+":"+ timeTurno1.minute + " "+ turnosReservados.get(index=0).paciente?.nombreCompleto
 
+                    id1 = turnosReservados.get(index = 1).idTurno
+                    id0 = turnosReservados.get(index = 0).idTurno
+
+
                 }
                 else {
                     binding.btnPrimerTurno.visibility = INVISIBLE
@@ -129,8 +135,13 @@ class InicioDoctorFragment : Fragment() {
                 }
 
                 binding.btnPrimerTurno.setOnClickListener{
-                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente("4MOd85EaF1KXvVG0yAGn"))
+                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id1))
                 }
+
+                binding.btnSegundoTurno.setOnClickListener{
+                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id0))
+                }
+
 
             }
 
