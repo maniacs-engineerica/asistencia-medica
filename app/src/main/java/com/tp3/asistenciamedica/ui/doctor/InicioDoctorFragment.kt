@@ -115,13 +115,15 @@ class InicioDoctorFragment : Fragment() {
 
                     if (turnosReservados.size > 1) {
                         var timeTurno2 = ZonedDateTime.parse(turnosReservados.get(index=1).dateTime)
+                        var nombrePaciente = turnosReservados.get(index=1).paciente?.nombreCompleto
                         binding.btnSegundoTurno.visibility = VISIBLE
                         binding.btnSegundoTurno.text = ""+timeTurno2.hour+":"+ timeTurno2.minute + " "+ turnosReservados.get(index=1).paciente?.nombreCompleto
                     }
 
                     var timeTurno1 = ZonedDateTime.parse(turnosReservados.get(index=0).dateTime)
-                    binding.btnSegundoTurno.visibility = VISIBLE
-                    binding.btnSegundoTurno.text = ""+timeTurno1.hour+":"+ timeTurno1.minute + " "+ turnosReservados.get(index=0).paciente?.nombreCompleto
+                    binding.btnPrimerTurno.visibility = VISIBLE
+                    var prueba = turnosReservados.get(index=0).paciente?.nombreCompleto
+                    binding.btnPrimerTurno.text = ""+timeTurno1.hour+":"+ timeTurno1.minute + " "+ turnosReservados.get(index=0).paciente?.nombreCompleto
 
                     id1 = turnosReservados.get(index = 1).idTurno
                     id0 = turnosReservados.get(index = 0).idTurno
@@ -135,13 +137,12 @@ class InicioDoctorFragment : Fragment() {
                 }
 
                 binding.btnPrimerTurno.setOnClickListener{
-                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id1))
-                }
-
-                binding.btnSegundoTurno.setOnClickListener{
                     findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id0))
                 }
 
+                binding.btnSegundoTurno.setOnClickListener{
+                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id1))
+                }
 
             }
 
