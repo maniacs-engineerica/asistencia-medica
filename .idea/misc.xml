@@ -85,6 +85,7 @@
         <entry key="app/src/main/res/layout/activity_registracion.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.25" />
         <entry key="app/src/main/res/layout/estudio_fragment.xml" value="0.22327898550724637" />
+        <entry key="app/src/main/res/layout/fragment_anadirinfo.xml" value="0.14210526315789473" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/layout/fragment_estudios.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/layout/fragment_generador_turnos.xml" value="0.335" />

@@ -58,7 +58,7 @@ class TurnoInformacionFragment : Fragment() {
 
     @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.edtInfo.setOnClickListener { agregarInformacion() }
+        binding.btnFinalizarInfo.setOnClickListener { agregarInformacion() }
     }
 
     override fun onStart() {
