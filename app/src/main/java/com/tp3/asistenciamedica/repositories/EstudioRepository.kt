@@ -8,7 +8,6 @@ import com.tp3.asistenciamedica.daos.EstudioDao
 import com.tp3.asistenciamedica.entities.Estudio
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
-import java.time.ZonedDateTime
 import java.util.*
 
 class EstudioRepository {
@@ -33,7 +32,7 @@ class EstudioRepository {
         return documents.toEstudios()
     }
 
-    suspend fun findEstudiosByPacientId(id: String): List<Estudio> {
+    suspend fun findEstudiosByPacientId(id: String?): List<Estudio> {
 
         val documents = db.collection(Estudio.FIREBASE_COLLECTION)
             .whereEqualTo("pacienteId", id)
