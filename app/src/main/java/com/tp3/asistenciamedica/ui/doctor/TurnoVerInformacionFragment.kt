@@ -67,7 +67,7 @@ class TurnoVerInformacionFragment : Fragment() {
 
     private fun verEstudios() {
         lifecycleScope.launch {
-            //findNavController().navigate(TurnoVerInformacionFragmentDirections.actionNavigationDoctorVerInfoPacienteToEstudiosFragment())
+            findNavController().navigate(TurnoVerInformacionFragmentDirections.actionNavigationDoctorVerInfoPacienteToPacienteEstudiosFragment())
         }
     }
 

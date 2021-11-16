@@ -82,10 +82,10 @@ class TurnoInformacionFragment : Fragment() {
     }
 
     private fun agregarInformacion() {
-
-        if (binding.txtAnInfo.text.isEmpty()){
-            binding.txtAnInfo.error = getString(R.string.validacion_descripcion)
-            Snackbar.make(binding.txtAnInfo, R.string.validacion_descripcion, Snackbar.LENGTH_SHORT).show()
+        val text = binding.edtInfo.text
+        if (binding.edtInfo.text.isEmpty()){
+            binding.edtInfo.error = getString(R.string.validacion_descripcion)
+            Snackbar.make(binding.edtInfo, R.string.validacion_descripcion, Snackbar.LENGTH_SHORT).show()
             return
         }
 

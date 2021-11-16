@@ -61,7 +61,7 @@
     <fragment
         android:id="@+id/navigation_doctor_agregar_info"
         android:name="com.tp3.asistenciamedica.ui.doctor.TurnoInformacionFragment"
-        android:label="fragment_anadirinfo"
+        android:label="@string/turno"
         tools:layout="@layout/fragment_anadirinfo">
         <argument
             android:name="turnoId"
@@ -72,8 +72,22 @@
     <fragment
         android:id="@+id/navigation_doctor_ver_info_paciente"
         android:name="com.tp3.asistenciamedica.ui.doctor.TurnoVerInformacionFragment"
-        android:label="fragment_infoturnopaciente"
+        android:label="@string/turno"
         tools:layout="@layout/fragment_infoturnopaciente">
+        <argument
+            android:name="turnoId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_navigation_doctor_ver_info_paciente_to_pacienteEstudiosFragment"
+            app:destination="@id/pacienteEstudiosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pacienteEstudiosFragment"
+        android:name="com.tp3.asistenciamedica.ui.doctor.PacienteEstudiosFragment"
+        android:label="@string/estudios"
+        tools:layout="@layout/fragment_estudios_doctor">
         <argument
             android:name="turnoId"
             android:defaultValue="@null"
