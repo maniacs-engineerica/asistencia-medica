@@ -81,6 +81,8 @@ class EstudioFragment : Fragment() {
             lifecycleScope.launch {
                 binding.paciente.options = UsuarioRepository().allPacientes()
             }
+
+
         }
 
         binding.subir.setOnClickListener { subir() }
