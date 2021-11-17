@@ -36,7 +36,7 @@
         android:layout_marginStart="136dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="173dp"
-        android:text="@string/nuevo_turno"
+        android:text="@string/turno_asignado"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"

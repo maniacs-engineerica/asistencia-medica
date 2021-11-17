@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
-import com.tp3.asistenciamedica.databinding.TurnoFragmentBinding
+
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session

@@ -63,10 +63,12 @@
     <string name="selec_especialidad">Seleccionar Especialidad</string>
     <string name="turnos_disp">Turnos Disponibles</string>
     <string name="nuevo_turno">Nuevo Turno</string>
+    <string name="turno_asignado">Turno Asignado</string>
     <string name="horario">Horario</string>
     <string name="doctora">Doctor/a</string>
     <string name="ubicacion">Ubicación</string>
     <string name="btn_solicitar"> Solicitar </string>
+    <string name="mis_turnos">Mis Turnos</string>
 
     <string name="proximos_pacientes">Próximos pacientes</string>
     <string name="ir_pacientes">Ver todos los pacientes</string>

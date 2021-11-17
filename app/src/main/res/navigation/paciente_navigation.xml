@@ -48,7 +48,7 @@
     <fragment
         android:id="@+id/navigation_turnos"
         android:name="com.tp3.asistenciamedica.ui.turnos.TurnosFragment"
-        android:label="@string/turnos"
+        android:label="@string/mis_turnos"
         tools:layout="@layout/fragment_recetas">
         <action
             android:id="@+id/action_turnos_to_turno"
