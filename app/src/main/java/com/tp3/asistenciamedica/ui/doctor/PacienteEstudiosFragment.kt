@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.EstudiosAdapter
 import com.tp3.asistenciamedica.databinding.FragmentEstudiosDoctorBinding
 import com.tp3.asistenciamedica.repositories.EstudioRepository
 import com.tp3.asistenciamedica.repositories.TurnoRepository
+import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 import kotlinx.coroutines.*
 
 class PacienteEstudiosFragment : Fragment() {
@@ -51,9 +53,7 @@ class PacienteEstudiosFragment : Fragment() {
             val idPaciente = turno.paciente?.id
 
             val estudios = EstudioRepository().findEstudiosByPacientId(idPaciente)
-            viewModel.setEstudios(estudios )
             withContext(Dispatchers.Main) {
-                if (!isAdded) return@withContext
                 viewModel.setEstudios(estudios)
                 binding.estudiosPaciente.hideShimmerAdapter()
             }
@@ -66,6 +66,9 @@ class PacienteEstudiosFragment : Fragment() {
 
     private fun setupRecycler() {
         adapter = EstudiosAdapter()
+        adapter.onEstudioClick = {
+            //findNavController().navigate(EstudiosFragmentDirections.actionEstudiosToEstudio(it.idEstudio))
+        }
         binding.estudiosPaciente.adapter = adapter
 
         viewModel.estudios.observe(viewLifecycleOwner, { result ->

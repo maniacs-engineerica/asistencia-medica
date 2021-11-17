@@ -61,19 +61,12 @@ class TurnoVerInformacionFragment : Fragment() {
         })
 
         binding.btnVerEstudios.setOnClickListener { verEstudios() }
-        binding.btnVerHistorial.setOnClickListener { verHistorial() }
 
     }
 
     private fun verEstudios() {
         lifecycleScope.launch {
-            findNavController().navigate(TurnoVerInformacionFragmentDirections.actionNavigationDoctorVerInfoPacienteToPacienteEstudiosFragment())
-        }
-    }
-
-    private fun verHistorial() {
-        lifecycleScope.launch {
-            //findNavController().navigate(TurnoVerInformacionFragmentDirections.actionNavigationDoctorVerInfoPacienteToHistorialFragment())
+            findNavController().navigate(TurnoVerInformacionFragmentDirections.actionNavigationDoctorVerInfoPacienteToPacienteEstudiosFragment(id))
         }
     }
 
