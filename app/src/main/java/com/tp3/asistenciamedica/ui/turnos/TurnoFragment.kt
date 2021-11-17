@@ -76,7 +76,7 @@ class TurnoFragment : Fragment() {
                 scope.launch {
 
                     turno?.state = TurnoStatusEnum.DISPONIBLE
-                    turno?.paciente = usuario
+                    turno?.paciente =usuario
                     if (turno != null) {
                         TurnoRepository().saveTurno(turno)
 
