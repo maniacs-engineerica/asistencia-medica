@@ -84,8 +84,10 @@
         tools:layout="@layout/turno_fragment" >
         <argument
             android:name="turnoId"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
+        <action
+            android:id="@+id/action_turnoFragment_to_navigation_turnos"
+            app:destination="@id/navigation_turnos" />
     </fragment>
     <fragment
         android:id="@+id/nuevoTurnoFragment"

@@ -13,13 +13,10 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
-import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import kotlinx.coroutines.*
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 class TurnoDetalleFragment : Fragment() {
 
@@ -42,7 +39,7 @@ class TurnoDetalleFragment : Fragment() {
         txtFecha = v.findViewById(R.id.txt_fecha)
         txtEspecialidad = v.findViewById(R.id.txt_especialidad)
         txtProfesional= v.findViewById(R.id.txt_profesional)
-        btnSolicitarTurno = v.findViewById(R.id.btn_solicitar)
+        btnSolicitarTurno = v.findViewById(R.id.btn_cancelar)
         return v
     }
 

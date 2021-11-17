@@ -90,6 +90,7 @@
     <string name="validacion_resultado">Ingrese un resultado</string>
     <string name="validacion_estudio">Ingrese un estudio</string>
     <string name="agregar">Agregar</string>
+    <string name="cancelar">Cancelar Turno</string>
     <string name="salir">Salir</string>
     <string name="adjuntar">Adjuntar</string>
     <string name="validacion_descripcion">Ingrese una descripción</string>
