@@ -37,6 +37,7 @@ class InicioDoctorFragment : Fragment() {
     private val monthFormatter = SimpleDateFormat("MMM", Locale.getDefault())
     private lateinit var id1: String
     private lateinit var id0: String
+    private lateinit var id2: String
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -115,9 +116,12 @@ class InicioDoctorFragment : Fragment() {
 
                     if (turnosReservados.size > 1) {
                         var timeTurno2 = ZonedDateTime.parse(turnosReservados.get(index=1).dateTime)
-                        var nombrePaciente = turnosReservados.get(index=1).paciente?.nombreCompleto
                         binding.btnSegundoTurno.visibility = VISIBLE
                         binding.btnSegundoTurno.text = ""+timeTurno2.hour+":"+ timeTurno2.minute + " "+ turnosReservados.get(index=1).paciente?.nombreCompleto
+
+                        var timeTurno3 = ZonedDateTime.parse(turnosReservados.get(index=3).dateTime)
+                        binding.btnTercerTurno.visibility = VISIBLE
+                        binding.btnTercerTurno.text = ""+timeTurno3.hour+":"+ timeTurno3.minute + " "+ turnosReservados.get(index=3).paciente?.nombreCompleto
                     }
 
                     var timeTurno1 = ZonedDateTime.parse(turnosReservados.get(index=0).dateTime)
@@ -127,12 +131,14 @@ class InicioDoctorFragment : Fragment() {
 
                     id1 = turnosReservados.get(index = 1).idTurno
                     id0 = turnosReservados.get(index = 0).idTurno
+                    id2 = turnosReservados.get(index = 3).idTurno
 
 
                 }
                 else {
                     binding.btnPrimerTurno.visibility = INVISIBLE
                     binding.btnSegundoTurno.visibility = INVISIBLE
+                    binding.btnTercerTurno.visibility = INVISIBLE
                     binding.txtUltimoTurnoReservado.text = "N/A"
                 }
 
@@ -142,6 +148,10 @@ class InicioDoctorFragment : Fragment() {
 
                 binding.btnSegundoTurno.setOnClickListener{
                     findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id1))
+                }
+
+                binding.btnTercerTurno.setOnClickListener{
+                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id2))
                 }
 
             }
