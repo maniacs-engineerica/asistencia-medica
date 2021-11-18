@@ -42,7 +42,7 @@ class TurnoPacienteFragment : Fragment() {
         turnoPacienteviewModel.turno.observe(viewLifecycleOwner, { result ->
             binding.txtNomPaciente.setText(result.paciente!!.nombreCompleto)
             binding.txtNomDoctor.setText(result.doctor.nombreCompleto)
-            binding.txtNomEspecialidad.setText(result.specialization)
+            binding.txtNomEspecialidad.setText(result.specialization.code)
             val date = Date.from(ZonedDateTime.parse(result.dateTime).toInstant())
             binding.txtNomFecha.setText(formatter.format(date))
         })

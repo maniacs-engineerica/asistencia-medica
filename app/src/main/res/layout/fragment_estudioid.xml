@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtEstudioId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Estudio #"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtPacEst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/paciente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtDocEst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="43dp"
+        android:text="@string/doctora"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPacEst" />
+
+    <TextView
+        android:id="@+id/txtEspEst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/especialidad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDocEst" />
+
+    <TextView
+        android:id="@+id/txtUbiEst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/estudio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEspEst" />
+
+    <TextView
+        android:id="@+id/txtNomPac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="148dp"
+        android:text="Cargando..."
+        app:layout_constraintStart_toEndOf="@+id/txtPacEst"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNomDoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="45dp"
+        android:text="Cargando..."
+        app:layout_constraintStart_toEndOf="@+id/txtDocEst"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomPac" />
+
+    <TextView
+        android:id="@+id/txtNomEsp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="44dp"
+        android:text="Cargando..."
+        app:layout_constraintStart_toEndOf="@+id/txtEspEst"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomDoc" />
+
+    <TextView
+        android:id="@+id/txtNomUbi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="37dp"
+        android:text="Cargando..."
+        app:layout_constraintStart_toEndOf="@+id/txtUbiEst"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomEsp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

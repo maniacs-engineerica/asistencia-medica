@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.R
+import com.tp3.asistenciamedica.entities.TurnoEspecialidadEnum
 
 class NuevoTurnoFragment : Fragment() {
 
@@ -52,21 +53,21 @@ class NuevoTurnoFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    fun onClickEspecialidad(btn: ImageButton,especialidad:String) {
+    fun onClickEspecialidad(btn: ImageButton,especialidad: TurnoEspecialidadEnum) {
         btn.setOnClickListener {
-            val action = NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment(especialidad)
+            val action = NuevoTurnoFragmentDirections.actionNuevoTurnoFragmentToTurnosDisponiblesFragment(especialidad.code)
             findNavController().navigate(action)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        onClickEspecialidad(btn_cardiologia,"Cardiologia")
-        onClickEspecialidad(btn_clinica,"Clinica")
-        onClickEspecialidad(btn_ginecologia,"Ginecologia")
-        onClickEspecialidad(btn_hematologia,"Hematologia")
-        onClickEspecialidad(btn_kinesiologia,"Kinesiologia")
-        onClickEspecialidad(btn_oftalmologia,"Oftalmologia")
+        onClickEspecialidad(btn_cardiologia,TurnoEspecialidadEnum.CARDIOLOGIA)
+        onClickEspecialidad(btn_clinica,TurnoEspecialidadEnum.CLINICA)
+        onClickEspecialidad(btn_ginecologia,TurnoEspecialidadEnum.Ginecologia)
+        onClickEspecialidad(btn_hematologia,TurnoEspecialidadEnum.Hematologia)
+        onClickEspecialidad(btn_kinesiologia,TurnoEspecialidadEnum.KINESIOLOGIA)
+        onClickEspecialidad(btn_oftalmologia,TurnoEspecialidadEnum.OFTALMOLOGIA)
     }
 
 }

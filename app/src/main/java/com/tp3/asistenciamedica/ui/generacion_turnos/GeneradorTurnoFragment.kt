@@ -16,6 +16,7 @@ import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.daos.TurnoDao
 import com.tp3.asistenciamedica.databinding.FragmentGeneradorTurnosBinding
 import com.tp3.asistenciamedica.entities.Turno
+import com.tp3.asistenciamedica.entities.TurnoEspecialidadEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import kotlinx.coroutines.runBlocking
@@ -53,6 +54,9 @@ class GeneradorTurnoFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(GeneradorTurnoViewModel::class.java)
 
+        binding.especialidad.options = TurnoEspecialidadEnum.values().toList().map { it.code }
+
+
         binding.submitTurnos.setOnClickListener {
             if(datosValidos()) {
                 generateTurnos()
@@ -74,7 +78,7 @@ class GeneradorTurnoFragment : Fragment() {
         val horaFinal: Editable = binding.horaFinal.text
         val horaInicial: Editable = binding.horaInicial.text
 
-        val especial: Editable = binding.especialidad.text
+        val especial: Any? = binding.especialidad.getSelectedItem()
 
 
         val duration: Editable = binding.duracion.text
@@ -105,10 +109,9 @@ class GeneradorTurnoFragment : Fragment() {
 
 
 
-        if (especial.isNullOrEmpty()) {
+        if (especial == null || especial.toString() == "") {
             binding.especialidad.error = "La especialidad no puede estar vacia"
             success = false
-            //TODO: Poner especialidades en un ENUM!
         }
 
         if (!regex.matches(horaInicial.toString())) {
@@ -145,9 +148,8 @@ class GeneradorTurnoFragment : Fragment() {
 
         var listDao = mutableListOf<TurnoDao>()
 
-        // Assumes that here we are with valid data
         val date: Editable = binding.fechaAGenerar.text
-        val especial: Editable = binding.especialidad.text
+        val especial: String = binding.especialidad.getSelectedItem().toString()
 
         val duration: Editable = binding.duracion.text
         val horaFinal: Editable = binding.horaFinal.text
@@ -186,7 +188,7 @@ class GeneradorTurnoFragment : Fragment() {
 
             val turno = TurnoDao()
 
-            turno.specialization = especial.toString()
+            turno.specialization = especial
             turno.dateTime = dateTime.toString()
             turno.doctorId = currentUser.id
 

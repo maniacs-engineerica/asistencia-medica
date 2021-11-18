@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp">
 
-            <EditText
+            <com.tp3.asistenciamedica.ui.views.PickerEditText
                 android:id="@+id/especialidad"
                 style="@style/EditText"
                 android:layout_width="match_parent"

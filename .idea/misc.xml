@@ -5,6 +5,9 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.25833333333333336" />
         <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_dropdown_item_1line.xml" value="0.17708333333333334" />
+        <entry key="..\:/Repositories/asistencia-medica/app/src/main/res/layout/fragment_estudios_doctor.xml" value="0.32065217391304346" />
+        <entry key="..\:/Repositories/asistencia-medica/app/src/main/res/layout/fragment_generador_turnos.xml" value="0.32065217391304346" />
+        <entry key="..\:/Repositories/asistencia-medica/app/src/main/res/layout/receta_fragment.xml" value="0.32065217391304346" />
         <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/fragment_anadirinfo.xml" value="0.25" />
         <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/fragment_doctor_inicio.xml" value="0.25" />
         <entry key="..\:/Users/Francisco Torres/Desktop/Proyectos_Android_Studio/asistencia-medica/app/src/main/res/layout/fragment_infoturnopaciente.xml" value="0.33" />
@@ -76,9 +79,6 @@
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/layout/vh_turno_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/menu/bottom_nav_doctor_menu.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/solan/Desktop/Proyecto TP3/asistencia-medica/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/solan/Desktop/tp3 fix/asistencia-medica/app/src/main/res/layout/fragment_anadirinfo.xml" value="0.1" />
-        <entry key="..\:/Users/solan/Desktop/tp3 fix/asistencia-medica/app/src/main/res/layout/fragment_estudios_doctor.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/solan/Desktop/tp3 fix/asistencia-medica/app/src/main/res/layout/paciente_estudios_fragment.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.29259259259259257" />
@@ -88,7 +88,6 @@
         <entry key="app/src/main/res/layout/activity_registracion.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.25" />
         <entry key="app/src/main/res/layout/estudio_fragment.xml" value="0.22327898550724637" />
-        <entry key="app/src/main/res/layout/fragment_anadirinfo.xml" value="0.14210526315789473" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/layout/fragment_estudios.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/layout/fragment_generador_turnos.xml" value="0.335" />
@@ -96,7 +95,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/layout/fragment_inicio.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_recetas.xml" value="0.2341485507246377" />
-        <entry key="app/src/main/res/layout/fragment_turnos.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_turnos.xml" value="0.11" />
         <entry key="app/src/main/res/layout/historial_fragment.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/nuevo_turno_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/receta_fragment.xml" value="0.22327898550724637" />
@@ -117,7 +116,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

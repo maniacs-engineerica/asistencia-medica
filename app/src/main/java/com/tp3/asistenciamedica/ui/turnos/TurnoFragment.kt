@@ -69,7 +69,7 @@ class TurnoFragment : Fragment() {
                 if (!isAdded) return@withContext
                 txtFecha.text = turno?.dateTime?.subSequence(0,10).toString() + " "+ turno?.dateTime?.subSequence(11,16).toString()
                 txtProfesional.text= turno?.doctor.toString()
-                txtEspecialidad.text = turno?.specialization
+                txtEspecialidad.text = turno?.specialization?.code
             }
             btnCancelarTurno.setOnClickListener {
 

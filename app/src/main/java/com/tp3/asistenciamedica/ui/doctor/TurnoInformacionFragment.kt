@@ -77,7 +77,7 @@ class TurnoInformacionFragment : Fragment() {
             fecha = turno.dateTime
             doctorId = turno?.doctor?.id
             pacienteId = turno.paciente!!.id
-            specialization = turno.specialization
+            specialization = turno.specialization.code
         }
     }
 

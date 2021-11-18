@@ -23,7 +23,7 @@ class TurnoDao {
         this.doctorId = turno.doctor?.id ?: ""
         this.pacienteId = turno.paciente?.id ?: ""
         this.detail = turno.detail
-        this.specialization = turno.specialization
+        this.specialization = turno.specialization.code
 
     }
 
