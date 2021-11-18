@@ -3,28 +3,20 @@ package com.tp3.asistenciamedica.ui.doctor
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.FragmentDoctorInicioBinding
-import com.tp3.asistenciamedica.databinding.FragmentInicioBinding
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.LoginActivity
-import com.tp3.asistenciamedica.ui.inicio.InicioFragmentDirections
 import kotlinx.coroutines.*
-import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
-import java.util.*
 
 class InicioDoctorFragment : Fragment() {
 
@@ -33,29 +25,28 @@ class InicioDoctorFragment : Fragment() {
     private lateinit var inicioDoctorViewModel: InicioDoctorViewModel
     private var _binding: FragmentDoctorInicioBinding? = null
 
-    private val dayFormatter = SimpleDateFormat("dd", Locale.getDefault())
-    private val monthFormatter = SimpleDateFormat("MMM", Locale.getDefault())
-    private lateinit var id1: String
-    private lateinit var id0: String
-    private lateinit var id2: String
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         inicioDoctorViewModel =
             ViewModelProvider(this).get(InicioDoctorViewModel::class.java)
 
         _binding = FragmentDoctorInicioBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        setupTurnosOnCards()
+        setupLabels()
+
+
+        return binding.root
     }
+
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -94,70 +85,141 @@ class InicioDoctorFragment : Fragment() {
 
 
             withContext(Dispatchers.Main) {
-                //estudiosViewModel.setEstudios(recetas)
-                binding.txtTurnoDisponible.text = turnosDisponibles.size.toString()
-                binding.txtTurnoReservados.text = turnosReservados.size.toString()
 
-                //TODO: Send this data to the viewModel
+                inicioDoctorViewModel.setTurnosDisponibles(turnosDisponibles.size.toString())
+                inicioDoctorViewModel.setTurnosReservados(turnosReservados.size.toString())
+
 
                 if (turnosDisponibles.isNotEmpty()) {
-                    var lastTurnoDisponible = ZonedDateTime.parse(turnosDisponibles.last().dateTime)
+                    val lastTurnoDisponible = ZonedDateTime.parse(turnosDisponibles.last().dateTime)
 
-                binding.txtUltimoTurnoDisponible.text = ""+ lastTurnoDisponible.dayOfMonth + "/" + lastTurnoDisponible.monthValue
+                    inicioDoctorViewModel.setUltimoTurnoDisponible(""+ lastTurnoDisponible.dayOfMonth + "/" + lastTurnoDisponible.monthValue)
+
 
                 }
                 else {
-                    binding.txtUltimoTurnoDisponible.text = "N/A"
+                    inicioDoctorViewModel.setUltimoTurnoDisponible("No disponible")
                 }
 
                 if (turnosReservados.isNotEmpty()) {
-                    var lastTurnoReservado = ZonedDateTime.parse( turnosReservados.last().dateTime)
-                    binding.txtUltimoTurnoReservado.text = ""+ lastTurnoReservado.dayOfMonth + "/" + lastTurnoReservado.monthValue
+                    val lastTurnoReservado = ZonedDateTime.parse( turnosReservados.last().dateTime)
+                    inicioDoctorViewModel.setUltimoTurnoReservado(""+ lastTurnoReservado.dayOfMonth + "/" + lastTurnoReservado.monthValue)
+
 
                     if (turnosReservados.size > 1) {
-                        var timeTurno2 = ZonedDateTime.parse(turnosReservados.get(index=1).dateTime)
-                        binding.btnSegundoTurno.visibility = VISIBLE
-                        binding.btnSegundoTurno.text = ""+timeTurno2.hour+":"+ timeTurno2.minute + " "+ turnosReservados.get(index=1).paciente?.nombreCompleto
+                        val timeTurno2 = ZonedDateTime.parse(turnosReservados.get(index=1).dateTime)
 
-                        var timeTurno3 = ZonedDateTime.parse(turnosReservados.get(index=3).dateTime)
-                        binding.btnTercerTurno.visibility = VISIBLE
-                        binding.btnTercerTurno.text = ""+timeTurno3.hour+":"+ timeTurno3.minute + " "+ turnosReservados.get(index=3).paciente?.nombreCompleto
+                        inicioDoctorViewModel.setSegundoTurno(""+timeTurno2.hour+":"+ timeTurno2.minute + " "+ turnosReservados.get(index=1).paciente?.nombreCompleto)
+                        inicioDoctorViewModel.setSegundoTurnoId(turnosReservados.get(index=1).idTurno)
+
+                        val timeTurno3 = ZonedDateTime.parse(turnosReservados.get(index=3).dateTime)
+                        inicioDoctorViewModel.setTercerTurno(""+timeTurno3.hour+":"+ timeTurno3.minute + " "+ turnosReservados.get(index=3).paciente?.nombreCompleto)
+                        inicioDoctorViewModel.setTercerTurnoId(turnosReservados.get(index=3).idTurno)
                     }
 
-                    var timeTurno1 = ZonedDateTime.parse(turnosReservados.get(index=0).dateTime)
-                    binding.btnPrimerTurno.visibility = VISIBLE
-                    var prueba = turnosReservados.get(index=0).paciente?.nombreCompleto
-                    binding.btnPrimerTurno.text = ""+timeTurno1.hour+":"+ timeTurno1.minute + " "+ turnosReservados.get(index=0).paciente?.nombreCompleto
+                    val timeTurno1 = ZonedDateTime.parse(turnosReservados.get(index=0).dateTime)
 
-                    id1 = turnosReservados.get(index = 1).idTurno
-                    id0 = turnosReservados.get(index = 0).idTurno
-                    id2 = turnosReservados.get(index = 3).idTurno
-
-
+                    inicioDoctorViewModel.setPrimerTurno(""+timeTurno1.hour+":"+ timeTurno1.minute + " "+ turnosReservados.get(index=0).paciente?.nombreCompleto)
+                    inicioDoctorViewModel.setPrimerTurnoId(turnosReservados.get(index = 0).idTurno)
                 }
                 else {
                     binding.btnPrimerTurno.visibility = INVISIBLE
                     binding.btnSegundoTurno.visibility = INVISIBLE
                     binding.btnTercerTurno.visibility = INVISIBLE
                     binding.txtUltimoTurnoReservado.text = "N/A"
-                }
 
-                binding.btnPrimerTurno.setOnClickListener{
-                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id0))
-                }
 
-                binding.btnSegundoTurno.setOnClickListener{
-                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id1))
+                    inicioDoctorViewModel.setUltimoTurnoReservado("No disponible")
                 }
-
-                binding.btnTercerTurno.setOnClickListener{
-                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(id2))
-                }
-
             }
 
         }
 
+    }
+
+
+    private fun setupTurnosOnCards() {
+        inicioDoctorViewModel.primerTurno.observe(viewLifecycleOwner, {
+            if (it != "Cargando..." && it != "") {
+
+                binding.btnPrimerTurno.visibility = VISIBLE
+                binding.btnPrimerTurno.text = it
+
+            }
+            else {
+                binding.btnPrimerTurno.visibility = INVISIBLE
+            }
+        })
+
+        inicioDoctorViewModel.segundoTurno.observe(viewLifecycleOwner, {
+            if (it != "Cargando..." && it != "") {
+
+                binding.btnSegundoTurno.visibility = VISIBLE
+                binding.btnSegundoTurno.text = it
+
+            }
+            else {
+                binding.btnSegundoTurno.visibility = INVISIBLE
+            }
+        })
+
+        inicioDoctorViewModel.tercerTurno.observe(viewLifecycleOwner, {
+            if (it != "Cargando..." && it != "") {
+
+                binding.btnTercerTurno.visibility = VISIBLE
+                binding.btnTercerTurno.text = it
+
+            }
+            else {
+                binding.btnTercerTurno.visibility = INVISIBLE
+            }
+        })
+
+        inicioDoctorViewModel.primerTurnoId.observe(viewLifecycleOwner, { idTurno ->
+            if (idTurno != "") {
+                binding.btnPrimerTurno.setOnClickListener{
+                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(
+                        idTurno
+                    ))
+                }
+            }
+        })
+
+        inicioDoctorViewModel.segundoTurnoId.observe(viewLifecycleOwner, { idTurno ->
+            if (idTurno != "") {
+                binding.btnSegundoTurno.setOnClickListener{
+                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(idTurno))
+                }
+            }
+        })
+
+
+        inicioDoctorViewModel.tercerTurnoId.observe(viewLifecycleOwner, { idTurno ->
+            if (idTurno != "") {
+                binding.btnTercerTurno.setOnClickListener{
+                    findNavController().navigate(InicioDoctorFragmentDirections.actionNavigationDoctorInicioToNavigationDoctorTurnoPaciente(idTurno))
+                }
+            }
+        })
+    }
+
+
+    private fun setupLabels() {
+        inicioDoctorViewModel.turnosDisponibles.observe(viewLifecycleOwner, {
+            binding.txtTurnoDisponible.text = it
+        })
+
+        inicioDoctorViewModel.turnosReservados.observe(viewLifecycleOwner, {
+            binding.txtTurnoReservados.text = it
+        })
+
+        inicioDoctorViewModel.ultimoTurnoDisponible.observe(viewLifecycleOwner, {
+            binding.txtUltimoTurnoDisponible.text = it
+        })
+
+        inicioDoctorViewModel.ultimoTurnoReservado.observe(viewLifecycleOwner, {
+            binding.txtUltimoTurnoReservado.text = it
+        })
     }
 
 
