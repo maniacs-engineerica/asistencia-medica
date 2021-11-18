@@ -69,6 +69,8 @@ class TurnoDetalleFragment : Fragment() {
             }
             btnSolicitarTurno.setOnClickListener {
 
+
+
                 scope.launch {
 
                     turno?.state = TurnoStatusEnum.DISPONIBLE.nextStatus()

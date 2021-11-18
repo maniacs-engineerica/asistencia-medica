@@ -82,6 +82,8 @@ class TurnoRepository {
             .sortedBy { ZonedDateTime.parse(it.dateTime) }
     }
 
+
+
     suspend fun saveTurnos(turnos: List<Turno>) {
         turnos.forEach { saveTurno(it) }
     }
