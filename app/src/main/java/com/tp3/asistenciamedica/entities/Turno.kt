@@ -12,7 +12,7 @@ class Turno() {
         this.dateTime = dao.dateTime
         this.state = dao.state
         this.detail = dao.detail
-        this.specialization = dao.specialization
+        this.specialization = TurnoEspecialidadEnum.findByCode(dao.specialization)
     }
 
 
@@ -22,7 +22,7 @@ class Turno() {
     lateinit var doctor: Usuario
     var paciente: Usuario? = null
     var detail: String = ""
-    var specialization: String = ""
+    lateinit var specialization: TurnoEspecialidadEnum
 
 
     fun withId(id: String): Turno {
@@ -55,7 +55,7 @@ class Turno() {
         return this
     }
 
-    fun withSpecialization(specialization: String): Turno {
+    fun withSpecialization(specialization: TurnoEspecialidadEnum): Turno {
         this.specialization = specialization
         return this
     }

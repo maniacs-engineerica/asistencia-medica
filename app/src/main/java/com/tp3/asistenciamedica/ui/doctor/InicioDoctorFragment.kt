@@ -112,7 +112,7 @@ class InicioDoctorFragment : Fragment() {
 
                 if (turnosReservados.isNotEmpty()) {
                     var lastTurnoReservado = ZonedDateTime.parse( turnosReservados.last().dateTime)
-                    binding.txtUltimoTurnoReservado.text = ""+ lastTurnoReservado.dayOfMonth + "/" + lastTurnoReservado.month
+                    binding.txtUltimoTurnoReservado.text = ""+ lastTurnoReservado.dayOfMonth + "/" + lastTurnoReservado.monthValue
 
                     if (turnosReservados.size > 1) {
                         var timeTurno2 = ZonedDateTime.parse(turnosReservados.get(index=1).dateTime)
