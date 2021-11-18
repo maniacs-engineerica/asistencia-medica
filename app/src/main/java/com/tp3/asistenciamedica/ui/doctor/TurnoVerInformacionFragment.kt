@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
@@ -53,8 +54,18 @@ class TurnoVerInformacionFragment : Fragment() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home ->
+                findNavController().navigate(TurnoVerInformacionFragmentDirections.actionNavigationDoctorVerInfoPacienteToNavigationDoctorTurnoPaciente(id))
+        }
+        return true
+    }
+
     @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+
         turnoVerInformacionViewModel.turno.observe(viewLifecycleOwner, { result ->
             binding.txtNomPacienteInfo.setText(result.paciente!!.nombreCompleto)
             binding.txtDNIPac.setText(result.paciente!!.dni)

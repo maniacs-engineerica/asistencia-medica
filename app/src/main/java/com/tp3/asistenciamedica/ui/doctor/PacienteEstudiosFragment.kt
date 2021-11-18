@@ -35,6 +35,7 @@ class PacienteEstudiosFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         setupRecycler()
     }
 
@@ -58,6 +59,14 @@ class PacienteEstudiosFragment : Fragment() {
                 binding.estudiosPaciente.hideShimmerAdapter()
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home ->
+                findNavController().navigate(PacienteEstudiosFragmentDirections.actionPacienteEstudiosFragmentToNavigationDoctorVerInfoPaciente(idTurno))
+        }
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

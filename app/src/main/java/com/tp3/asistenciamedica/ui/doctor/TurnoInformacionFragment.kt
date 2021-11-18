@@ -3,11 +3,8 @@ package com.tp3.asistenciamedica.ui.doctor
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.view.KeyEvent
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -58,6 +55,7 @@ class TurnoInformacionFragment : Fragment() {
 
     @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         binding.btnFinalizarInfo.setOnClickListener { agregarInformacion() }
     }
 
@@ -79,6 +77,14 @@ class TurnoInformacionFragment : Fragment() {
             pacienteId = turno.paciente!!.id
             specialization = turno.specialization.code
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home ->
+                findNavController().navigate(TurnoInformacionFragmentDirections.actionNavigationDoctorAgregarInfoToNavigationDoctorTurnoPaciente(id))
+        }
+        return true
     }
 
     private fun agregarInformacion() {

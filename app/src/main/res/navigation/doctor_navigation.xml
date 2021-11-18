@@ -68,6 +68,9 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_navigation_doctor_agregar_info_to_navigation_doctor_turno_paciente"
+            app:destination="@id/navigation_doctor_turno_paciente" />
     </fragment>
     <fragment
         android:id="@+id/navigation_doctor_ver_info_paciente"
@@ -82,6 +85,9 @@
         <action
             android:id="@+id/action_navigation_doctor_ver_info_paciente_to_pacienteEstudiosFragment"
             app:destination="@id/pacienteEstudiosFragment" />
+        <action
+            android:id="@+id/action_navigation_doctor_ver_info_paciente_to_navigation_doctor_turno_paciente"
+            app:destination="@id/navigation_doctor_turno_paciente" />
     </fragment>
     <fragment
         android:id="@+id/pacienteEstudiosFragment"
@@ -93,5 +99,8 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_pacienteEstudiosFragment_to_navigation_doctor_ver_info_paciente"
+            app:destination="@id/navigation_doctor_ver_info_paciente" />
     </fragment>
 </navigation>

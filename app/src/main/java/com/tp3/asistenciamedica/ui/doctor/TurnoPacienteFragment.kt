@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.databinding.FragmentTurnoidBinding
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import kotlinx.coroutines.*
@@ -39,6 +40,8 @@ class TurnoPacienteFragment : Fragment() {
 
     @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+
         turnoPacienteviewModel.turno.observe(viewLifecycleOwner, { result ->
             binding.txtNomPaciente.setText(result.paciente!!.nombreCompleto)
             binding.txtNomDoctor.setText(result.doctor.nombreCompleto)
@@ -67,6 +70,14 @@ class TurnoPacienteFragment : Fragment() {
                 turnoPacienteviewModel.setTurno(turno)
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home ->
+                findNavController().navigate(R.id.navigation_doctor_inicio)
+        }
+        return true
     }
 
     private fun agregarInformacion() {

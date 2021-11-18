@@ -9,6 +9,7 @@ class InicioDoctorViewModel : ViewModel() {
 
 
 
+
     private var _turnosDisponibles = MutableLiveData<String>().apply {
         value = "Cargando..."
     }
