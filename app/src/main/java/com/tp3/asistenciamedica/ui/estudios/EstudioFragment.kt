@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
@@ -30,6 +31,8 @@ import com.tp3.asistenciamedica.repositories.StorageRepository
 import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.BaseActivity
+import com.tp3.asistenciamedica.ui.recetas.RecetaFragmentArgs
+import com.tp3.asistenciamedica.ui.recetas.RecetaFragmentDirections
 import com.tp3.asistenciamedica.utils.DateUtils
 import com.tp3.asistenciamedica.utils.ImagePicker
 import kotlinx.coroutines.*
@@ -45,6 +48,8 @@ class EstudioFragment : Fragment() {
     private lateinit var viewModel: EstudioViewModel
 
     private lateinit var adapter: ResourcesAdapter
+
+    private lateinit var origin: String
 
     private val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
@@ -63,7 +68,11 @@ class EstudioFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         setupRecycler()
+
+        origin = EstudioFragmentArgs.fromBundle(requireArguments()).origin.toString()
+
 
         val usuario = Session.current()
 
@@ -99,6 +108,21 @@ class EstudioFragment : Fragment() {
             adapter.swapResources(result)
         })
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                if (origin == "home") {
+                    findNavController().navigate(EstudioFragmentDirections.actionEstudioFragmentToNavigationInicio())
+                }
+                else {
+                    findNavController().navigate(EstudioFragmentDirections.actionEstudioFragmentToNavigationEstudios())
+                }
+            }
+        }
+        return true
+    }
+
 
     override fun onStart() {
         super.onStart()

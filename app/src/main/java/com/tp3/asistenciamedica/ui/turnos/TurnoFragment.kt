@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -18,6 +19,7 @@ import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
+import com.tp3.asistenciamedica.ui.doctor.PacienteEstudiosFragmentDirections
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
@@ -35,6 +37,8 @@ class TurnoFragment : Fragment() {
     lateinit var btnCancelarTurno: Button
     private lateinit var v: View
 
+    private lateinit var origin:String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +51,29 @@ class TurnoFragment : Fragment() {
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+
+        origin = TurnoFragmentArgs.fromBundle(requireArguments()).origin
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                if (origin == "home") {
+                    findNavController().navigate(TurnoFragmentDirections.actionTurnoFragmentToNavigationInicio())
+                }
+                else {
+                    findNavController().navigate(TurnoFragmentDirections.actionTurnoFragmentToNavigationTurnos())
+                }
+            }
+        }
+        return true
+    }
+
+
+        override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TurnoViewModel::class.java)
         // TODO: Use the ViewModel

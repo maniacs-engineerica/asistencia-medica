@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ import com.tp3.asistenciamedica.repositories.StorageRepository
 import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.BaseActivity
+import com.tp3.asistenciamedica.ui.turnos.TurnoFragmentDirections
 import com.tp3.asistenciamedica.utils.DateUtils
 import com.tp3.asistenciamedica.utils.ImagePicker
 import kotlinx.coroutines.*
@@ -38,6 +40,8 @@ class RecetaFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: RecetaViewModel
+
+    private lateinit var origin: String
 
     private lateinit var adapter: ResourcesAdapter
 
@@ -58,11 +62,14 @@ class RecetaFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         setupRecycler()
 
         val usuario = Session.current()
 
         val exists = recetaId != null
+
+        origin = RecetaFragmentArgs.fromBundle(requireArguments()).origin.toString()
 
         if (usuario.tipo == UsuarioTypeEnum.PACIENTE || exists) {
             binding.paciente.isEnabled = false
@@ -89,6 +96,21 @@ class RecetaFragment : Fragment() {
         viewModel.resources.observe(viewLifecycleOwner, { result ->
             adapter.swapResources(result)
         })
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                if (origin == "home") {
+                    findNavController().navigate(RecetaFragmentDirections.actionRecetaFragmentToNavigationInicio())
+                }
+                else if (origin == "recetas") {
+                    findNavController().navigate(RecetaFragmentDirections.actionRecetaFragmentToNavigationRecetas())
+                }
+            }
+        }
+        return true
     }
 
     override fun onStart() {

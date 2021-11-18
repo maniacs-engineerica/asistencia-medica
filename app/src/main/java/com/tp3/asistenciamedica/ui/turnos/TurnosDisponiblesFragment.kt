@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -24,6 +25,7 @@ import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
+import com.tp3.asistenciamedica.ui.estudios.EstudioFragmentDirections
 import com.tp3.asistenciamedica.ui.estudios.EstudiosFragmentDirections
 import kotlinx.coroutines.*
 
@@ -56,6 +58,7 @@ class TurnosDisponiblesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         setupRecycler()
     }
 
@@ -91,6 +94,14 @@ class TurnosDisponiblesFragment : Fragment() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                findNavController().navigate(TurnosDisponiblesFragmentDirections.actionTurnosDisponiblesFragmentToNuevoTurnoFragment())
+            }
+        }
+        return true
+    }
 
     private fun setupRecycler() {
         adapter = TurnosAdapter()

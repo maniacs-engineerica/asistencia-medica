@@ -66,6 +66,15 @@
             android:name="estudioId"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="origin"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_estudioFragment_to_navigation_estudios"
+            app:destination="@id/navigation_estudios" />
+        <action
+            android:id="@+id/action_estudioFragment_to_navigation_inicio"
+            app:destination="@id/navigation_inicio" />
     </fragment>
     <fragment
         android:id="@+id/recetaFragment"
@@ -76,6 +85,15 @@
             android:name="recetaId"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="origin"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_recetaFragment_to_navigation_recetas"
+            app:destination="@id/navigation_recetas" />
+        <action
+            android:id="@+id/action_recetaFragment_to_navigation_inicio"
+            app:destination="@id/navigation_inicio" />
     </fragment>
     <fragment
         android:id="@+id/turnoFragment"
@@ -85,9 +103,15 @@
         <argument
             android:name="turnoId"
             app:argType="string" />
+        <argument
+            android:name="origin"
+            app:argType="string" />
         <action
             android:id="@+id/action_turnoFragment_to_navigation_turnos"
             app:destination="@id/navigation_turnos" />
+        <action
+            android:id="@+id/action_turnoFragment_to_navigation_inicio"
+            app:destination="@id/navigation_inicio" />
     </fragment>
     <fragment
         android:id="@+id/nuevoTurnoFragment"
@@ -97,6 +121,9 @@
         <action
             android:id="@+id/action_nuevoTurnoFragment_to_turnosDisponiblesFragment"
             app:destination="@id/turnosDisponiblesFragment" />
+        <action
+            android:id="@+id/action_nuevoTurnoFragment_to_navigation_turnos"
+            app:destination="@id/navigation_turnos" />
     </fragment>
     <fragment
         android:id="@+id/turnosDisponiblesFragment"
@@ -112,6 +139,9 @@
         <action
             android:id="@+id/action_turnosDisponiblesFragment_to_navigation_turnos"
             app:destination="@id/navigation_turnos" />
+        <action
+            android:id="@+id/action_turnosDisponiblesFragment_to_nuevoTurnoFragment"
+            app:destination="@id/nuevoTurnoFragment" />
     </fragment>
 
     <fragment
@@ -125,5 +155,8 @@
         <action
             android:id="@+id/action_turnoDetalleFragment_to_navigation_turnos"
             app:destination="@id/navigation_turnos" />
+        <action
+            android:id="@+id/action_turnoDetalleFragment_to_turnosDisponiblesFragment"
+            app:destination="@id/turnosDisponiblesFragment" />
     </fragment>
 </navigation>
