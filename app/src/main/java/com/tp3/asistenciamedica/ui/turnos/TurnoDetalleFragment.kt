@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -16,6 +17,7 @@ import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
+import com.tp3.asistenciamedica.ui.estudios.EstudioFragmentDirections
 import kotlinx.coroutines.*
 
 class TurnoDetalleFragment : Fragment() {
@@ -41,6 +43,22 @@ class TurnoDetalleFragment : Fragment() {
         txtProfesional= v.findViewById(R.id.txt_profesional)
         btnSolicitarTurno = v.findViewById(R.id.btn_cancelar)
         return v
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                findNavController().navigate(TurnoDetalleFragmentDirections.actionTurnoDetalleFragmentToTurnosDisponiblesFragment(
+                    txtEspecialidad.text.toString()
+                ))
+            }
+        }
+        return true
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

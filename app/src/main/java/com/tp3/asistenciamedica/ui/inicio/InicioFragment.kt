@@ -83,7 +83,7 @@ class InicioFragment : Fragment() {
             holder.descriptionView.text = "${turno.doctor.nombreCompleto}\n${turno.specialization}"
         }
         turnosAdapter.onItemClick = {
-            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToTurno(it.idTurno))
+            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToTurno(it.idTurno, "home"))
         }
         binding.turnos.adapter = turnosAdapter
         turnosAdapter.load()
@@ -106,7 +106,7 @@ class InicioFragment : Fragment() {
             holder.descriptionView.text = "${estudio.nombre}\n${estudio.doctor.nombreCompleto}"
         }
         estudiosAdapter.onItemClick = {
-            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToEstudio(it.idEstudio))
+            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToEstudio(it.idEstudio, "home"))
         }
         binding.estudios.adapter = estudiosAdapter
         estudiosAdapter.load()
@@ -129,7 +129,7 @@ class InicioFragment : Fragment() {
             holder.descriptionView.text = "${turno.doctor.nombreCompleto}\n${turno.specialization}"
         }
         historiaAdapter.onItemClick = {
-            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToTurno(it.idTurno))
+            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToTurno(it.idTurno, "home"))
         }
         binding.historias.adapter = historiaAdapter
         historiaAdapter.load()
@@ -140,3 +140,4 @@ class InicioFragment : Fragment() {
         _binding = null
     }
 }
+

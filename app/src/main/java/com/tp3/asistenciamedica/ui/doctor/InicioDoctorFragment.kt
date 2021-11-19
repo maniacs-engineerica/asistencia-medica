@@ -49,6 +49,7 @@ class InicioDoctorFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         //setupInformation()
     }
@@ -68,6 +69,8 @@ class InicioDoctorFragment : Fragment() {
         super.onStart()
         setupInformation()
     }
+
+
 
 
     @SuppressLint("NewApi")

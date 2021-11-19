@@ -69,7 +69,7 @@ class RecetasFragment : Fragment() {
         val add = menu.findItem(R.id.add)
         add.isVisible = Session.current().tipo == UsuarioTypeEnum.MEDICO
         add.setOnMenuItemClickListener {
-            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta(null))
+            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta(null, "recetas"))
             true
         }
     }
@@ -77,7 +77,7 @@ class RecetasFragment : Fragment() {
     private fun setupRecycler() {
         adapter = RecetasAdapter()
         adapter.onRecetaClick = {
-            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta(it.idReceta))
+            findNavController().navigate(RecetasFragmentDirections.actionRecetasToReceta(it.idReceta, "recetas"))
         }
         binding.recetas.adapter = adapter
 
