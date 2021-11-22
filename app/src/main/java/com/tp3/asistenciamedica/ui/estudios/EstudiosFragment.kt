@@ -69,7 +69,7 @@ class EstudiosFragment : Fragment() {
         val add = menu.findItem(R.id.add)
         add.isVisible = Session.current().tipo == UsuarioTypeEnum.MEDICO
         add.setOnMenuItemClickListener {
-            findNavController().navigate(EstudiosFragmentDirections.actionEstudiosToEstudio(null, "estudios"))
+            findNavController().navigate(EstudiosFragmentDirections.actionEstudiosToEstudio(null))
             true
         }
     }
@@ -77,7 +77,7 @@ class EstudiosFragment : Fragment() {
     private fun setupRecycler() {
         adapter = EstudiosAdapter()
         adapter.onEstudioClick = {
-            findNavController().navigate(EstudiosFragmentDirections.actionEstudiosToEstudio(it.idEstudio, "estudios"))
+            findNavController().navigate(EstudiosFragmentDirections.actionEstudiosToEstudio(it.idEstudio))
         }
         binding.estudios.adapter = adapter
 

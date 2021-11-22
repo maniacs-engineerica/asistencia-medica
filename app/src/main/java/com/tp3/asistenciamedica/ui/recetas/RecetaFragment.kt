@@ -41,7 +41,6 @@ class RecetaFragment : Fragment() {
 
     private lateinit var viewModel: RecetaViewModel
 
-    private lateinit var origin: String
 
     private lateinit var adapter: ResourcesAdapter
 
@@ -69,7 +68,6 @@ class RecetaFragment : Fragment() {
 
         val exists = recetaId != null
 
-        origin = RecetaFragmentArgs.fromBundle(requireArguments()).origin.toString()
 
         if (usuario.tipo == UsuarioTypeEnum.PACIENTE || exists) {
             binding.paciente.isEnabled = false
@@ -102,12 +100,7 @@ class RecetaFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                if (origin == "home") {
-                    findNavController().navigate(RecetaFragmentDirections.actionRecetaFragmentToNavigationInicio())
-                }
-                else if (origin == "recetas") {
-                    findNavController().navigate(RecetaFragmentDirections.actionRecetaFragmentToNavigationRecetas())
-                }
+                findNavController().popBackStack()
             }
         }
         return true

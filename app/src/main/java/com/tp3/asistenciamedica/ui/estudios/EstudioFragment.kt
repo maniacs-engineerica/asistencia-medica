@@ -49,7 +49,6 @@ class EstudioFragment : Fragment() {
 
     private lateinit var adapter: ResourcesAdapter
 
-    private lateinit var origin: String
 
     private val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
@@ -71,7 +70,6 @@ class EstudioFragment : Fragment() {
         setHasOptionsMenu(true)
         setupRecycler()
 
-        origin = EstudioFragmentArgs.fromBundle(requireArguments()).origin.toString()
 
 
         val usuario = Session.current()
@@ -112,12 +110,7 @@ class EstudioFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                if (origin == "home") {
-                    findNavController().navigate(EstudioFragmentDirections.actionEstudioFragmentToNavigationInicio())
-                }
-                else {
-                    findNavController().navigate(EstudioFragmentDirections.actionEstudioFragmentToNavigationEstudios())
-                }
+                findNavController().popBackStack()
             }
         }
         return true
