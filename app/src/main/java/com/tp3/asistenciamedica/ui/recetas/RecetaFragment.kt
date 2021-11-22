@@ -104,8 +104,7 @@ class RecetaFragment : Fragment() {
             android.R.id.home -> {
                 if (origin == "home") {
                     findNavController().navigate(RecetaFragmentDirections.actionRecetaFragmentToNavigationInicio())
-                }
-                else if (origin == "recetas") {
+                } else if (origin == "recetas") {
                     findNavController().navigate(RecetaFragmentDirections.actionRecetaFragmentToNavigationRecetas())
                 }
             }
@@ -135,10 +134,16 @@ class RecetaFragment : Fragment() {
         adapter = ResourcesAdapter(requireContext())
         adapter.callback = object : ResourcesAdapter.Callback {
             override fun onResourceClick(resource: Resource) {
-
+                if (Session.current().tipo == UsuarioTypeEnum.PACIENTE) {
+                    download(resource)
+                }
             }
         }
         binding.resources.adapter = adapter
+    }
+
+    private fun download(resource: Resource) {
+
     }
 
     private fun adjuntar() {
