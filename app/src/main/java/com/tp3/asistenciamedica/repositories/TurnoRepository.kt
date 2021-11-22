@@ -129,11 +129,11 @@ class TurnoRepository {
     suspend fun findHistorialByPacienteId(id: String): List<Turno> {
         val documents = db.collection(Turno.FIREBASE_COLLECTION)
             .whereEqualTo("pacienteId", id)
+            .whereEqualTo("state", TurnoStatusEnum.CERRADO )
             .get()
             .await()
 
-        val turnos = documents.toTurnos().sortedBy { ZonedDateTime.parse(it.dateTime) }
-        return turnos.filter { ZonedDateTime.parse(it.dateTime).isBefore(ZonedDateTime.now()) }
+        return documents.toTurnos().sortedBy { ZonedDateTime.parse(it.dateTime) }
     }
 
 

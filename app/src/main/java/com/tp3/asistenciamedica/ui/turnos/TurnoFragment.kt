@@ -37,7 +37,6 @@ class TurnoFragment : Fragment() {
     lateinit var btnCancelarTurno: Button
     private lateinit var v: View
 
-    private lateinit var origin:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,19 +53,12 @@ class TurnoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-
-        origin = TurnoFragmentArgs.fromBundle(requireArguments()).origin
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                if (origin == "home") {
-                    findNavController().navigate(TurnoFragmentDirections.actionTurnoFragmentToNavigationInicio())
-                }
-                else {
-                    findNavController().navigate(TurnoFragmentDirections.actionTurnoFragmentToNavigationTurnos())
-                }
+                findNavController().popBackStack()
             }
         }
         return true

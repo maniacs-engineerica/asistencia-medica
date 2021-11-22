@@ -115,6 +115,7 @@
         <entry key="app/src/main/res/menu/estudios_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/menu/inicio_fragment.xml" value="0.12938596491228072" />
         <entry key="app/src/main/res/menu/receta_fragment.xml" value="0.12938596491228072" />
+        <entry key="app/src/main/res/xml/provider_paths.xml" value="0.14473684210526316" />
       </map>
     </option>
   </component>

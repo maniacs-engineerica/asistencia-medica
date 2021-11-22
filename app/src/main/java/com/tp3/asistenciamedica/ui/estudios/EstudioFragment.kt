@@ -1,6 +1,8 @@
 package com.tp3.asistenciamedica.ui.estudios
 
 import android.Manifest
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -18,6 +20,8 @@ import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.ResourcesAdapter
 import com.tp3.asistenciamedica.daos.EstudioDao
@@ -35,12 +39,15 @@ import com.tp3.asistenciamedica.ui.recetas.RecetaFragmentArgs
 import com.tp3.asistenciamedica.ui.recetas.RecetaFragmentDirections
 import com.tp3.asistenciamedica.utils.DateUtils
 import com.tp3.asistenciamedica.utils.ImagePicker
+import com.tp3.asistenciamedica.utils.MyFileProvider
 import kotlinx.coroutines.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 class EstudioFragment : Fragment() {
+
+    private val storage = Firebase.storage(StorageRepository.FOLDER)
 
     private var _binding: EstudioFragmentBinding? = null
     private val binding get() = _binding!!
@@ -49,7 +56,6 @@ class EstudioFragment : Fragment() {
 
     private lateinit var adapter: ResourcesAdapter
 
-    private lateinit var origin: String
 
     private val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
@@ -70,8 +76,6 @@ class EstudioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         setupRecycler()
-
-        origin = EstudioFragmentArgs.fromBundle(requireArguments()).origin.toString()
 
 
         val usuario = Session.current()
@@ -112,12 +116,7 @@ class EstudioFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                if (origin == "home") {
-                    findNavController().navigate(EstudioFragmentDirections.actionEstudioFragmentToNavigationInicio())
-                }
-                else {
-                    findNavController().navigate(EstudioFragmentDirections.actionEstudioFragmentToNavigationEstudios())
-                }
+                findNavController().popBackStack()
             }
         }
         return true
@@ -146,10 +145,39 @@ class EstudioFragment : Fragment() {
         adapter = ResourcesAdapter(requireContext())
         adapter.callback = object : ResourcesAdapter.Callback {
             override fun onResourceClick(resource: Resource) {
-
+                if (Session.current().tipo == UsuarioTypeEnum.PACIENTE) {
+                    download(resource)
+                }
             }
         }
         binding.resources.adapter = adapter
+    }
+
+    private fun download(resource: Resource) {
+        val reference = storage.getReference(resource.name)
+        val localFile = File.createTempFile(resource.name, "jpg")
+        reference.getFile(localFile).addOnSuccessListener {
+            showImage(localFile)
+        }.addOnFailureListener {
+            Snackbar.make(binding.subirArchivo, R.string.download_failure, Snackbar.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    private fun showImage(file: File) {
+        val path = MyFileProvider.getUriForFile(requireContext(), file)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.setDataAndType(path, "image/*")
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Snackbar.make(
+                binding.subirArchivo,
+                R.string.application_not_found,
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun subir() {

@@ -73,7 +73,8 @@ class InicioFragment : Fragment() {
         turnosAdapter.onLoadItems = onLoadItems@{
             return@onLoadItems TurnoRepository().findTurnosByPacienteId(user.id)
         }
-        turnosAdapter.onLoaded = {
+        turnosAdapter.onLoaded = onLoaded@ {
+            if (!isAdded) return@onLoaded
             binding.loadingTurnos.visibility = GONE
         }
         turnosAdapter.onBindViewHolder = { turno, holder ->
@@ -83,7 +84,7 @@ class InicioFragment : Fragment() {
             holder.descriptionView.text = "${turno.doctor.nombreCompleto}\n${turno.specialization}"
         }
         turnosAdapter.onItemClick = {
-            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToTurno(it.idTurno, "home"))
+            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToTurno(it.idTurno))
         }
         binding.turnos.adapter = turnosAdapter
         turnosAdapter.load()
@@ -96,7 +97,8 @@ class InicioFragment : Fragment() {
         estudiosAdapter.onLoadItems = onLoadItems@{
             return@onLoadItems EstudioRepository().findEstudiosHistoriaByPacientId(user.id)
         }
-        estudiosAdapter.onLoaded = {
+        estudiosAdapter.onLoaded = onLoaded@ {
+            if (!isAdded) return@onLoaded
             binding.loadingEstudios.visibility = GONE
         }
         estudiosAdapter.onBindViewHolder = { estudio, holder ->
@@ -106,7 +108,7 @@ class InicioFragment : Fragment() {
             holder.descriptionView.text = "${estudio.nombre}\n${estudio.doctor.nombreCompleto}"
         }
         estudiosAdapter.onItemClick = {
-            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToEstudio(it.idEstudio, "home"))
+            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToEstudio(it.idEstudio))
         }
         binding.estudios.adapter = estudiosAdapter
         estudiosAdapter.load()
@@ -119,7 +121,8 @@ class InicioFragment : Fragment() {
         historiaAdapter.onLoadItems = onLoadItems@{
             return@onLoadItems TurnoRepository().findHistorialByPacienteId(user.id)
         }
-        historiaAdapter.onLoaded = {
+        historiaAdapter.onLoaded = onLoaded@ {
+            if (!isAdded) return@onLoaded
             binding.loadingHistorias.visibility = GONE
         }
         historiaAdapter.onBindViewHolder = { turno, holder ->
@@ -129,7 +132,7 @@ class InicioFragment : Fragment() {
             holder.descriptionView.text = "${turno.doctor.nombreCompleto}\n${turno.specialization}"
         }
         historiaAdapter.onItemClick = {
-            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToTurno(it.idTurno, "home"))
+            findNavController().navigate(InicioFragmentDirections.actionNavigationInicioToTurno(it.idTurno))
         }
         binding.historias.adapter = historiaAdapter
         historiaAdapter.load()

@@ -13,12 +13,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.tp3.asistenciamedica.R
 import com.tp3.asistenciamedica.adapters.ResourcesAdapter
 import com.tp3.asistenciamedica.daos.RecetaDao
-import com.tp3.asistenciamedica.databinding.FragmentRecetasBinding
 import com.tp3.asistenciamedica.databinding.RecetaFragmentBinding
-import com.tp3.asistenciamedica.entities.Receta
 import com.tp3.asistenciamedica.entities.Resource
 import com.tp3.asistenciamedica.entities.Usuario
 import com.tp3.asistenciamedica.entities.UsuarioTypeEnum
@@ -27,21 +27,27 @@ import com.tp3.asistenciamedica.repositories.StorageRepository
 import com.tp3.asistenciamedica.repositories.UsuarioRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.BaseActivity
-import com.tp3.asistenciamedica.ui.turnos.TurnoFragmentDirections
 import com.tp3.asistenciamedica.utils.DateUtils
 import com.tp3.asistenciamedica.utils.ImagePicker
 import kotlinx.coroutines.*
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.ActivityNotFoundException
+
+import android.content.Intent
+import com.tp3.asistenciamedica.utils.MyFileProvider
+
 
 class RecetaFragment : Fragment() {
+
+    private val storage = Firebase.storage(StorageRepository.FOLDER)
 
     private var _binding: RecetaFragmentBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel: RecetaViewModel
 
-    private lateinit var origin: String
 
     private lateinit var adapter: ResourcesAdapter
 
@@ -69,7 +75,6 @@ class RecetaFragment : Fragment() {
 
         val exists = recetaId != null
 
-        origin = RecetaFragmentArgs.fromBundle(requireArguments()).origin.toString()
 
         if (usuario.tipo == UsuarioTypeEnum.PACIENTE || exists) {
             binding.paciente.isEnabled = false
@@ -102,11 +107,7 @@ class RecetaFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                if (origin == "home") {
-                    findNavController().navigate(RecetaFragmentDirections.actionRecetaFragmentToNavigationInicio())
-                } else if (origin == "recetas") {
-                    findNavController().navigate(RecetaFragmentDirections.actionRecetaFragmentToNavigationRecetas())
-                }
+                findNavController().popBackStack()
             }
         }
         return true
@@ -143,7 +144,25 @@ class RecetaFragment : Fragment() {
     }
 
     private fun download(resource: Resource) {
+        val reference = storage.getReference(resource.name)
+        val localFile = File.createTempFile(resource.name, "jpg")
+        reference.getFile(localFile).addOnSuccessListener {
+            showImage(localFile)
+        }.addOnFailureListener {
+            Snackbar.make(binding.subirArchivo, R.string.download_failure, Snackbar.LENGTH_SHORT).show()
+        }
+    }
 
+    private fun showImage(file: File){
+        val path = MyFileProvider.getUriForFile(requireContext(), file)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.setDataAndType(path, "image/*")
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Snackbar.make(binding.subirArchivo, R.string.application_not_found, Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun adjuntar() {

@@ -98,7 +98,7 @@ open class TurnosFragment : Fragment() {
     }
 
     open fun onTurnoClick(turno: Turno) {
-        findNavController().navigate(TurnosFragmentDirections.actionTurnosToTurno(turno.idTurno, "turnos"))
+        findNavController().navigate(TurnosFragmentDirections.actionTurnosToTurno(turno.idTurno))
     }
 
     override fun onDestroyView() {

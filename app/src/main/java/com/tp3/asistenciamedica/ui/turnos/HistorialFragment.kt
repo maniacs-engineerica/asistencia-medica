@@ -21,7 +21,7 @@ class HistorialFragment : TurnosFragment() {
     }
 
     override fun onTurnoClick(turno: Turno) {
-        findNavController().navigate(HistorialFragmentDirections.actionHistorialToTurno(turno.idTurno, "historial"))
+        findNavController().navigate(HistorialFragmentDirections.actionHistorialToTurno(turno.idTurno))
     }
 
 }

@@ -51,6 +51,10 @@ class ResourcesAdapter(private val context: Context) :
         val resource: Resource = resources[position]
         holder.textView.text = resource.name
 
+        callback?.let { c ->
+            holder.itemView.setOnClickListener { c.onResourceClick(resource) }
+        }
+
         if (resource.isPending) {
             holder.imageView.visibility = INVISIBLE
             holder.loadingView.visibility = VISIBLE
