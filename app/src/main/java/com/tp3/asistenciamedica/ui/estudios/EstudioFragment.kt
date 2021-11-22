@@ -40,6 +40,7 @@ import com.tp3.asistenciamedica.ui.recetas.RecetaFragmentDirections
 import com.tp3.asistenciamedica.utils.DateUtils
 import com.tp3.asistenciamedica.utils.ImagePicker
 import com.tp3.asistenciamedica.utils.MyFileProvider
+import com.tp3.asistenciamedica.utils.ProgressUtils
 import kotlinx.coroutines.*
 import java.io.File
 import java.text.SimpleDateFormat
@@ -155,28 +156,26 @@ class EstudioFragment : Fragment() {
 
     private fun download(resource: Resource) {
         val reference = storage.getReference(resource.name)
-        val localFile = File.createTempFile(resource.name, "jpg")
+        val localFile = File.createTempFile(resource.name, ".jpg")
+        ProgressUtils.showLoading(requireContext())
         reference.getFile(localFile).addOnSuccessListener {
+            ProgressUtils.hideLoading()
             showImage(localFile)
         }.addOnFailureListener {
-            Snackbar.make(binding.subirArchivo, R.string.download_failure, Snackbar.LENGTH_SHORT)
-                .show()
+            Snackbar.make(binding.subirArchivo, R.string.download_failure, Snackbar.LENGTH_SHORT).show()
         }
     }
 
-    private fun showImage(file: File) {
-        val path = MyFileProvider.getUriForFile(requireContext(), file)
+    private fun showImage(file: File){
+        val uri = MyFileProvider.getUriForFile(requireContext(), file)
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.setDataAndType(path, "image/*")
+        intent.flags =
+            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        intent.setDataAndType(uri, "image/*")
         try {
             startActivity(intent)
         } catch (e: ActivityNotFoundException) {
-            Snackbar.make(
-                binding.subirArchivo,
-                R.string.application_not_found,
-                Snackbar.LENGTH_SHORT
-            ).show()
+            Snackbar.make(binding.subirArchivo, R.string.application_not_found, Snackbar.LENGTH_SHORT).show()
         }
     }
 

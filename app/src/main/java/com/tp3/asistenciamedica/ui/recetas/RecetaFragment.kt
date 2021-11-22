@@ -37,6 +37,7 @@ import android.content.ActivityNotFoundException
 
 import android.content.Intent
 import com.tp3.asistenciamedica.utils.MyFileProvider
+import com.tp3.asistenciamedica.utils.ProgressUtils
 
 
 class RecetaFragment : Fragment() {
@@ -145,8 +146,10 @@ class RecetaFragment : Fragment() {
 
     private fun download(resource: Resource) {
         val reference = storage.getReference(resource.name)
-        val localFile = File.createTempFile(resource.name, "jpg")
+        val localFile = File.createTempFile(resource.name, ".jpg")
+        ProgressUtils.showLoading(requireContext())
         reference.getFile(localFile).addOnSuccessListener {
+            ProgressUtils.hideLoading()
             showImage(localFile)
         }.addOnFailureListener {
             Snackbar.make(binding.subirArchivo, R.string.download_failure, Snackbar.LENGTH_SHORT).show()
@@ -154,10 +157,11 @@ class RecetaFragment : Fragment() {
     }
 
     private fun showImage(file: File){
-        val path = MyFileProvider.getUriForFile(requireContext(), file)
+        val uri = MyFileProvider.getUriForFile(requireContext(), file)
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.setDataAndType(path, "image/*")
+        intent.flags =
+            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        intent.setDataAndType(uri, "image/*")
         try {
             startActivity(intent)
         } catch (e: ActivityNotFoundException) {
