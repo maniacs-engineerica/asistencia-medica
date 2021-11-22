@@ -70,9 +70,6 @@ class InicioDoctorFragment : Fragment() {
         setupInformation()
     }
 
-
-
-
     @SuppressLint("NewApi")
     fun setupInformation() {
 
@@ -108,29 +105,28 @@ class InicioDoctorFragment : Fragment() {
                     val lastTurnoReservado = ZonedDateTime.parse( turnosReservados.last().dateTime)
                     inicioDoctorViewModel.setUltimoTurnoReservado(""+ lastTurnoReservado.dayOfMonth + "/" + lastTurnoReservado.monthValue)
 
+                    val timeTurno1 = ZonedDateTime.parse(turnosReservados.get(index=0).dateTime)
+
+                    inicioDoctorViewModel.setPrimerTurno(""+timeTurno1.hour+":"+ timeTurno1.minute + " "+ turnosReservados.get(index=0).paciente?.nombreCompleto)
+                    inicioDoctorViewModel.setPrimerTurnoId(turnosReservados.get(index = 0).idTurno)
 
                     if (turnosReservados.size > 1) {
                         val timeTurno2 = ZonedDateTime.parse(turnosReservados.get(index=1).dateTime)
-
                         inicioDoctorViewModel.setSegundoTurno(""+timeTurno2.hour+":"+ timeTurno2.minute + " "+ turnosReservados.get(index=1).paciente?.nombreCompleto)
                         inicioDoctorViewModel.setSegundoTurnoId(turnosReservados.get(index=1).idTurno)
-
+                    }
+                    if (turnosReservados.size > 2) {
                         val timeTurno3 = ZonedDateTime.parse(turnosReservados.get(index=3).dateTime)
                         inicioDoctorViewModel.setTercerTurno(""+timeTurno3.hour+":"+ timeTurno3.minute + " "+ turnosReservados.get(index=3).paciente?.nombreCompleto)
                         inicioDoctorViewModel.setTercerTurnoId(turnosReservados.get(index=3).idTurno)
                     }
 
-                    val timeTurno1 = ZonedDateTime.parse(turnosReservados.get(index=0).dateTime)
-
-                    inicioDoctorViewModel.setPrimerTurno(""+timeTurno1.hour+":"+ timeTurno1.minute + " "+ turnosReservados.get(index=0).paciente?.nombreCompleto)
-                    inicioDoctorViewModel.setPrimerTurnoId(turnosReservados.get(index = 0).idTurno)
                 }
                 else {
                     binding.btnPrimerTurno.visibility = INVISIBLE
                     binding.btnSegundoTurno.visibility = INVISIBLE
                     binding.btnTercerTurno.visibility = INVISIBLE
                     binding.txtUltimoTurnoReservado.text = "N/A"
-
 
                     inicioDoctorViewModel.setUltimoTurnoReservado("No disponible")
                 }
@@ -139,7 +135,6 @@ class InicioDoctorFragment : Fragment() {
         }
 
     }
-
 
     private fun setupTurnosOnCards() {
         inicioDoctorViewModel.primerTurno.observe(viewLifecycleOwner, {
@@ -171,7 +166,6 @@ class InicioDoctorFragment : Fragment() {
 
                 binding.btnTercerTurno.visibility = VISIBLE
                 binding.btnTercerTurno.text = it
-
             }
             else {
                 binding.btnTercerTurno.visibility = INVISIBLE

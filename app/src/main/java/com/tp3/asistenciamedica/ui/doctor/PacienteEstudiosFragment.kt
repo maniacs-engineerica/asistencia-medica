@@ -35,7 +35,7 @@ class PacienteEstudiosFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
         setupRecycler()
     }
 
