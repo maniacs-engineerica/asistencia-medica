@@ -14,11 +14,15 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
+import com.tp3.asistenciamedica.entities.Turno
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.estudios.EstudioFragmentDirections
 import kotlinx.coroutines.*
+import java.text.DateFormat
+import java.time.ZonedDateTime
+import java.util.*
 
 class TurnoDetalleFragment : Fragment() {
 
@@ -32,6 +36,8 @@ class TurnoDetalleFragment : Fragment() {
     lateinit var txtProfesional: TextView
     lateinit var btnSolicitarTurno: Button
     private lateinit var v: View
+
+    private var turno: Turno? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +70,6 @@ class TurnoDetalleFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TurnoDetalleViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -75,40 +80,34 @@ class TurnoDetalleFragment : Fragment() {
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
         scope.launch {
-            val turno = TurnoRepository().findTurnoById(
+            turno = TurnoRepository().findTurnoById(
                 TurnoDetalleFragmentArgs.fromBundle(requireArguments()).turnoId
             )
 
+            val turno = turno ?: return@launch
+
             withContext(Dispatchers.Main) {
                 if (!isAdded) return@withContext
-                txtFecha.text = turno?.dateTime?.subSequence(0,10).toString() + " "+ turno?.dateTime?.subSequence(11,16).toString()
-                txtProfesional.text= turno?.doctor.toString()
-                txtEspecialidad.text = turno?.specialization?.code
+                val formatter = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
+                txtFecha.text = formatter.format(Date.from(ZonedDateTime.parse(turno.dateTime).toInstant()))
+                txtProfesional.text= turno.doctor.toString()
+                txtEspecialidad.text = turno.specialization.code
             }
-            btnSolicitarTurno.setOnClickListener {
+        }
 
+        btnSolicitarTurno.setOnClickListener {
+            val turno = turno ?: return@setOnClickListener
 
+            scope.launch {
+                turno.state = TurnoStatusEnum.DISPONIBLE.nextStatus()
+                turno.paciente = usuario
+                TurnoRepository().saveTurno(turno)
 
-                scope.launch {
-
-                    turno?.state = TurnoStatusEnum.DISPONIBLE.nextStatus()
-                    turno?.paciente = usuario
-                    if (turno != null) {
-                        TurnoRepository().saveTurno(turno)
-
-                    }
-
-                    withContext(Dispatchers.Main) {
-
-                        findNavController().navigate(TurnoDetalleFragmentDirections.actionTurnoDetalleFragmentToNavigationTurnos())
-                    }
-
-
+                withContext(Dispatchers.Main) {
+                    Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_LONG).show()
+                    findNavController().navigate(TurnoDetalleFragmentDirections.actionTurnoDetalleFragmentToNavigationTurnos())
                 }
-                Snackbar.make(v, "Turno Solicitado", Snackbar.LENGTH_LONG).show()
             }
-
-
         }
 
     }

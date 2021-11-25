@@ -97,6 +97,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/layout/fragment_inicio.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_recetas.xml" value="0.2341485507246377" />
+        <entry key="app/src/main/res/layout/fragment_turnoid.xml" value="0.1412280701754386" />
         <entry key="app/src/main/res/layout/fragment_turnos.xml" value="0.11" />
         <entry key="app/src/main/res/layout/historial_fragment.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/nuevo_turno_fragment.xml" value="0.33" />

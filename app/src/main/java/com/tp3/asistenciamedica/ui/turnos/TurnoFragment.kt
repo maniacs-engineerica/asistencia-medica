@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
@@ -15,12 +17,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.tp3.asistenciamedica.R
+import com.tp3.asistenciamedica.entities.Turno
 
 import com.tp3.asistenciamedica.entities.TurnoStatusEnum
 import com.tp3.asistenciamedica.repositories.TurnoRepository
 import com.tp3.asistenciamedica.session.Session
 import com.tp3.asistenciamedica.ui.doctor.PacienteEstudiosFragmentDirections
 import kotlinx.coroutines.*
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
 import java.util.*
@@ -30,6 +34,8 @@ class TurnoFragment : Fragment() {
     companion object {
         fun newInstance() = TurnoFragment()
     }
+
+
     private lateinit var viewModel: TurnoViewModel
     lateinit var txtFecha: TextView
     lateinit var txtEspecialidad: TextView
@@ -37,6 +43,7 @@ class TurnoFragment : Fragment() {
     lateinit var btnCancelarTurno: Button
     private lateinit var v: View
 
+    private var turno: Turno? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +72,7 @@ class TurnoFragment : Fragment() {
     }
 
 
-        override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TurnoViewModel::class.java)
         // TODO: Use the ViewModel
@@ -74,43 +81,40 @@ class TurnoFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
-        val usuario = Session.current()
+
         val parentJob = Job()
         val scope = CoroutineScope(Dispatchers.Default + parentJob)
 
         scope.launch {
-            val turno = TurnoRepository().findTurnoById(
+            turno = TurnoRepository().findTurnoById(
                 TurnoFragmentArgs.fromBundle(requireArguments()).turnoId
             )
 
+            val turno = turno ?: return@launch
+
             withContext(Dispatchers.Main) {
                 if (!isAdded) return@withContext
-                txtFecha.text = turno?.dateTime?.subSequence(0,10).toString() + " "+ turno?.dateTime?.subSequence(11,16).toString()
-                txtProfesional.text= turno?.doctor.toString()
-                txtEspecialidad.text = turno?.specialization?.code
+                val formatter = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
+                txtFecha.text = formatter.format(Date.from(ZonedDateTime.parse(turno.dateTime).toInstant()))
+                txtProfesional.text= turno.doctor.toString()
+                txtEspecialidad.text = turno.specialization.code
+                btnCancelarTurno.visibility = if (turno.state != TurnoStatusEnum.CERRADO) VISIBLE else GONE
             }
-            btnCancelarTurno.setOnClickListener {
+        }
 
-                scope.launch {
+        btnCancelarTurno.setOnClickListener {
+            val turno = turno ?: return@setOnClickListener
 
-                    turno?.state = TurnoStatusEnum.DISPONIBLE
-                    turno?.paciente?.id = ""
-                    if (turno != null) {
-                        TurnoRepository().saveTurno(turno)
+            scope.launch {
+                turno.state = TurnoStatusEnum.DISPONIBLE
+                turno.paciente?.id = ""
+                TurnoRepository().saveTurno(turno)
 
-                    }
-
-                    withContext(Dispatchers.Main) {
-
-                        findNavController().navigate(TurnoFragmentDirections.actionTurnoFragmentToNavigationTurnos())
-                    }
-
-
+                withContext(Dispatchers.Main) {
+                    Snackbar.make(v, "Turno Cancelado", Snackbar.LENGTH_LONG).show()
+                    findNavController().navigate(TurnoFragmentDirections.actionTurnoFragmentToNavigationTurnos())
                 }
-                Snackbar.make(v, "Turno Cancelado", Snackbar.LENGTH_LONG).show()
             }
-
-
         }
 
     }
