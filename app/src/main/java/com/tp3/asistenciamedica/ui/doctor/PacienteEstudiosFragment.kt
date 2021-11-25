@@ -76,7 +76,7 @@ class PacienteEstudiosFragment : Fragment() {
     private fun setupRecycler() {
         adapter = EstudiosAdapter()
         adapter.onEstudioClick = {
-            //findNavController().navigate(EstudiosFragmentDirections.actionEstudiosToEstudio(it.idEstudio))
+            findNavController().navigate(PacienteEstudiosFragmentDirections.actionPacienteEstudiosFragmentToNavigationDoctorVerInfoPaciente(it.idEstudio))
         }
         binding.estudiosPaciente.adapter = adapter
 

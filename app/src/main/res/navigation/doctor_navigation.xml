@@ -103,6 +103,6 @@
             app:nullable="true" />
         <action
             android:id="@+id/action_pacienteEstudiosFragment_to_navigation_doctor_ver_info_paciente"
-            app:destination="@id/navigation_doctor_ver_info_paciente" />
+            app:destination="@id/navigation_doctor_estudios" />
     </fragment>
 </navigation>
