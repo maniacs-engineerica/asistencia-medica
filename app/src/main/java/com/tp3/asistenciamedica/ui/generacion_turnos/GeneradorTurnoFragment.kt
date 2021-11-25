@@ -25,6 +25,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.math.truncate
 
 
@@ -167,7 +168,7 @@ class GeneradorTurnoFragment : Fragment() {
         val parsedHoraFinal: Double = Integer.valueOf(horaFinal.toString().replace(":", "")).toDouble()
         var parsedHoraInicial: Double = Integer.valueOf(horaInicial.toString().replace(":", "")).toDouble()
 
-        var finalTime: ZonedDateTime = parsedDate.atStartOfDay(ZoneId.of("America/Argentina/Buenos_Aires"))
+        var finalTime: ZonedDateTime = parsedDate.atStartOfDay(ZoneId.of("UTC"))
             .plusHours(
                 truncate((parsedHoraFinal / 100)).toLong()
             )
@@ -175,7 +176,7 @@ class GeneradorTurnoFragment : Fragment() {
                 (parsedHoraFinal - truncate((parsedHoraFinal / 100)) * 100).toLong()
             )
 
-        var dateTime: ZonedDateTime = parsedDate.atStartOfDay(ZoneId.of("America/Argentina/Buenos_Aires"))
+        var dateTime: ZonedDateTime = parsedDate.atStartOfDay(ZoneId.of("UTC"))
             .plusHours(
                 truncate((parsedHoraInicial / 100)).toLong()
             )
